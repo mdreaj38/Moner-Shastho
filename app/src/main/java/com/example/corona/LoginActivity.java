@@ -1,20 +1,51 @@
 package com.example.corona;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.mongodb.stitch.android.core.Stitch;
+import com.mongodb.stitch.android.core.StitchAppClient;
+import com.mongodb.stitch.android.core.auth.StitchUser;
+import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
 
 public class LoginActivity extends AppCompatActivity {
     String[] user_type;
     private Button signup;
     private int ind = 0;
+    StitchAppClient stitchClient = null;
      protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+         super.onCreate(savedInstanceState);
+         /*Stitch.initializeDefaultAppClient(
+                 getResources().getString(R.string.my_app_id)
+         );
+         System.out.println(getResources().getString(R.string.my_app_id));
+         this.stitchClient = Stitch.getDefaultAppClient();
+
+         Log.d("stitch", "logging in anonymously");
+         Stitch.getDefaultAppClient().getAuth().loginWithCredential(new AnonymousCredential()).addOnCompleteListener(new OnCompleteListener<StitchUser>() {
+             @Override
+             public void onComplete(@NonNull final Task<StitchUser> task) {
+                 if (task.isSuccessful()) {
+                     Log.d("stitch", "logged in anonymously");
+                 } else {
+                     Log.e("stitch", "failed to log in anonymously", task.getException());
+                 }
+             }
+             });*/
+
         setContentView(R.layout.activity_login);
         signup = findViewById(R.id.signup);
         Handler handler = new Handler();

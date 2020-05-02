@@ -50,6 +50,8 @@
             android:textStyle="bold" />
 
         <EditText
+
+            android:id="@+id/name"
             android:layout_width="280dp"
             android:layout_height="45dp"
             android:layout_marginTop="15dp"
@@ -57,10 +59,11 @@
             android:elevation="5dp"
             android:hint="Your Name"
             android:inputType="text"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
             android:textColorHint="#C3BABA" />
 
         <EditText
+            android:id="@+id/email"
             android:layout_width="280dp"
             android:layout_height="45dp"
             android:layout_marginTop="10dp"
@@ -68,10 +71,11 @@
             android:elevation="8dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
             android:textColorHint="#C3BABA" />
 
         <EditText
+            android:id="@+id/password"
             android:layout_width="280dp"
             android:layout_height="45dp"
             android:layout_marginTop="10dp"
@@ -79,7 +83,7 @@
             android:elevation="8dp"
             android:hint="Password"
             android:inputType="textPassword"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
             android:textColorHint="#C3BABA" />
 
         <Button
