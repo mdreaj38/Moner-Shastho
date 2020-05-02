@@ -23,6 +23,7 @@
                 android:src="@drawable/ic_face_black_24dp"/>
         </LinearLayout>
         <EditText
+            android:id="@+id/email_login"
             android:layout_width="300dp"
             android:layout_height="45dp"
             android:hint="Email"
@@ -36,6 +37,7 @@
             android:drawablePadding="10dp"
             android:background="@drawable/btn" />
         <EditText
+            android:id="@+id/password_login"
             android:layout_width="300dp"
             android:layout_height="45dp"
             android:hint="Password"
