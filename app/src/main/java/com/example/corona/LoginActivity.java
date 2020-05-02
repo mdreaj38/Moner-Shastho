@@ -22,34 +22,18 @@ import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
 
 public class LoginActivity extends AppCompatActivity {
     String[] user_type;
-    private Button signup;
-    private int ind = 0;
     StitchAppClient stitchClient = null;
      protected void onCreate(Bundle savedInstanceState) {
 
          super.onCreate(savedInstanceState);
-         /*Stitch.initializeDefaultAppClient(
-                 getResources().getString(R.string.my_app_id)
-         );
-         System.out.println(getResources().getString(R.string.my_app_id));
-         this.stitchClient = Stitch.getDefaultAppClient();
-
-         Log.d("stitch", "logging in anonymously");
-         Stitch.getDefaultAppClient().getAuth().loginWithCredential(new AnonymousCredential()).addOnCompleteListener(new OnCompleteListener<StitchUser>() {
-             @Override
-             public void onComplete(@NonNull final Task<StitchUser> task) {
-                 if (task.isSuccessful()) {
-                     Log.d("stitch", "logged in anonymously");
-                 } else {
-                     Log.e("stitch", "failed to log in anonymously", task.getException());
-                 }
-             }
-             });*/
 
         setContentView(R.layout.activity_login);
-        signup = findViewById(R.id.signup);
+         Button signup = findViewById(R.id.signup);
         Handler handler = new Handler();
         signup.setOnClickListener(handler);
+         Button logIn = findViewById(R.id.login);
+        logIn.setOnClickListener(handler);
+
     }
     class Handler implements View.OnClickListener{
 
@@ -88,6 +72,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
              }
+            if(v.getId()==R.id.login)
+            {
+                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
     }
 }
