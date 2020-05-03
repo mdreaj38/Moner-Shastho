@@ -1,17 +1,11 @@
 package com.example.corona;
 
-import android.app.Dialog;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,8 +18,8 @@ public class MainScreenActivity extends AppCompatActivity {
     GridView gridView;
     private ImageView imageView;
 
-    String[] Options = {"Manage Stress", "Stay Active", "Mental Well being", "Resources", "Contact with professionals", "Profile"};
-    int[] OptionImage = {R.drawable.stress, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.professionals, R.drawable.man};
+    String[] Options = {"Lock down", "Remain Healthy", "Track Record", "Resources", "Contact with expert", "Profile"};
+    int[] OptionImage = {R.drawable.lockdown, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.professionals, R.drawable.man};
     int cnt = 0;
 
 
