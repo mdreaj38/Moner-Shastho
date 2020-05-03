@@ -1,7 +1,9 @@
 package com.example.corona;
 
 import android.app.Dialog;
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +48,11 @@ public class MainScreenActivity extends AppCompatActivity {
 
 
     }
+    static class ViewHolder {
+        public TextView name;
+        ImageView image;
+    }
+
 
     private class CustomAdapter extends BaseAdapter {
         @Override
@@ -65,20 +72,27 @@ public class MainScreenActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            View view1 = getLayoutInflater().inflate(R.layout.row_data, null);
-            //getting view in row_data
-            TextView name = view1.findViewById(R.id.fruits);
-            ImageView image = view1.findViewById(R.id.images);
-
-            name.setText(Options[i]);
-            image.setImageResource(OptionImage[i]);
+            View view1 = view;
+            ViewHolder viewHolder;
+            Log.d("Options", String.valueOf(i));
+            if (view1 == null) {
+                view1 = getLayoutInflater().inflate(R.layout.row_data,null);
+                //getting view in row_data
+                 viewHolder = new ViewHolder();
+                viewHolder.name = view1.findViewById(R.id.fruits);
+                viewHolder.image = view1.findViewById(R.id.images);
+                view1.setTag(viewHolder);
+            } {
+                viewHolder = (ViewHolder) view1.getTag();
+                viewHolder.name.setText(Options[i]);
+                viewHolder.image.setImageResource(OptionImage[i]);
+            }
             return view1;
-
-
         }
+
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the main_menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -110,8 +124,8 @@ public class MainScreenActivity extends AppCompatActivity {
         assert skip != null;
 
 
-        skip.setEnabled(true);
-        next.setEnabled(true);
+        //skip.setEnabled(true);
+        //next.setEnabled(true);
 
 
         skip.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +145,6 @@ public class MainScreenActivity extends AppCompatActivity {
         });
         myDialog.show();
     }
-
+*/
 }
 
