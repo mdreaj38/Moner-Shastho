@@ -62,15 +62,15 @@ public class GeneralReg extends AppCompatActivity {
             RemoteMongoClient mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
             RemoteMongoCollection<Document> usersCollection = mongoClient.getDatabase("Corona").getCollection("Users");
             Document newItem = new Document()
-                    .append("Name", NameString)
-                    .append("Email", EmailString)
-                    .append("Password", PasswordString);
+                    .append("name", NameString)
+                    .append("email", EmailString)
+                    .append("password", PasswordString);
             Task<RemoteInsertOneResult> insertTask = usersCollection.insertOne(newItem);
             insertTask.addOnCompleteListener(new OnCompleteListener<RemoteInsertOneResult>() {
                 @Override
                 public void onComplete(@NonNull Task<RemoteInsertOneResult> task) {
                     if (task.isSuccessful()) {
-                        Log.d("app", String.format(NameString));
+                        Log.d("app", NameString);
                         Log.d("app", String.format("successfully inserted item with id %s",
                                 task.getResult().getInsertedId()));
 

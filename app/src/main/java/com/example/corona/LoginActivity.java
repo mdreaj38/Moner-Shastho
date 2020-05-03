@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                 StitchAppClient stitchAppClient = Stitch.getDefaultAppClient();
                 RemoteMongoClient mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
                 RemoteMongoCollection<Document> usersCollection = mongoClient.getDatabase("Corona").getCollection("Users");
-                Document query = new Document().append("Name",
+                Document query = new Document().append("email",
                         new Document().append("$eq", string_email_login));
                 final Task<Document> findOneAndUpdateTask = usersCollection.findOne(query);
                 findOneAndUpdateTask.addOnCompleteListener(new OnCompleteListener<Document>() {
