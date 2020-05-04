@@ -72,9 +72,8 @@
             android:text="Log In"
             android:textStyle="bold"
             android:textAllCaps="false"
-            android:background="@drawable/joinbtn">
+            android:background="@drawable/joinbtn"/>
 
-        </Button>
     <Button
         android:id="@+id/signup"
         android:layout_width="300dp"
@@ -84,9 +83,8 @@
         android:text="Sign Up"
         android:textStyle="bold"
         android:textAllCaps="false"
-        android:background="@drawable/joinbtn">
+        android:background="@drawable/joinbtn"/>
 
-    </Button>
     <ProgressBar
         android:id="@+id/pBar"
         style="?android:attr/progressBarStyleLarge"

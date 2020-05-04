@@ -1,5 +1,6 @@
 package com.example.corona;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +20,7 @@ public class MainScreenActivity extends AppCompatActivity {
     GridView gridView;
     private ImageView imageView;
 
-    String[] Options = {"Lock down", "Remain Healthy", "Track Record", "Resources", "Contact with expert", "Profile"};
+    String[] Options = {"Lock Down", "Remain Healthy", "Track Record", "Resources", "Contact with expert", "Profile"};
     int[] OptionImage = {R.drawable.lockdown, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.professionals, R.drawable.man};
     int cnt = 0;
 
@@ -36,7 +38,13 @@ public class MainScreenActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                 if(i==0){
+                     Intent intent = new Intent(MainScreenActivity.this,LockDown.class);
+                     startActivity(intent);
+                 }
+                 else {
+                     Toast.makeText((MainScreenActivity.this), "STOP", Toast.LENGTH_SHORT).show();
+                 }
             }
         });
 
