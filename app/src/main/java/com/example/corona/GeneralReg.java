@@ -43,7 +43,7 @@ public class GeneralReg extends AppCompatActivity {
         joinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(GeneralReg.this.getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+
                 // Code here executes on main thread after user presses button
                 Stitch.initializeDefaultAppClient("coronaapp-yvebc");
                 Stitch.getDefaultAppClient().getAuth().loginWithCredential(new AnonymousCredential()).addOnCompleteListener(new OnCompleteListener<StitchUser>() {
@@ -67,25 +67,41 @@ public class GeneralReg extends AppCompatActivity {
                         .append("name", NameString)
                         .append("email", EmailString)
                         .append("password", PasswordString);
-                Task<RemoteInsertOneResult> insertTask = usersCollection.insertOne(newItem);
-                insertTask.addOnCompleteListener(new OnCompleteListener<RemoteInsertOneResult>() {
+                Document query=new Document().append("email",
+                        new Document().append("$eq", EmailString));
+                final Task<Document> findOneAndUpdateTask = usersCollection.findOne(query);
+                findOneAndUpdateTask.addOnCompleteListener(new OnCompleteListener<Document>() {
                     @Override
-                    public void onComplete(@NonNull Task<RemoteInsertOneResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("app", NameString);
-                            Log.d("app", String.format("successfully inserted item with id %s",
-                                    task.getResult().getInsertedId()));
+                    public void onComplete(@NonNull Task<Document> task) {
+                        if (task.getResult() == null) {
+
+                            Task<RemoteInsertOneResult> insertTask = usersCollection.insertOne(newItem);
+                            insertTask.addOnCompleteListener(new OnCompleteListener<RemoteInsertOneResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<RemoteInsertOneResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("app", NameString);
+                                        Toast.makeText(GeneralReg.this.getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                        Log.d("app", String.format("successfully inserted item with id %s",
+                                                task.getResult().getInsertedId()));
 
 
-                        } else {
-                            Log.e("app", "failed to insert document with: ", task.getException());
+                                    } else {
+                                        Log.e("app", "failed to insert document with: ", task.getException());
+                                    }
+                                }
+                            });
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(), "This email is already in use!Try a new one!", Toast.LENGTH_LONG).show();
                         }
                     }
-                });
-            }
         });
 
 
+    }
+});
     }
 }
 

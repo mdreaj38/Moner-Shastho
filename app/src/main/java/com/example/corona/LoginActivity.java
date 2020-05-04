@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     class Handler implements View.OnClickListener {
         EditText emailLogin = findViewById(R.id.email_login);
         EditText passLogin = findViewById(R.id.password_login);
-        String string_email_login;
+        String string_email_login,string_email_pass;
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.signup) {
@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
 */
 
                string_email_login = emailLogin.getText().toString();
+               string_email_pass=passLogin.getText().toString();
                 if (!isEmailValid(string_email_login)) {
                     Toast.makeText(getApplicationContext(), "Your Email ID is Invalid!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -123,8 +124,8 @@ public class LoginActivity extends AppCompatActivity {
                     StitchAppClient stitchAppClient = Stitch.getDefaultAppClient();
                     RemoteMongoClient mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
                     RemoteMongoCollection<Document> usersCollection = mongoClient.getDatabase("Corona").getCollection("Users");
-                    Document query = new Document().append("email",
-                            new Document().append("$eq", string_email_login));
+                    Document query= new Document().append("email",
+                            new Document().append("$eq", string_email_login)).append("password",new Document().append("$eq",string_email_pass));
                     final Task<Document> findOneAndUpdateTask = usersCollection.findOne(query);
                     findOneAndUpdateTask.addOnCompleteListener(new OnCompleteListener<Document>() {
                         @Override
@@ -161,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
             RemoteMongoClient mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
             RemoteMongoCollection<Document> expertUsersCollection = mongoClient.getDatabase("Corona").getCollection("expertUsers");
             Document query= new Document().append("email",
-                    new Document().append("$eq", string_email_login));
+                    new Document().append("$eq", string_email_login)).append("password",new Document().append("$eq",string_email_pass));
             final Task<Document> findOneAndUpdateTask = expertUsersCollection.findOne(query);
             findOneAndUpdateTask.addOnCompleteListener(new OnCompleteListener<Document>() {
                 @Override
