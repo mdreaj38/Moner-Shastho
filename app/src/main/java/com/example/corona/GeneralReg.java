@@ -40,46 +40,49 @@ public class GeneralReg extends AppCompatActivity {
 
      /*   System.out.println("hello");
         System.out.println(NameString + EmailString + PasswordString);*/
-        joinus.setOnClickListener((View v) -> {
-            Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
-            // Code here executes on main thread after user presses button
-            Stitch.initializeDefaultAppClient("coronaapp-yvebc");
-            Stitch.getDefaultAppClient().getAuth().loginWithCredential(new AnonymousCredential()).addOnCompleteListener(new OnCompleteListener<StitchUser>() {
-                @Override
-                public void onComplete(@NonNull final Task<StitchUser> task) {
-                    if (task.isSuccessful()) {
+        joinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(GeneralReg.this.getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+                // Code here executes on main thread after user presses button
+                Stitch.initializeDefaultAppClient("coronaapp-yvebc");
+                Stitch.getDefaultAppClient().getAuth().loginWithCredential(new AnonymousCredential()).addOnCompleteListener(new OnCompleteListener<StitchUser>() {
+                    @Override
+                    public void onComplete(@NonNull final Task<StitchUser> task) {
+                        if (task.isSuccessful()) {
 
-                        Log.d("stitch", "logged in anonymously");
-                    } else {
-                        Log.e("stitch", "failed to log in anonymously", task.getException());
+                            Log.d("stitch", "logged in anonymously");
+                        } else {
+                            Log.e("stitch", "failed to log in anonymously", task.getException());
+                        }
                     }
-                }
-            });
-            NameString = Name.getText().toString();
-            EmailString = Email.getText().toString();
-            PasswordString = Password.getText().toString();
-            StitchAppClient stitchAppClient = Stitch.getDefaultAppClient();
-            RemoteMongoClient mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
-            RemoteMongoCollection<Document> usersCollection = mongoClient.getDatabase("Corona").getCollection("Users");
-            Document newItem = new Document()
-                    .append("name", NameString)
-                    .append("email", EmailString)
-                    .append("password", PasswordString);
-            Task<RemoteInsertOneResult> insertTask = usersCollection.insertOne(newItem);
-            insertTask.addOnCompleteListener(new OnCompleteListener<RemoteInsertOneResult>() {
-                @Override
-                public void onComplete(@NonNull Task<RemoteInsertOneResult> task) {
-                    if (task.isSuccessful()) {
-                        Log.d("app", NameString);
-                        Log.d("app", String.format("successfully inserted item with id %s",
-                                task.getResult().getInsertedId()));
+                });
+                NameString = Name.getText().toString();
+                EmailString = Email.getText().toString();
+                PasswordString = Password.getText().toString();
+                StitchAppClient stitchAppClient = Stitch.getDefaultAppClient();
+                RemoteMongoClient mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
+                RemoteMongoCollection<Document> usersCollection = mongoClient.getDatabase("Corona").getCollection("Users");
+                Document newItem = new Document()
+                        .append("name", NameString)
+                        .append("email", EmailString)
+                        .append("password", PasswordString);
+                Task<RemoteInsertOneResult> insertTask = usersCollection.insertOne(newItem);
+                insertTask.addOnCompleteListener(new OnCompleteListener<RemoteInsertOneResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<RemoteInsertOneResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("app", NameString);
+                            Log.d("app", String.format("successfully inserted item with id %s",
+                                    task.getResult().getInsertedId()));
 
 
-                    } else {
-                        Log.e("app", "failed to insert document with: ", task.getException());
+                        } else {
+                            Log.e("app", "failed to insert document with: ", task.getException());
+                        }
                     }
-                }
-            });
+                });
+            }
         });
 
 

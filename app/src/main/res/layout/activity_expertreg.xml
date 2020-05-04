@@ -6,199 +6,190 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ExpertReg">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:background="@color/colorAccent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
+
         <ImageView
             android:id="@+id/backtologin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_back_black_24dp"
-            />
+            android:src="@drawable/ic_arrow_back_black_24dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Log In"
-            android:textStyle="bold"
             android:gravity="end"
+            android:text="Log In"
+            android:textColor="#000000"
             android:textSize="15sp"
-            android:textColor="#000000"/>
+            android:textStyle="bold" />
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="70dp"
-        android:gravity="center"
-        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:text="Create  Your \n    Account"
-            android:textColor="#139EAF"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="70dp">
 
-        <EditText
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/btn"
-            android:elevation="5dp"
-            android:hint="Your Name"
-            android:inputType="text"
-            android:paddingLeft="15dp"
-            android:textColorHint="#C3BABA" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Create  Your \n    Account"
+                android:textColor="#139EAF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn"
-            android:elevation="8dp"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="15dp"
-            android:textColorHint="#C3BABA" />
+            <EditText
+                android:id="@+id/ex_name"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btn"
+                android:elevation="5dp"
+                android:hint="Your Name"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
 
-        <EditText
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn"
-            android:elevation="8dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingLeft="15dp"
-            android:textColorHint="#C3BABA" />
-        <EditText
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn"
-            android:elevation="8dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingLeft="15dp"
-            android:textColorHint="#C3BABA" />
-        <EditText
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn"
-            android:elevation="8dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingLeft="15dp"
-            android:textColorHint="#C3BABA" />
-        <EditText
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn"
-            android:elevation="8dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingLeft="15dp"
-            android:textColorHint="#C3BABA" />
-        <EditText
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn"
-            android:elevation="8dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingLeft="15dp"
-            android:textColorHint="#C3BABA" /> <EditText
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btn"
-        android:elevation="8dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:textColorHint="#C3BABA" /> <EditText
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btn"
-        android:elevation="8dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:textColorHint="#C3BABA" />
-        <EditText
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn"
-            android:elevation="8dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingLeft="15dp"
-            android:textColorHint="#C3BABA" /> <EditText
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btn"
-        android:elevation="8dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:textColorHint="#C3BABA" /> <EditText
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btn"
-        android:elevation="8dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:textColorHint="#C3BABA" />
-        <EditText
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn"
-            android:elevation="8dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingLeft="15dp"
-            android:textColorHint="#C3BABA" />
-        <EditText
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn"
-            android:elevation="8dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingLeft="15dp"
-            android:textColorHint="#C3BABA" />
+            <EditText
+                android:id="@+id/ex_email"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
 
+            <EditText
+                android:id="@+id/ex_pass"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
 
+            <EditText
+                android:id="@+id/affiliation"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Current Affiliation"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
 
+            <EditText
+                android:id="@+id/designation"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Designation"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
+            <EditText
+                android:id="@+id/country"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Country"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="City"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
 
+            <EditText
+                android:id="@+id/licence"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Licence"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
 
-        <Button
-            android:id="@+id/joinus"
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/joinbtn"
-            android:elevation="8dp"
-            android:text="Join Us"
-            android:textAllCaps="false" />
-    </LinearLayout>
-    ></ScrollView>
-    </LinearLayout>
+            <EditText
+                android:id="@+id/education"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Education"
+                android:inputType="textPassword"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
+
+            <EditText
+                android:id="@+id/hdegree"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Highest Degree"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
+            <EditText
+                android:id="@+id/institute"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Institute"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
+
+            <Button
+                android:id="@+id/ex_joinus"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/joinbtn"
+                android:elevation="8dp"
+                android:text="Join Us"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
