@@ -27,7 +27,7 @@ public class LockDown extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_down);
         gridView = findViewById(R.id.gridview);
-        imageView=findViewById(R.id.sleep);
+        imageView = findViewById(R.id.sleep);
         Handler handle = new Handler();
         imageView.setOnClickListener(handle);
 
@@ -36,21 +36,19 @@ public class LockDown extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i==0){
-                    Toast.makeText((LockDown.this),"Zero",Toast.LENGTH_SHORT).show();
-                }
-                else if(i==1){
-                    Toast.makeText((LockDown.this),"One",Toast.LENGTH_SHORT).show();
-                }
-                else if(i==2){
-                    Toast.makeText((LockDown.this),"Two",Toast.LENGTH_SHORT).show();
-                }
-                else if(i==3){
-                    Toast.makeText((LockDown.this),"Three",Toast.LENGTH_SHORT).show();
+                if (i == 0) {
+                    Toast.makeText((LockDown.this), "Zero", Toast.LENGTH_SHORT).show();
+                } else if (i == 1) {
+                    Toast.makeText((LockDown.this), "One", Toast.LENGTH_SHORT).show();
+                } else if (i == 2) {
+                    Toast.makeText((LockDown.this), "Two", Toast.LENGTH_SHORT).show();
+                } else if (i == 3) {
+                    Toast.makeText((LockDown.this), "Three", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
     static class ViewHolder {
         public TextView name;
         ImageView image;
@@ -78,13 +76,14 @@ public class LockDown extends AppCompatActivity {
             ViewHolder viewHolder;
             Log.d("Options", String.valueOf(i));
             if (view1 == null) {
-                view1 = getLayoutInflater().inflate(R.layout.row_data,null);
+                view1 = getLayoutInflater().inflate(R.layout.row_data, null);
                 //getting view in row_data
                 viewHolder = new ViewHolder();
                 viewHolder.name = view1.findViewById(R.id.fruits);
                 viewHolder.image = view1.findViewById(R.id.images);
                 view1.setTag(viewHolder);
-            } {
+            }
+            {
                 viewHolder = (ViewHolder) view1.getTag();
                 viewHolder.name.setText(Options[i]);
                 viewHolder.image.setImageResource(OptionImage[i]);
@@ -93,12 +92,13 @@ public class LockDown extends AppCompatActivity {
         }
 
     }
-    class Handler implements View.OnClickListener{
+
+    class Handler implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            if(v.getId()==R.id.sleep){
-                Toast.makeText((LockDown.this),"SLEEEPPPPPPP",Toast.LENGTH_SHORT).show();
+            if (v.getId() == R.id.sleep) {
+                Toast.makeText((LockDown.this), "SLEEEPPPPPPP", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public LoginActivity() {
     }
+
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
@@ -43,10 +44,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-        pgsdialog=new ProgressDialog(LoginActivity.this);
+        pgsdialog = new ProgressDialog(LoginActivity.this);
         pgsdialog.setTitle("Please Wait");
         pgsdialog.setMessage("Logging In..");
-       // pgsBar = (ProgressBar) findViewById(R.id.pBar);
+        // pgsBar = (ProgressBar) findViewById(R.id.pBar);
 
         Button signup = findViewById(R.id.signup);
         Handler handler = new Handler();
@@ -55,13 +56,13 @@ public class LoginActivity extends AppCompatActivity {
         logIn.setOnClickListener(handler);
 
 
-
     }
 
     class Handler implements View.OnClickListener {
         EditText emailLogin = findViewById(R.id.email_login);
         EditText passLogin = findViewById(R.id.password_login);
-        String string_email_login,string_email_pass;
+        String string_email_login, string_email_pass;
+
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.signup) {
@@ -102,8 +103,8 @@ public class LoginActivity extends AppCompatActivity {
                 pgsBar.setVisibility(View.VISIBLE);
 */
 
-               string_email_login = emailLogin.getText().toString();
-               string_email_pass=passLogin.getText().toString();
+                string_email_login = emailLogin.getText().toString();
+                string_email_pass = passLogin.getText().toString();
                 if (!isEmailValid(string_email_login)) {
                     Toast.makeText(getApplicationContext(), "Your Email ID is Invalid!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -124,15 +125,15 @@ public class LoginActivity extends AppCompatActivity {
                     StitchAppClient stitchAppClient = Stitch.getDefaultAppClient();
                     RemoteMongoClient mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
                     RemoteMongoCollection<Document> usersCollection = mongoClient.getDatabase("Corona").getCollection("Users");
-                    Document query= new Document().append("email",
-                            new Document().append("$eq", string_email_login)).append("password",new Document().append("$eq",string_email_pass));
+                    Document query = new Document().append("email",
+                            new Document().append("$eq", string_email_login)).append("password", new Document().append("$eq", string_email_pass));
                     final Task<Document> findOneAndUpdateTask = usersCollection.findOne(query);
                     findOneAndUpdateTask.addOnCompleteListener(new OnCompleteListener<Document>() {
                         @Override
                         public void onComplete(@NonNull Task<Document> task) {
                             if (task.getResult() == null) {
                                 check_expertsCollection();
-                                      pgsdialog.dismiss();
+                                pgsdialog.dismiss();
                             } else if (task.isSuccessful()) {
 
                                 Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
@@ -155,14 +156,13 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-        void check_expertsCollection()
-        {
+        void check_expertsCollection() {
 
             StitchAppClient stitchAppClient = Stitch.getDefaultAppClient();
             RemoteMongoClient mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
             RemoteMongoCollection<Document> expertUsersCollection = mongoClient.getDatabase("Corona").getCollection("expertUsers");
-            Document query= new Document().append("email",
-                    new Document().append("$eq", string_email_login)).append("password",new Document().append("$eq",string_email_pass));
+            Document query = new Document().append("email",
+                    new Document().append("$eq", string_email_login)).append("password", new Document().append("$eq", string_email_pass));
             final Task<Document> findOneAndUpdateTask = expertUsersCollection.findOne(query);
             findOneAndUpdateTask.addOnCompleteListener(new OnCompleteListener<Document>() {
                 @Override

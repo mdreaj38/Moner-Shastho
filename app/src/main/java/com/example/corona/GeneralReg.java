@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
 import com.mongodb.stitch.android.core.Stitch;
 import com.mongodb.stitch.android.core.StitchAppClient;
 import com.mongodb.stitch.android.core.auth.StitchUser;
@@ -44,6 +47,7 @@ public class GeneralReg extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 // Code here executes on main thread after user presses button
                 Stitch.initializeDefaultAppClient("coronaapp-yvebc");
                 Stitch.getDefaultAppClient().getAuth().loginWithCredential(new AnonymousCredential()).addOnCompleteListener(new OnCompleteListener<StitchUser>() {
@@ -67,7 +71,7 @@ public class GeneralReg extends AppCompatActivity {
                         .append("name", NameString)
                         .append("email", EmailString)
                         .append("password", PasswordString);
-                Document query=new Document().append("email",
+                Document query = new Document().append("email",
                         new Document().append("$eq", EmailString));
                 final Task<Document> findOneAndUpdateTask = usersCollection.findOne(query);
                 findOneAndUpdateTask.addOnCompleteListener(new OnCompleteListener<Document>() {
@@ -91,17 +95,15 @@ public class GeneralReg extends AppCompatActivity {
                                     }
                                 }
                             });
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(getApplicationContext(), "This email is already in use!Try a new one!", Toast.LENGTH_LONG).show();
                         }
                     }
+                });
+
+
+            }
         });
-
-
-    }
-});
     }
 }
 

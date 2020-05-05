@@ -38,18 +38,18 @@ public class MainScreenActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                 if(i==0){
-                     Intent intent = new Intent(MainScreenActivity.this,LockDown.class);
-                     startActivity(intent);
-                 }
-                 else {
-                     Toast.makeText((MainScreenActivity.this), "STOP", Toast.LENGTH_SHORT).show();
-                 }
+                if (i == 0) {
+                    Intent intent = new Intent(MainScreenActivity.this, LockDown.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText((MainScreenActivity.this), "STOP", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
 
     }
+
     static class ViewHolder {
         public TextView name;
         ImageView image;
@@ -78,13 +78,14 @@ public class MainScreenActivity extends AppCompatActivity {
             ViewHolder viewHolder;
             Log.d("Options", String.valueOf(i));
             if (view1 == null) {
-                view1 = getLayoutInflater().inflate(R.layout.row_data,null);
+                view1 = getLayoutInflater().inflate(R.layout.row_data, null);
                 //getting view in row_data
-                 viewHolder = new ViewHolder();
+                viewHolder = new ViewHolder();
                 viewHolder.name = view1.findViewById(R.id.fruits);
                 viewHolder.image = view1.findViewById(R.id.images);
                 view1.setTag(viewHolder);
-            } {
+            }
+            {
                 viewHolder = (ViewHolder) view1.getTag();
                 viewHolder.name.setText(Options[i]);
                 viewHolder.image.setImageResource(OptionImage[i]);

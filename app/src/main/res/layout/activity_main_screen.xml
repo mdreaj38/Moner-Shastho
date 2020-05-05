@@ -9,12 +9,12 @@
 
     <GridView
         android:id="@+id/gridview"
-        android:numColumns="2"
-        android:verticalSpacing="2dp"
-        android:horizontalSpacing="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:horizontalSpacing="2dp"
+        android:numColumns="2"
+        android:verticalSpacing="2dp" />
 
 </LinearLayout>

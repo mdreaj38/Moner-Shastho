@@ -22,7 +22,8 @@ import org.bson.Document;
 public class ExpertReg extends AppCompatActivity {
     Button joinUs;
     EditText name, email, password, affiliation, country, city, designation, licence, hiDegree, institute;
-    String stringName,stringEmail,stringPass,stringAffiliation,stringCity,stringDesignation,stringLicence,stringHDegree,stringInstitute;
+    String stringName, stringEmail, stringPass, stringAffiliation, stringCity, stringDesignation, stringLicence, stringHDegree, stringInstitute;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
 
     <ImageView
@@ -13,35 +13,36 @@
         android:layout_margin="10dp"
         android:contentDescription="App Demo"
         app:srcCompat="@drawable/doormat" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="sadaasdsa"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="?android:attr/borderlessButtonStyle"
-            android:text="Skip Demo"
-            android:textStyle="bold"
-            android:textSize="20sp"
             android:id="@+id/skipp"
-            />
-        <Button
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?android:attr/borderlessButtonStyle"
-            android:text="Next"
-            android:textStyle="bold"
+            android:text="Skip Demo"
             android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
             android:id="@+id/nextt"
-            />
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
