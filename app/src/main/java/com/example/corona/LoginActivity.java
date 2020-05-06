@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.mongodb.stitch.android.core.Stitch;
 import com.mongodb.stitch.android.core.StitchAppClient;
 import com.mongodb.stitch.android.core.auth.StitchUser;
+import com.mongodb.stitch.android.core.auth.providers.userpassword.UserPasswordAuthProviderClient;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
 import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     /*ProgressBar pgsBar;*/
     StitchAppClient stitchClient = null;
     ProgressDialog pgsdialog;
+    TextView forgetPass;
 
     public LoginActivity() {
     }
@@ -37,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -55,6 +57,9 @@ public class LoginActivity extends AppCompatActivity {
         Button logIn = findViewById(R.id.login);
         logIn.setOnClickListener(handler);
 
+        //forget password section
+        forgetPass = findViewById(R.id.forget_password);
+        forgetPass.setOnClickListener(handler);
 
     }
 
@@ -105,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 string_email_login = emailLogin.getText().toString();
                 string_email_pass = passLogin.getText().toString();
+
                 if (!isEmailValid(string_email_login)) {
                     Toast.makeText(getApplicationContext(), "Your Email ID is Invalid!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -153,7 +159,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
 
-
+            if (v.getId() == R.id.forget_password) {
+                Intent intent = new Intent(LoginActivity.this, forget_password.class);
+                startActivity(intent);
+            }
         }
 
         void check_expertsCollection() {

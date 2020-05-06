@@ -19,6 +19,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.stitch.android.core.Stitch;
 import com.mongodb.stitch.android.core.StitchAppClient;
 import com.mongodb.stitch.android.core.auth.StitchUser;
+import com.mongodb.stitch.android.core.auth.providers.userpassword.UserPasswordAuthProviderClient;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
 import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
@@ -46,9 +47,29 @@ public class GeneralReg extends AppCompatActivity {
         joinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NameString = Name.getText().toString();
+                EmailString = Email.getText().toString();
+                PasswordString = Password.getText().toString();
 
 
                 // Code here executes on main thread after user presses button
+                /*Stitch.initializeDefaultAppClient("coronaapp-yvebc");
+                UserPasswordAuthProviderClient emailPassClient = Stitch.getDefaultAppClient().getAuth().getProviderClient(
+                        UserPasswordAuthProviderClient.factory
+                );
+
+                emailPassClient.registerWithEmail(EmailString, PasswordString)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                   @Override
+                                                   public void onComplete(@NonNull final Task<Void> task) {
+                                                       if (task.isSuccessful()) {
+                                                           Log.d("stitch", "Successfully sent account confirmation email");
+                                                       } else {
+                                                           Log.e("stitch", "Error registering new user:", task.getException());
+                                                       }
+                                                   }
+                                               }
+                        );*/
                 Stitch.initializeDefaultAppClient("coronaapp-yvebc");
                 Stitch.getDefaultAppClient().getAuth().loginWithCredential(new AnonymousCredential()).addOnCompleteListener(new OnCompleteListener<StitchUser>() {
                     @Override
