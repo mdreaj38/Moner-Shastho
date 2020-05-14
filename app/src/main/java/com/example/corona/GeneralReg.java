@@ -1,9 +1,12 @@
 package com.example.corona;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -99,19 +102,14 @@ public class GeneralReg extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     HttpPostRequest httpPostRequest = new HttpPostRequest();
-                    try {
-                        String verdict = httpPostRequest.execute(url,data.toString()).get();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    httpPostRequest.execute(url,data.toString());
                 }
             }
         });
     }
 
-    public class HttpPostRequest extends AsyncTask<String,Void,String  > {
+    public class HttpPostRequest extends AsyncTask<String,Void,String > {
+        String verdict,message;
         ProgressDialog progressDialog;
         protected void onPreExecute(){
             progressDialog = ProgressDialog.show(GeneralReg.this, "ProgressDialog", "Wait");
@@ -158,6 +156,7 @@ public class GeneralReg extends AppCompatActivity {
                 }
 
                 bufferedReader.close();
+
                 Log.e("Res2",data);
                 Log.e("Response2",sb.toString());
 
@@ -166,8 +165,9 @@ public class GeneralReg extends AppCompatActivity {
                 //////////////////////test
 
                 JSONObject reader = new JSONObject(sb.toString());
-                String st = (String) reader.get("msg");
-                Log.e("Response2(msg)",st);
+                verdict = reader.getString("status");
+                message = reader.getString("msg");
+                Log.e("Response2(msg)",message);
                 //////////////test
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -182,8 +182,28 @@ public class GeneralReg extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             progressDialog.dismiss();
-            /*Intent intent = new Intent(GeneralReg.this,LoginActivity.class);
-            startActivity(intent);*/
+            if(verdict.equals("true")){
+                Intent intent = new Intent(GeneralReg.this,LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText((GeneralReg.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
+
+            }
+            else {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(GeneralReg.this);
+                builder1.setCancelable(false);
+                builder1.setTitle(message);
+                builder1.setMessage("Try again");
+
+                builder1.setPositiveButton(
+                        Html.fromHtml("<font color='#FF0000'>Ok</font>"),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
             super.onPostExecute(s);
         }
     }

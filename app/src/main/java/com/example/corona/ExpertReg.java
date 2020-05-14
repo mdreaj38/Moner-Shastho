@@ -3,9 +3,13 @@ package com.example.corona;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -150,6 +154,7 @@ public class ExpertReg extends AppCompatActivity {
 
 
     public class HttpPostRequest extends AsyncTask<String,Void,String  > {
+        String verdict,message;
         ProgressDialog progressDialog;
         protected void onPreExecute(){
             progressDialog = ProgressDialog.show(ExpertReg.this, "ProgressDialog", "Wait");
@@ -189,14 +194,21 @@ public class ExpertReg extends AppCompatActivity {
                     sb.append(line);
                 }
 
+                JSONObject reader = new JSONObject(sb.toString());
+                verdict = reader.getString("status");
+                message = reader.getString("msg");
+
                 bufferedReader.close();
                 result = sb.toString();
+
                 Log.e("Res2",data);
                 Log.e("Response2",sb.toString());
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             return result;
@@ -207,6 +219,28 @@ public class ExpertReg extends AppCompatActivity {
             progressDialog.dismiss();
             /*Intent intent = new Intent(GeneralReg.this,LoginActivity.class);
             startActivity(intent);*/
+            if(verdict.equals("true")){
+                Intent intent = new Intent(ExpertReg.this,LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText((ExpertReg.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
+
+            }
+            else {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(ExpertReg.this);
+                builder1.setCancelable(false);
+                builder1.setTitle(message);
+                builder1.setMessage("Try again");
+
+                builder1.setPositiveButton(
+                        Html.fromHtml("<font color='#FF0000'>Ok</font>"),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
             super.onPostExecute(s);
         }
     }
