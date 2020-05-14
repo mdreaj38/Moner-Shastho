@@ -41,7 +41,14 @@ public class MainScreenActivity extends AppCompatActivity {
                 if (i == 0) {
                     Intent intent = new Intent(MainScreenActivity.this, LockDown.class);
                     startActivity(intent);
-                } else {
+                }
+                if(i==5){
+                    Intent intent = new Intent(MainScreenActivity.this, profile.class);
+                    startActivity(intent);
+                }
+
+                    else
+                 {
                     Toast.makeText((MainScreenActivity.this), "STOP", Toast.LENGTH_SHORT).show();
                 }
             }

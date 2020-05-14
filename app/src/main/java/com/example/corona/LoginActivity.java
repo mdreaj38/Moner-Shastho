@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     StitchAppClient stitchClient = null;
     ProgressDialog pgsdialog;
     TextView forgetPass;
+    public String email1, pass1;
 
     public LoginActivity() {
     }
@@ -110,8 +111,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 string_email_login = emailLogin.getText().toString();
                 string_email_pass = passLogin.getText().toString();
-
-                if (!isEmailValid(string_email_login)) {
+                email1 = string_email_login;
+                pass1 = string_email_pass;
+                /*if (!isEmailValid(string_email_login)) {
                     Toast.makeText(getApplicationContext(), "Your Email ID is Invalid!", Toast.LENGTH_SHORT).show();
                 } else {
                     pgsdialog.show();
@@ -120,12 +122,12 @@ public class LoginActivity extends AppCompatActivity {
                     Stitch.getDefaultAppClient().getAuth().loginWithCredential(new AnonymousCredential()).addOnCompleteListener(new OnCompleteListener<StitchUser>() {
                         @Override
                         public void onComplete(@NonNull final Task<StitchUser> task) {
-                        /*if (task.isSuccessful()) {
+                        *//*if (task.isSuccessful()) {
 
                             Log.d("stitch", "logged in anonymously");
                         } else {
                             Log.e("stitch", "failed to log in anonymously", task.getException());
-                        }*/
+                        }*//*
                         }
                     });
                     StitchAppClient stitchAppClient = Stitch.getDefaultAppClient();
@@ -141,23 +143,21 @@ public class LoginActivity extends AppCompatActivity {
                                 check_expertsCollection();
                                 pgsdialog.dismiss();
                             } else if (task.isSuccessful()) {
-
-                                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
-                                startActivity(intent);
-                                pgsdialog.dismiss();
-                                Log.d("app", String.format("Successfully found document: %s",
-                                        task.getResult()));
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Login Failed!Please Try again!", Toast.LENGTH_SHORT).show();
-                                Log.e("app", "Failed to findOne: ", task.getException());
-                                pgsdialog.dismiss();
-                            }
-                        }
-
-                    });
-
-                }
+*/
+                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                startActivity(intent);
+                pgsdialog.dismiss();
             }
+            /*else {
+                Log.d("app", String.format("Successfully found document: %s",
+                        task.getResult()));
+                Toast.makeText(getApplicationContext(), "Login Failed!Please Try again!", Toast.LENGTH_SHORT).show();
+                Log.e("app", "Failed to findOne: ", task.getException());
+                pgsdialog.dismiss();
+            }*/
+
+            //});
+
 
             if (v.getId() == R.id.forget_password) {
                 Intent intent = new Intent(LoginActivity.this, forget_password.class);

@@ -3,5 +3,11 @@
     <string name="my_app_id">coronaapp-yvebc</string>
     <string name="show_spinner">Show Spinner</string>
     <string name="hide_spinner">Hide Spinner</string>
+    <string name="hello">hello</string>
+    <string name="age_in_year">Age in Year</string>
+    <string name="update">Update</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="todo">TODO</string>
     <!-- app/src/main/res/values/strings.xml -->
 </resources>

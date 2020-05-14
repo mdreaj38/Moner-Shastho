@@ -12,7 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".forget_password"></activity>
+        <activity android:name=".sliding_bar"></activity>
+        <activity android:name=".update_profile_page_4" />
+        <activity android:name=".update_profile_page_3" />
+        <activity android:name=".update_profile_page_2" />
+        <activity android:name=".update_profile" />
+        <activity android:name=".profile" />
+        <activity android:name=".forget_password" />
         <activity android:name=".LockDown" />
         <activity android:name=".MainScreenActivity" />
         <activity android:name=".ExpertReg" />
