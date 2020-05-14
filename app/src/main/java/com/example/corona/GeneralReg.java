@@ -1,5 +1,8 @@
 package com.example.corona;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,12 +29,27 @@ import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
 import com.mongodb.stitch.core.services.mongodb.remote.RemoteInsertOneResult;
 
 import org.bson.Document;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class GeneralReg extends AppCompatActivity {
 
-    public String EmailString, PasswordString, NameString;
-
+    public String EmailString,PhoneString, PasswordString, NameString,CPasswordString;
+    String url = "https://bad-blogger.herokuapp.com/admin/register/general";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -41,93 +59,146 @@ public class GeneralReg extends AppCompatActivity {
         EditText Name = findViewById(R.id.name);
         EditText Email = findViewById(R.id.email);
         EditText Password = findViewById(R.id.password);
+        EditText confirmpass = findViewById(R.id.conpassword);
+        EditText Phone =findViewById(R.id.phone);
 
-     /*   System.out.println("hello");
-        System.out.println(NameString + EmailString + PasswordString);*/
         joinus.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 NameString = Name.getText().toString();
                 EmailString = Email.getText().toString();
+                PhoneString = Phone.getText().toString();
                 PasswordString = Password.getText().toString();
+                CPasswordString = confirmpass.getText().toString();
+                Log.e("Response",PasswordString);
+                if(!isValidPhoneNumber(PhoneString.trim())){
+                    Toast.makeText((GeneralReg.this), "Enter Valid Phone number", Toast.LENGTH_SHORT).show();
 
-
-                // Code here executes on main thread after user presses button
-                /*Stitch.initializeDefaultAppClient("coronaapp-yvebc");
-                UserPasswordAuthProviderClient emailPassClient = Stitch.getDefaultAppClient().getAuth().getProviderClient(
-                        UserPasswordAuthProviderClient.factory
-                );
-
-                emailPassClient.registerWithEmail(EmailString, PasswordString)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                   @Override
-                                                   public void onComplete(@NonNull final Task<Void> task) {
-                                                       if (task.isSuccessful()) {
-                                                           Log.d("stitch", "Successfully sent account confirmation email");
-                                                       } else {
-                                                           Log.e("stitch", "Error registering new user:", task.getException());
-                                                       }
-                                                   }
-                                               }
-                        );*/
-                Stitch.initializeDefaultAppClient("coronaapp-yvebc");
-                Stitch.getDefaultAppClient().getAuth().loginWithCredential(new AnonymousCredential()).addOnCompleteListener(new OnCompleteListener<StitchUser>() {
-                    @Override
-                    public void onComplete(@NonNull final Task<StitchUser> task) {
-                        if (task.isSuccessful()) {
-
-                            Log.d("stitch", "logged in anonymously");
-                        } else {
-                            Log.e("stitch", "failed to log in anonymously", task.getException());
-                        }
+                }
+                else if(!validateEmail(EmailString.trim())){
+                    Toast.makeText((GeneralReg.this), "Enter Valid mail", Toast.LENGTH_SHORT).show();
+                }
+                else if(EmailString.length()==0 && PhoneString.length()==0){
+                    Toast.makeText((GeneralReg.this), "Enter Valid mail or phone number or both", Toast.LENGTH_SHORT).show();
+                }
+                else if(PasswordString.length()<6){
+                    Toast.makeText((GeneralReg.this), "Length Must be grater than 6", Toast.LENGTH_SHORT).show();
+                }
+                else if(!CPasswordString.equals(PasswordString)){
+                    Toast.makeText((GeneralReg.this), "Password unmatched!!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    JSONObject data = new JSONObject();
+                    try {
+                        data.put("name",NameString);
+                        data.put("email",EmailString);
+                        data.put("phoneNumber",PhoneString);
+                        data.put("password",PasswordString);
+                        String res = data.toString();
+                        Log.e("Response",data.toString());
+                    }catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                });
-                NameString = Name.getText().toString();
-                EmailString = Email.getText().toString();
-                PasswordString = Password.getText().toString();
-                StitchAppClient stitchAppClient = Stitch.getDefaultAppClient();
-                RemoteMongoClient mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
-                RemoteMongoCollection<Document> usersCollection = mongoClient.getDatabase("Corona").getCollection("Users");
-                Document newItem = new Document()
-                        .append("name", NameString)
-                        .append("email", EmailString)
-                        .append("password", PasswordString);
-                Document query = new Document().append("email",
-                        new Document().append("$eq", EmailString));
-                final Task<Document> findOneAndUpdateTask = usersCollection.findOne(query);
-                findOneAndUpdateTask.addOnCompleteListener(new OnCompleteListener<Document>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Document> task) {
-                        if (task.getResult() == null) {
-
-                            Task<RemoteInsertOneResult> insertTask = usersCollection.insertOne(newItem);
-                            insertTask.addOnCompleteListener(new OnCompleteListener<RemoteInsertOneResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<RemoteInsertOneResult> task) {
-                                    if (task.isSuccessful()) {
-                                        Log.d("app", NameString);
-                                        Toast.makeText(GeneralReg.this.getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
-                                        Log.d("app", String.format("successfully inserted item with id %s",
-                                                task.getResult().getInsertedId()));
-
-
-                                    } else {
-                                        Log.e("app", "failed to insert document with: ", task.getException());
-                                    }
-                                }
-                            });
-                        } else {
-                            Toast.makeText(getApplicationContext(), "This email is already in use!Try a new one!", Toast.LENGTH_LONG).show();
-                        }
+                    HttpPostRequest httpPostRequest = new HttpPostRequest();
+                    try {
+                        String verdict = httpPostRequest.execute(url,data.toString()).get();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                });
-
-
+                }
             }
         });
     }
-}
 
+    public class HttpPostRequest extends AsyncTask<String,Void,String  > {
+        ProgressDialog progressDialog;
+        protected void onPreExecute(){
+            progressDialog = ProgressDialog.show(GeneralReg.this, "ProgressDialog", "Wait");
+
+        }
+        protected String  doInBackground(String... strings) {
+            HttpURLConnection urlConnection;
+            String url=strings[0];
+            String data = strings[1];
+            String result = null;
+            try {
+
+                /*JSONObject res = new JSONObject();
+                res.put("name","Reaj");
+                res.put("username","Reaj");
+                res.put("email","reaj123@gmail.com");
+                res.put("password","Reaj123");
+                data = res.toString();*/
+
+
+                //Connect
+                urlConnection = (HttpURLConnection) ((new URL(url).openConnection()));
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Accept", "application/json");
+                urlConnection.setRequestMethod("POST");
+                urlConnection.connect();
+
+                //Write
+                OutputStream outputStream = urlConnection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                writer.write(data);
+                writer.close();
+                outputStream.close();
+
+                //Read
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+
+                String line = null;
+                StringBuilder sb = new StringBuilder();
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+                Log.e("Res2",data);
+                Log.e("Response2",sb.toString());
+
+
+
+                //////////////////////test
+
+                JSONObject reader = new JSONObject(sb.toString());
+                String st = (String) reader.get("msg");
+                Log.e("Response2(msg)",st);
+                //////////////test
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.dismiss();
+            /*Intent intent = new Intent(GeneralReg.this,LoginActivity.class);
+            startActivity(intent);*/
+            super.onPostExecute(s);
+        }
+    }
+    private boolean validateEmail(String data){
+        if(data.length()==0) return true;
+        Pattern emailPattern = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher emailMatcher = emailPattern.matcher(data);
+        return emailMatcher.matches();
+    }
+
+    public static final boolean isValidPhoneNumber(String data) {
+        if(data.length()==0) return true;
+        return data.length()==11 && data.charAt(0)=='0';
+    }
+}
 
 
 

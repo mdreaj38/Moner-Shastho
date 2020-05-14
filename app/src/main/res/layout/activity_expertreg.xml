@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E9EFEE"
     android:orientation="vertical"
     tools:context=".ExpertReg">
 
@@ -45,6 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Create  Your \n    Account"
                 android:textColor="#139EAF"
@@ -55,6 +57,7 @@
                 android:id="@+id/ex_name"
                 android:layout_width="280dp"
                 android:layout_height="45dp"
+                android:gravity="center"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/btn"
                 android:elevation="5dp"
@@ -74,7 +77,17 @@
                 android:inputType="textEmailAddress"
                 android:paddingLeft="15dp"
                 android:textColorHint="#C3BABA" />
-
+            <EditText
+                android:id="@+id/mobile"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Phone"
+                android:inputType="textPassword"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
             <EditText
                 android:id="@+id/ex_pass"
                 android:layout_width="280dp"
@@ -83,6 +96,17 @@
                 android:background="@drawable/btn"
                 android:elevation="8dp"
                 android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
+            <EditText
+                android:id="@+id/ex_cpass"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:paddingLeft="15dp"
                 android:textColorHint="#C3BABA" />
@@ -148,18 +172,6 @@
                 android:textColorHint="#C3BABA" />
 
             <EditText
-                android:id="@+id/education"
-                android:layout_width="280dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btn"
-                android:elevation="8dp"
-                android:hint="Education"
-                android:inputType="textPassword"
-                android:paddingLeft="15dp"
-                android:textColorHint="#C3BABA" />
-
-            <EditText
                 android:id="@+id/hdegree"
                 android:layout_width="280dp"
                 android:layout_height="45dp"
@@ -179,6 +191,17 @@
                 android:background="@drawable/btn"
                 android:elevation="8dp"
                 android:hint="Institute"
+                android:inputType="text"
+                android:paddingLeft="15dp"
+                android:textColorHint="#C3BABA" />
+            <EditText
+                android:id="@+id/field"
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn"
+                android:elevation="8dp"
+                android:hint="Field of Study"
                 android:inputType="text"
                 android:paddingLeft="15dp"
                 android:textColorHint="#C3BABA" />

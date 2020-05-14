@@ -58,6 +58,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/btn"
             android:elevation="5dp"
+            android:gravity="center"
             android:hint="Your Name"
             android:inputType="text"
             android:paddingStart="15dp"
@@ -70,8 +71,19 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/btn"
             android:elevation="8dp"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
+            android:gravity="center"
+             android:hint="Email"
+            android:paddingStart="15dp"
+            android:textColorHint="#C3BABA" />
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn"
+            android:elevation="8dp"
+            android:gravity="center"
+            android:hint="Phone"
             android:paddingStart="15dp"
             android:textColorHint="#C3BABA" />
 
@@ -82,7 +94,20 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/btn"
             android:elevation="8dp"
+            android:gravity="center"
             android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingStart="15dp"
+            android:textColorHint="#C3BABA" />
+        <EditText
+            android:id="@+id/conpassword"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn"
+            android:elevation="8dp"
+            android:gravity="center"
+            android:hint="Confirm Password"
             android:inputType="textPassword"
             android:paddingStart="15dp"
             android:textColorHint="#C3BABA" />
