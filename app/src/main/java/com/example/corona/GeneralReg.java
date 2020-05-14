@@ -48,8 +48,9 @@ import java.util.regex.Pattern;
 
 public class GeneralReg extends AppCompatActivity {
 
-    public String EmailString,PhoneString, PasswordString, NameString,CPasswordString;
+    public String EmailString, PhoneString, PasswordString, NameString, CPasswordString;
     String url = "https://bad-blogger.herokuapp.com/admin/register/general";
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -60,7 +61,7 @@ public class GeneralReg extends AppCompatActivity {
         EditText Email = findViewById(R.id.email);
         EditText Password = findViewById(R.id.password);
         EditText confirmpass = findViewById(R.id.conpassword);
-        EditText Phone =findViewById(R.id.phone);
+        EditText Phone = findViewById(R.id.phone);
 
         joinus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -69,41 +70,34 @@ public class GeneralReg extends AppCompatActivity {
                 PhoneString = Phone.getText().toString();
                 PasswordString = Password.getText().toString();
                 CPasswordString = confirmpass.getText().toString();
-                Log.e("Response",PasswordString);
-                if(!isValidPhoneNumber(PhoneString.trim())){
+                Log.e("Response", PasswordString);
+                if (!isValidPhoneNumber(PhoneString.trim())) {
                     Toast.makeText((GeneralReg.this), "Enter Valid Phone number", Toast.LENGTH_SHORT).show();
 
-                }
-                else if(!validateEmail(EmailString.trim())){
+                } else if (!validateEmail(EmailString.trim())) {
                     Toast.makeText((GeneralReg.this), "Enter Valid mail", Toast.LENGTH_SHORT).show();
-                }
-                else if(EmailString.length()==0 && PhoneString.length()==0){
+                } else if (EmailString.length() == 0 && PhoneString.length() == 0) {
                     Toast.makeText((GeneralReg.this), "Enter Valid mail or phone number or both", Toast.LENGTH_SHORT).show();
-                }
-                else if(PasswordString.length()<6){
+                } else if (PasswordString.length() < 6) {
                     Toast.makeText((GeneralReg.this), "Length Must be grater than 6", Toast.LENGTH_SHORT).show();
-                }
-                else if(!CPasswordString.equals(PasswordString)){
+                } else if (!CPasswordString.equals(PasswordString)) {
                     Toast.makeText((GeneralReg.this), "Password unmatched!!", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     JSONObject data = new JSONObject();
                     try {
-                        data.put("name",NameString);
-                        data.put("email",EmailString);
-                        data.put("phoneNumber",PhoneString);
-                        data.put("password",PasswordString);
+                        data.put("name", NameString);
+                        data.put("email", EmailString);
+                        data.put("phoneNumber", PhoneString);
+                        data.put("password", PasswordString);
                         String res = data.toString();
-                        Log.e("Response",data.toString());
-                    }catch (JSONException e) {
+                        Log.e("Response", data.toString());
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     HttpPostRequest httpPostRequest = new HttpPostRequest();
                     try {
-                        String verdict = httpPostRequest.execute(url,data.toString()).get();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
+                        String verdict = httpPostRequest.execute(url, data.toString()).get();
+                    } catch (ExecutionException | InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
@@ -111,15 +105,17 @@ public class GeneralReg extends AppCompatActivity {
         });
     }
 
-    public class HttpPostRequest extends AsyncTask<String,Void,String  > {
+    public class HttpPostRequest extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
-        protected void onPreExecute(){
+
+        protected void onPreExecute() {
             progressDialog = ProgressDialog.show(GeneralReg.this, "ProgressDialog", "Wait");
 
         }
-        protected String  doInBackground(String... strings) {
+
+        protected String doInBackground(String... strings) {
             HttpURLConnection urlConnection;
-            String url=strings[0];
+            String url = strings[0];
             String data = strings[1];
             String result = null;
             try {
@@ -158,22 +154,17 @@ public class GeneralReg extends AppCompatActivity {
                 }
 
                 bufferedReader.close();
-                Log.e("Res2",data);
-                Log.e("Response2",sb.toString());
-
+                Log.e("Res2", data);
+                Log.e("Response2", sb.toString());
 
 
                 //////////////////////test
 
                 JSONObject reader = new JSONObject(sb.toString());
                 String st = (String) reader.get("msg");
-                Log.e("Response2(msg)",st);
+                Log.e("Response2(msg)", st);
                 //////////////test
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return result;
@@ -187,16 +178,17 @@ public class GeneralReg extends AppCompatActivity {
             super.onPostExecute(s);
         }
     }
-    private boolean validateEmail(String data){
-        if(data.length()==0) return true;
+
+    private boolean validateEmail(String data) {
+        if (data.length() == 0) return true;
         Pattern emailPattern = Pattern.compile(".+@.+\\.[a-z]+");
         Matcher emailMatcher = emailPattern.matcher(data);
         return emailMatcher.matches();
     }
 
     public static final boolean isValidPhoneNumber(String data) {
-        if(data.length()==0) return true;
-        return data.length()==11 && data.charAt(0)=='0';
+        if (data.length() == 0) return true;
+        return data.length() == 11 && data.charAt(0) == '0';
     }
 }
 
