@@ -61,8 +61,8 @@
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-medium"
         android:paddingStart="210dp"
-        android:text="Forget Password?"
-        android:textColor="#3C3737"
+        android:text="@string/forgetpass"
+        android:textColor="#DF0D38"
         android:textSize="15sp"
         android:textStyle="italic" />
 
