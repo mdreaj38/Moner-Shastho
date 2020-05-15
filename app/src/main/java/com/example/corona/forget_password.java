@@ -191,6 +191,7 @@ public class forget_password extends AppCompatActivity {
                 alert11.show();
                 Intent intent = new Intent(forget_password.this,LoginActivity.class);
                 startActivity(intent);
+                finish();
 
             }
             else {
