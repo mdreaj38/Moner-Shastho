@@ -3,13 +3,11 @@ package com.example.corona;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 
 public class update_profile extends AppCompatActivity {
 
-    private Object Menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +22,7 @@ public class update_profile extends AppCompatActivity {
         setContentView(R.layout.activity_update_profile);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
-        /*FloatingActionButton fab=findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(update_profile.this, update_profile_page_2.class);
-                startActivity(intent);
-            }
-        });*/
+        TextView nextpage = findViewById(R.id.next);
 
 
     }

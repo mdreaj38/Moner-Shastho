@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".update_profile">
 
@@ -15,7 +15,18 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <TextView
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="320dp"
+            android:text="Next"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+    </androidx.appcompat.widget.Toolbar>
 
 
     <LinearLayout
@@ -30,7 +41,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginTop="30dp"
             android:layout_marginStart="10dp"
             android:text="12.Clients main concerns/ complaints with duration (in telegraphic at least 3)"
             android:textColor="#ba160c"
@@ -182,50 +192,9 @@
             android:inputType="text"
             android:textColorHint="@color/colorPrimaryDark" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:text="17.Stressful life events mention with duration"
-            android:textColor="#ba160c"
-            android:textSize="20sp" />
 
 
-        <EditText
-            android:id="@+id/stressful_life"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="text"
-            android:ems="10"
-            android:inputType="text"
-            android:textColorHint="@color/colorPrimaryDark" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:gravity="end">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="16dp"
-                android:contentDescription="submit"
-                android:src="@drawable/ic_arrow_forward_black_24dp" />
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
 
-    <!--<Button
-        android:id="@+id/loginButton"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#ba160c"
-        android:text="@string/update"
-        android:textColor="#ffff"
 
-        />-->
