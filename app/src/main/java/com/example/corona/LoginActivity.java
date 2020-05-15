@@ -4,28 +4,15 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.mongodb.stitch.android.core.Stitch;
 import com.mongodb.stitch.android.core.StitchAppClient;
-import com.mongodb.stitch.android.core.auth.StitchUser;
-import com.mongodb.stitch.android.core.auth.providers.userpassword.UserPasswordAuthProviderClient;
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
-import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
-
-import org.bson.Document;
 
 public class LoginActivity extends AppCompatActivity {
     String[] user_type;
@@ -105,96 +92,22 @@ public class LoginActivity extends AppCompatActivity {
             }
             if (v.getId() == R.id.login) {
 
-               /* pgsBar = findViewById(R.id.pBar);
-                pgsBar.setVisibility(View.VISIBLE);
-*/
 
                 string_email_login = emailLogin.getText().toString();
                 string_email_pass = passLogin.getText().toString();
                 email1 = string_email_login;
                 pass1 = string_email_pass;
-                /*if (!isEmailValid(string_email_login)) {
-                    Toast.makeText(getApplicationContext(), "Your Email ID is Invalid!", Toast.LENGTH_SHORT).show();
-                } else {
-                    pgsdialog.show();
-                    String string_pass_login = passLogin.getText().toString();
-                    Stitch.initializeDefaultAppClient("coronaapp-yvebc");
-                    Stitch.getDefaultAppClient().getAuth().loginWithCredential(new AnonymousCredential()).addOnCompleteListener(new OnCompleteListener<StitchUser>() {
-                        @Override
-                        public void onComplete(@NonNull final Task<StitchUser> task) {
-                        *//*if (task.isSuccessful()) {
 
-                            Log.d("stitch", "logged in anonymously");
-                        } else {
-                            Log.e("stitch", "failed to log in anonymously", task.getException());
-                        }*//*
-                        }
-                    });
-                    StitchAppClient stitchAppClient = Stitch.getDefaultAppClient();
-                    RemoteMongoClient mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
-                    RemoteMongoCollection<Document> usersCollection = mongoClient.getDatabase("Corona").getCollection("Users");
-                    Document query = new Document().append("email",
-                            new Document().append("$eq", string_email_login)).append("password", new Document().append("$eq", string_email_pass));
-                    final Task<Document> findOneAndUpdateTask = usersCollection.findOne(query);
-                    findOneAndUpdateTask.addOnCompleteListener(new OnCompleteListener<Document>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Document> task) {
-                            if (task.getResult() == null) {
-                                check_expertsCollection();
-                                pgsdialog.dismiss();
-                            } else if (task.isSuccessful()) {
-*/
                 Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 startActivity(intent);
                 pgsdialog.dismiss();
             }
-            /*else {
-                Log.d("app", String.format("Successfully found document: %s",
-                        task.getResult()));
-                Toast.makeText(getApplicationContext(), "Login Failed!Please Try again!", Toast.LENGTH_SHORT).show();
-                Log.e("app", "Failed to findOne: ", task.getException());
-                pgsdialog.dismiss();
-            }*/
-
-            //});
 
 
             if (v.getId() == R.id.forget_password) {
                 Intent intent = new Intent(LoginActivity.this, forget_password.class);
                 startActivity(intent);
             }
-        }
-
-        void check_expertsCollection() {
-
-            StitchAppClient stitchAppClient = Stitch.getDefaultAppClient();
-            RemoteMongoClient mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
-            RemoteMongoCollection<Document> expertUsersCollection = mongoClient.getDatabase("Corona").getCollection("expertUsers");
-            Document query = new Document().append("email",
-                    new Document().append("$eq", string_email_login)).append("password", new Document().append("$eq", string_email_pass));
-            final Task<Document> findOneAndUpdateTask = expertUsersCollection.findOne(query);
-            findOneAndUpdateTask.addOnCompleteListener(new OnCompleteListener<Document>() {
-                @Override
-                public void onComplete(@NonNull Task<Document> task) {
-                    if (task.getResult() == null) {
-                        Toast.makeText(getApplicationContext(), "You are not Signed Up!Please Sign up first!", Toast.LENGTH_SHORT).show();
-                        Log.d("app", "No document matches the provided query");
-                        pgsdialog.dismiss();
-                    } else if (task.isSuccessful()) {
-
-                        Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
-                        startActivity(intent);
-                        pgsdialog.dismiss();
-                        Log.d("app", String.format("Successfully found document: %s",
-                                task.getResult()));
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Login Failed!Please Try again!", Toast.LENGTH_SHORT).show();
-                        Log.e("app", "Failed to findOne: ", task.getException());
-                        pgsdialog.dismiss();
-                    }
-                }
-
-            });
         }
     }
 }

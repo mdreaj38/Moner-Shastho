@@ -5,8 +5,9 @@
         android:title="sfdghj"
         android:id="@+id/item1"
         android:visible="true"
-        android:icon="@drawable/light_bulb"
+        android:icon="@drawable/ic_check_black_24dp"
         app:showAsAction="always"
+
         >
     </item>
 </menu>
