@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,15 +38,17 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ExpertReg extends AppCompatActivity {
     Button joinUs;
-    EditText name, email, mobile,password,cpassword, affiliation, country, city, designation, licence, hiDegree, institute,field;
-    String stringName, stringEmail,stringMobile, stringPass, stringCpassword, stringAffiliation, stringCountry,stringCity, stringDesignation, stringLicence, stringHDegree, stringInstitute,stringfield;
+    EditText name, email, mobile, password, cpassword, affiliation, country, city, designation, licence, hiDegree, institute, field;
+    String stringName, stringEmail, stringMobile, stringPass, stringCpassword, stringAffiliation, stringCountry, stringCity, stringDesignation, stringLicence, stringHDegree, stringInstitute, stringfield;
     String url = "https://bad-blogger.herokuapp.com/admin/register/expert";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,76 +72,71 @@ public class ExpertReg extends AppCompatActivity {
             public void onClick(View v) {
                 int flag = 1;
                 stringName = name.getText().toString();
-                flag*=stringName.length();
+                flag *= stringName.length();
 
                 stringEmail = email.getText().toString();
-                flag*=stringEmail.length();
+                flag *= stringEmail.length();
 
                 stringMobile = mobile.getText().toString();
-                flag*=stringMobile.length();
+                flag *= stringMobile.length();
 
                 stringPass = password.getText().toString();
-                flag*=stringPass.length();
+                flag *= stringPass.length();
 
                 stringCpassword = cpassword.getText().toString();
-                flag*=stringCpassword.length();
+                flag *= stringCpassword.length();
 
                 stringAffiliation = affiliation.getText().toString();
-                flag*=stringAffiliation.length();
+                flag *= stringAffiliation.length();
 
                 stringDesignation = designation.getText().toString();
-                flag*=stringDesignation.length();
+                flag *= stringDesignation.length();
 
                 stringCountry = country.getText().toString();
-                flag*=stringCountry.length();
+                flag *= stringCountry.length();
 
                 stringCity = city.getText().toString();
-                flag*=stringCity.length();
+                flag *= stringCity.length();
 
                 stringLicence = licence.getText().toString();
-                flag*=stringLicence.length();
+                flag *= stringLicence.length();
 
                 stringHDegree = hiDegree.getText().toString();
-                flag*=stringHDegree.length();
+                flag *= stringHDegree.length();
 
                 stringInstitute = institute.getText().toString();
-                flag*=stringInstitute.length();
+                flag *= stringInstitute.length();
 
                 stringfield = field.getText().toString();
-                flag*=stringfield.length();
+                flag *= stringfield.length();
 
-                if(flag==0){
+                if (flag == 0) {
                     Toast.makeText((ExpertReg.this), "You have to enter all the field", Toast.LENGTH_SHORT).show();
-                }
-                else if(!isValidPhoneNumber(stringMobile.trim())){
+                } else if (!isValidPhoneNumber(stringMobile.trim())) {
                     Toast.makeText((ExpertReg.this), "Enter Valid Phone number", Toast.LENGTH_SHORT).show();
-                }
-                else if(!validateEmail(stringEmail.trim())){
+                } else if (!validateEmail(stringEmail.trim())) {
                     Toast.makeText((ExpertReg.this), "Enter Valid mail", Toast.LENGTH_SHORT).show();
-                }
-                else if(stringPass.length()<6){
+                } else if (stringPass.length() < 6) {
                     Toast.makeText((ExpertReg.this), "Length Must be grater than 6", Toast.LENGTH_SHORT).show();
-                }
-                else if(!stringCpassword.equals(stringPass)){
+                } else if (!stringCpassword.equals(stringPass)) {
                     Toast.makeText((ExpertReg.this), "Password unmatched!!", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     JSONObject res = new JSONObject();
                     try {
-                        res.put("name",stringName);
-                        res.put("email",stringEmail);
-                        res.put("phoneNumber",stringMobile);
-                        res.put("password",stringPass);
-                        res.put("currentAffiliation",stringAffiliation);
-                        res.put("designation",stringDesignation);
-                        res.put("city",stringCity);
-                        res.put("country",stringCountry);
-                        res.put("license",stringLicence);
-                        res.put("hDegree",stringHDegree);
-                        res.put("institute",stringInstitute);
-                        res.put("field",stringfield);
+                        res.put("name", stringName);
+                        res.put("email", stringEmail);
+                        res.put("phoneNumber", stringMobile);
+                        res.put("password", stringPass);
+                        res.put("currentAffiliation", stringAffiliation);
+                        res.put("designation", stringDesignation);
+                        res.put("city", stringCity);
+                        res.put("country", stringCountry);
+                        res.put("license", stringLicence);
+                        res.put("hDegree", stringHDegree);
+                        res.put("institute", stringInstitute);
+                        res.put("field", stringfield);
                         HttpPostRequest httpPostRequest = new HttpPostRequest();
-                        String verdict = httpPostRequest.execute(url,res.toString()).get();
+                        String verdict = httpPostRequest.execute(url, res.toString()).get();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
@@ -150,23 +148,34 @@ public class ExpertReg extends AppCompatActivity {
                 }
             }
         });
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
-    public class HttpPostRequest extends AsyncTask<String,Void,String  > {
-        String verdict,message;
+    public class HttpPostRequest extends AsyncTask<String, Void, String> {
+        String verdict, message;
         ProgressDialog progressDialog;
-        protected void onPreExecute(){
+
+        protected void onPreExecute() {
             progressDialog = ProgressDialog.show(ExpertReg.this, "ProgressDialog", "Wait");
 
         }
-        protected String  doInBackground(String... strings) {
+
+        protected String doInBackground(String... strings) {
             HttpURLConnection urlConnection;
-            String url=strings[0];
+            String url = strings[0];
             String data = strings[1];
             String result = null;
             try {
-
 
 
                 //Connect
@@ -201,8 +210,8 @@ public class ExpertReg extends AppCompatActivity {
                 bufferedReader.close();
                 result = sb.toString();
 
-                Log.e("Res2",data);
-                Log.e("Response2",sb.toString());
+                Log.e("Res2", data);
+                Log.e("Response2", sb.toString());
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -219,13 +228,12 @@ public class ExpertReg extends AppCompatActivity {
             progressDialog.dismiss();
             /*Intent intent = new Intent(GeneralReg.this,LoginActivity.class);
             startActivity(intent);*/
-            if(verdict.equals("true")){
-                Intent intent = new Intent(ExpertReg.this,LoginActivity.class);
+            if (verdict.equals("true")) {
+                Intent intent = new Intent(ExpertReg.this, LoginActivity.class);
                 startActivity(intent);
                 Toast.makeText((ExpertReg.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
 
-            }
-            else {
+            } else {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(ExpertReg.this);
                 builder1.setCancelable(false);
                 builder1.setTitle(message);
@@ -244,14 +252,15 @@ public class ExpertReg extends AppCompatActivity {
             super.onPostExecute(s);
         }
     }
-    private boolean validateEmail(String data){
+
+    private boolean validateEmail(String data) {
         Pattern emailPattern = Pattern.compile(".+@.+\\.[a-z]+");
         Matcher emailMatcher = emailPattern.matcher(data);
         return emailMatcher.matches();
     }
 
     public static final boolean isValidPhoneNumber(String data) {
-        return data.length()==11 && data.charAt(0)=='0';
+        return data.length() == 11 && data.charAt(0) == '0';
     }
 }
 

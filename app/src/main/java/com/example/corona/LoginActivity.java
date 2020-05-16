@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mongodb.stitch.android.core.StitchAppClient;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     String[] user_type;
@@ -49,6 +52,17 @@ public class LoginActivity extends AppCompatActivity {
         forgetPass = findViewById(R.id.forget_password);
         forgetPass.setOnClickListener(handler);
 
+        //back button
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     class Handler implements View.OnClickListener {
