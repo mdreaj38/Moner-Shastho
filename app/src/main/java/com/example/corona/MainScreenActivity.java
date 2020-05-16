@@ -23,8 +23,8 @@ public class MainScreenActivity extends AppCompatActivity {
     GridView gridView;
     private ImageView imageView;
 
-    String[] Options = {"Lock Down", "Remain Healthy", "Track Record", "Resources", "Contact with expert", "Profile"};
-    int[] OptionImage = {R.drawable.lockdown, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.professionals, R.drawable.man};
+    String[] Options = {"Lock Down", "Remain Healthy", "Track Record", "Resources", "Log Out", "Profile"};
+    int[] OptionImage = {R.drawable.lockdown, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.logout, R.drawable.man};
     int cnt = 0;
 
 
