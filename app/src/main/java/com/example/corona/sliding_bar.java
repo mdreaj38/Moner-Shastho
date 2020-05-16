@@ -16,7 +16,7 @@ public class sliding_bar extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Toast.makeText(getApplicationContext(), progress + "", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), progress + "", Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -1,8 +1,5 @@
 package com.example.corona;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -19,15 +16,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.mongodb.stitch.android.core.Stitch;
-import com.mongodb.stitch.android.core.StitchAppClient;
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
-import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateResult;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,7 +38,8 @@ public class forget_password extends AppCompatActivity {
     ProgressDialog pgsdialog;
     TextView login;
     RadioGroup radioGroup;
-    String url="https://bad-blogger.herokuapp.com/admin/forgot_password";
+    String url = "https://bad-blogger.herokuapp.com/admin/forgot_password";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,14 +48,14 @@ public class forget_password extends AppCompatActivity {
         pgsdialog.setTitle("Please Wait");
         pgsdialog.setMessage("Updating Password..");
         forgetEmail = findViewById(R.id.forget_email);
-        radioGroup  = findViewById(R.id.radio);
+        radioGroup = findViewById(R.id.radio);
         Button updatePass = findViewById(R.id.update_pass);
         updatePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*update here*/
                 int id = radioGroup.getCheckedRadioButtonId();
-                if(id==-1){
+                if (id == -1) {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(forget_password.this);
                     builder1.setCancelable(false);
                     builder1.setMessage(Html.fromHtml("<font color='#FF0000'>Select User Type</font>"));
@@ -77,22 +68,21 @@ public class forget_password extends AppCompatActivity {
                             });
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
-                }
-                else {
+                } else {
                     RadioButton rb = findViewById(id);
                     String text = rb.getText().toString();
                     text = text.toLowerCase();
                     Toast.makeText((forget_password.this), text, Toast.LENGTH_SHORT).show();
                     JSONObject res = new JSONObject();
                     try {
-                        res.put("email",forgetEmail.getText().toString());
-                        res.put("userType",text);
+                        res.put("email", forgetEmail.getText().toString());
+                        res.put("userType", text);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
                     HttpPostRequest httpPostRequest = new HttpPostRequest();
-                    httpPostRequest.execute(url,res.toString());
+                    httpPostRequest.execute(url, res.toString());
 
                 }
             }
@@ -101,16 +91,18 @@ public class forget_password extends AppCompatActivity {
     }
 
 
-    public class HttpPostRequest extends AsyncTask<String,Void,String > {
-        String verdict,message;
+    public class HttpPostRequest extends AsyncTask<String, Void, String> {
+        String verdict, message;
         ProgressDialog progressDialog;
-        protected void onPreExecute(){
+
+        protected void onPreExecute() {
             progressDialog = ProgressDialog.show(forget_password.this, "A link will be sent soon", "Wait");
 
         }
-        protected String  doInBackground(String... strings) {
+
+        protected String doInBackground(String... strings) {
             HttpURLConnection urlConnection;
-            String url=strings[0];
+            String url = strings[0];
             String data = strings[1];
             String result = null;
             try {
@@ -150,9 +142,8 @@ public class forget_password extends AppCompatActivity {
 
                 bufferedReader.close();
 
-                Log.e("Res2",data);
-                Log.e("Response2",sb.toString());
-
+                Log.e("Res2", data);
+                Log.e("Response2", sb.toString());
 
 
                 //////////////////////test
@@ -160,7 +151,7 @@ public class forget_password extends AppCompatActivity {
                 JSONObject reader = new JSONObject(sb.toString());
                 verdict = reader.getString("status");
                 message = reader.getString("msg");
-                Log.e("Response2(msg)",message);
+                Log.e("Response2(msg)", message);
                 //////////////test
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -175,7 +166,7 @@ public class forget_password extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             progressDialog.dismiss();
-            if(verdict.equals("true")){
+            if (verdict.equals("true")) {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(forget_password.this);
                 builder1.setCancelable(false);
                 builder1.setTitle(message);
@@ -189,12 +180,11 @@ public class forget_password extends AppCompatActivity {
                         });
                 AlertDialog alert11 = builder1.create();
                 alert11.show();
-                Intent intent = new Intent(forget_password.this,LoginActivity.class);
+                Intent intent = new Intent(forget_password.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
 
-            }
-            else {
+            } else {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(forget_password.this);
                 builder1.setCancelable(false);
                 builder1.setTitle(message);
