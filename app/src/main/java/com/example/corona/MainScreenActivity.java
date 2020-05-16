@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,21 +16,25 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
 public class MainScreenActivity extends AppCompatActivity {
 
 
     GridView gridView;
     private ImageView imageView;
 
-    String[] Options = {"Lock Down", "Remain Healthy", "Track Record", "Resources", "Contact with expert", "Profile"};
-    int[] OptionImage = {R.drawable.lockdown, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.professionals, R.drawable.man};
+    String[] Options = {"Lock Down", "Remain Healthy", "Track Record", "Resources", "Log Out", "Profile"};
+    int[] OptionImage = {R.drawable.lockdown, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.logout, R.drawable.man};
     int cnt = 0;
-
+    public String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        Intent intent = getIntent();
+        email = intent.getStringExtra("email");
 
         //finding listview
         gridView = findViewById(R.id.gridview);
@@ -50,6 +55,7 @@ public class MainScreenActivity extends AppCompatActivity {
                 }
                 else if (i == 5) {
                     Intent intent = new Intent(MainScreenActivity.this, profile.class);
+                    intent.putExtra("email",email);
                     startActivity(intent);
                 } else {
                     Toast.makeText((MainScreenActivity.this), "STOP", Toast.LENGTH_SHORT).show();
@@ -58,6 +64,16 @@ public class MainScreenActivity extends AppCompatActivity {
         });
 
 
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     static class ViewHolder {

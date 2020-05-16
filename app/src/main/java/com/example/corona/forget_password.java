@@ -32,6 +32,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
 
 public class forget_password extends AppCompatActivity {
 
@@ -97,6 +98,16 @@ public class forget_password extends AppCompatActivity {
             }
         });
 
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

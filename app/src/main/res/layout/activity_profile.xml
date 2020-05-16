@@ -2,10 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:visibility="visible"
+    tools:context=".profile"
     tools:visibility="visible">
 
     <RelativeLayout
@@ -19,8 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleType="centerCrop">
-        </ImageView>
+            android:scaleType="centerCrop"></ImageView>
 
         <de.hdodenhof.circleimageview.CircleImageView
 
@@ -80,15 +79,15 @@
                 android:layout_below="@+id/designation"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="Update Profile"
                 android:clickable="true"
-                android:textColor="#fff"
+                android:focusable="true"
+                android:text="Update Profile"
                 android:textAllCaps="true"
-                android:textSize="16sp"
-                android:focusable="true" />
+                android:textColor="#fff"
+                android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/designation"
+                android:id="@+id/email_idd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/name"
