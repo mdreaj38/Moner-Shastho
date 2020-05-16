@@ -26,12 +26,14 @@ public class MainScreenActivity extends AppCompatActivity {
     String[] Options = {"Lock Down", "Remain Healthy", "Track Record", "Resources", "Log Out", "Profile"};
     int[] OptionImage = {R.drawable.lockdown, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.logout, R.drawable.man};
     int cnt = 0;
-
+    public String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        Intent intent = getIntent();
+        email = intent.getStringExtra("email");
 
         //finding listview
         gridView = findViewById(R.id.gridview);
@@ -47,6 +49,7 @@ public class MainScreenActivity extends AppCompatActivity {
                 }
                 if (i == 5) {
                     Intent intent = new Intent(MainScreenActivity.this, profile.class);
+                    intent.putExtra("email",email);
                     startActivity(intent);
                 } else {
                     Toast.makeText((MainScreenActivity.this), "STOP", Toast.LENGTH_SHORT).show();

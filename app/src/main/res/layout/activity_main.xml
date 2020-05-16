@@ -9,7 +9,7 @@
     android:padding="10dp"
     tools:context=".GeneralReg">
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
@@ -31,7 +31,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"

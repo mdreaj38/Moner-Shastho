@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class sliding_bar extends AppCompatActivity {
@@ -13,10 +14,13 @@ public class sliding_bar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sliding_bar);
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
+        TextView value=findViewById(R.id.range);
+        value.setText("Range: "+seekBar.getProgress()+"/"+ seekBar.getMax());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Toast.makeText(getApplicationContext(), progress + "", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), progress + "", Toast.LENGTH_SHORT).show();
+                value.setText("Range: "+progress+"/"+ seekBar.getMax());
             }
 
             @Override

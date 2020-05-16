@@ -3,6 +3,7 @@ package com.example.corona;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         pgsdialog.setTitle("Please Wait");
         pgsdialog.setMessage("Logging In..");
         // pgsBar = (ProgressBar) findViewById(R.id.pBar);
+
 
         Button signup = findViewById(R.id.signup);
         Handler handler = new Handler();
@@ -113,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                 pass1 = string_email_pass;
 
                 Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                intent.putExtra("email",email1);
                 startActivity(intent);
                 pgsdialog.dismiss();
             }
