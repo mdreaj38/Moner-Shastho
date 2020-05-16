@@ -8,12 +8,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -40,8 +42,12 @@ public class GeneralReg extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle("General User Registration");
+        /*back button*/
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         Button joinus = findViewById(R.id.joinus);
-        ImageView backtologin = findViewById(R.id.backtologin);
         EditText Name = findViewById(R.id.name);
         EditText Email = findViewById(R.id.email);
         EditText Password = findViewById(R.id.password);
@@ -89,6 +95,13 @@ public class GeneralReg extends AppCompatActivity {
                 }
             }
         });
+    }
+    // listener for backbutton
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==android.R.id.home);{
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public class HttpPostRequest extends AsyncTask<String,Void,String > {

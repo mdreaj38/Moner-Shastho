@@ -1,5 +1,6 @@
 package com.example.corona;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,7 +43,12 @@ public class MainScreenActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainScreenActivity.this, LockDown.class);
                     startActivity(intent);
                 }
-                if (i == 5) {
+                else if(i==3){
+                    Intent intent = new Intent(MainScreenActivity.this, resource.class);
+                    startActivity(intent);
+
+                }
+                else if (i == 5) {
                     Intent intent = new Intent(MainScreenActivity.this, profile.class);
                     startActivity(intent);
                 } else {

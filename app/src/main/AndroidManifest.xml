@@ -12,6 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ShowResource"></activity>
+        <activity android:name=".resource" />
         <activity android:name=".sliding_bar" />
         <activity android:name=".update_profile_page_4" />
         <activity android:name=".update_profile_page_3" />

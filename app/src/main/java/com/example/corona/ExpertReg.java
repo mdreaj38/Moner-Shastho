@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +51,15 @@ public class ExpertReg extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expertreg);
+
+
+        setTitle("Expert Registration");
+        /*back button*/
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+
         joinUs = findViewById(R.id.ex_joinus);
         name = findViewById(R.id.ex_name);
         email = findViewById(R.id.ex_email);
@@ -151,7 +161,12 @@ public class ExpertReg extends AppCompatActivity {
             }
         });
     }
-
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==android.R.id.home);{
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public class HttpPostRequest extends AsyncTask<String,Void,String  > {
         String verdict,message;
