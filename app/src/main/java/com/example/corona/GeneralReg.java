@@ -103,13 +103,7 @@ public class GeneralReg extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    // listener for backbutton
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==android.R.id.home);{
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 
 
     public class HttpPostRequest extends AsyncTask<String, Void, String> {

@@ -168,12 +168,7 @@ public class ExpertReg extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==android.R.id.home);{
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 
     public class HttpPostRequest extends AsyncTask<String, Void, String> {
         String verdict, message;
