@@ -64,7 +64,7 @@ public class ques_ans_takeInput extends AppCompatActivity {
                 if (ans.equals("")) {
                     Toast toast = Toast.makeText(ques_ans_takeInput.this, "Answer Can not be empty!", Toast.LENGTH_SHORT);
                     View view = toast.getView();
-                    view.setBackgroundResource(R.color.colorAccent);
+                    view.setBackgroundResource(R.color.red);
                     toast.show();
 
                 } else {

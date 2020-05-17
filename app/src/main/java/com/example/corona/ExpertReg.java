@@ -13,6 +13,8 @@ import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -44,8 +46,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ExpertReg extends AppCompatActivity {
+    EditText country;
+    String[] countryNames = {"abc","bcd"};
+
     Button joinUs;
-    EditText name, email, mobile, password, cpassword, affiliation, country, city, designation, licence, hiDegree, institute, field;
+    EditText name, email, mobile, password, cpassword, affiliation, city, designation, licence, hiDegree, institute, field;
     String stringName, stringEmail, stringMobile, stringPass, stringCpassword, stringAffiliation, stringCountry, stringCity, stringDesignation, stringLicence, stringHDegree, stringInstitute, stringfield;
     String url = "https://bad-blogger.herokuapp.com/admin/register/expert";
 
@@ -76,6 +81,8 @@ public class ExpertReg extends AppCompatActivity {
         hiDegree = findViewById(R.id.hdegree);
         institute = findViewById(R.id.institute);
         field = findViewById(R.id.field);
+
+
         joinUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

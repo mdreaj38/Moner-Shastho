@@ -22,7 +22,7 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text=""
             android:gravity="center"
             android:textColor="#000000"
             android:textStyle="bold"
@@ -34,8 +34,7 @@
         android:layout_height="wrap_content"
         android:padding="6dp"
         android:justificationMode="inter_word"
-
-        android:text="body"
+        android:text=""
          android:textSize="20sp"
         />
         <TextView

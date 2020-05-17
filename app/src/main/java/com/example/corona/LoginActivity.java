@@ -4,30 +4,44 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mongodb.stitch.android.core.StitchAppClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
     String[] user_type;
     /*ProgressBar pgsBar;*/
-    StitchAppClient stitchClient = null;
     ProgressDialog pgsdialog;
     TextView forgetPass;
     public String email1, pass1;
-
-    public LoginActivity() {
-    }
+    String string_email_login, string_email_pass;
 
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
@@ -70,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
     class Handler implements View.OnClickListener {
         EditText emailLogin = findViewById(R.id.email_login);
         EditText passLogin = findViewById(R.id.password_login);
-        String string_email_login, string_email_pass;
 
         @Override
         public void onClick(View v) {
@@ -98,25 +111,41 @@ public class LoginActivity extends AppCompatActivity {
                 mbuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 });
                 AlertDialog mdialog = mbuilder.create();
                 mdialog.show();
-
-
             }
             if (v.getId() == R.id.login) {
-
 
                 string_email_login = emailLogin.getText().toString();
                 string_email_pass = passLogin.getText().toString();
                 email1 = string_email_login;
                 pass1 = string_email_pass;
 
-                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                JSONObject res = new JSONObject();
+                try {
+
+                    res.put("device","android");
+                    res.put("handle","email");
+                    res.put("email",email1);
+                    res.put("password",pass1);
+
+                    new HttpPostRequest().execute("https://bad-blogger.herokuapp.com/admin/login",res.toString()).get();
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                /*Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 intent.putExtra("email",email1);
-                startActivity(intent);
+                startActivity(intent);*/
+
                 pgsdialog.dismiss();
             }
 
@@ -127,5 +156,105 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
+    public class HttpPostRequest extends AsyncTask<String, Void, String> {
+        String verdict, message;
+        ProgressDialog progressDialog;
+
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(LoginActivity.this, "ProgressDialog", "Wait");
+
+        }
+
+        protected String doInBackground(String... strings) {
+            HttpURLConnection urlConnection;
+            String url = strings[0];
+            String data = strings[1];
+            String result = null;
+            try {
+
+                /*JSONObject res = new JSONObject();
+                res.put("name","Reaj");
+                data = res.toString();*/
+
+                //Connect
+                urlConnection = (HttpURLConnection) ((new URL(url).openConnection()));
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Accept", "application/json");
+                urlConnection.setRequestMethod("POST");
+                urlConnection.connect();
+
+                //Write
+                OutputStream outputStream = urlConnection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                writer.write(data);
+                writer.flush();
+                writer.close();
+                outputStream.close();
+
+                int responseCode = urlConnection.getResponseCode();
+                Log.e("Response Code : ", "" + responseCode);
+
+                //Read
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+
+                String line = null;
+                StringBuilder sb = new StringBuilder();
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                Log.e("Responsedata", data);
+                Log.e("Responsesb", sb.toString());
+
+                //////////////////////test
+
+               /* JSONObject reader = new JSONObject(sb.toString());
+                verdict = reader.getString("status");
+                message = reader.getString("msg");
+                Log.e("Response2(msg)", message);*/
+
+                //////////////test
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.dismiss();
+           /* if (verdict.equals("true")) {
+                Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText((LoginActivity.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
+
+            } else {
+                android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(LoginActivity.this);
+                builder1.setCancelable(false);
+                builder1.setTitle(message);
+                builder1.setMessage("Try again");
+
+                builder1.setPositiveButton(
+                        Html.fromHtml("<font color='#FF0000'>Ok</font>"),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                android.app.AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }*/
+            super.onPostExecute(s);
+        }
+    }
+
 }
 
