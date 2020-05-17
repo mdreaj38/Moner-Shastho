@@ -62,6 +62,8 @@ public class update_profile extends AppCompatActivity {
             View view = toast.getView();
             view.setBackgroundResource(R.color.colorAccent);
             toast.show();
+
+
             return true;
         }
         if (item.getItemId() == android.R.id.home) {

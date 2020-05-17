@@ -2,6 +2,7 @@ package com.example.corona;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -40,10 +41,16 @@ public class LockDown extends AppCompatActivity {
 
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
+                    Intent intent = new Intent(LockDown.this, qus_ans_slider.class);
+                    startActivity(intent);
                     Toast.makeText((LockDown.this), "Zero", Toast.LENGTH_SHORT).show();
                 } else if (i == 1) {
+                    Intent intent = new Intent(LockDown.this, ques_ans_takeInput.class);
+                    startActivity(intent);
                     Toast.makeText((LockDown.this), "One", Toast.LENGTH_SHORT).show();
                 } else if (i == 2) {
+                    Intent intent = new Intent(LockDown.this, ques_ans_select_box.class);
+                    startActivity(intent);
                     Toast.makeText((LockDown.this), "Two", Toast.LENGTH_SHORT).show();
                 } else if (i == 3) {
                     Toast.makeText((LockDown.this), "Three", Toast.LENGTH_SHORT).show();
