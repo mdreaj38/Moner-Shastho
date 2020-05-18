@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.github.mikephil.charting.charts.Chart;
+
 import java.util.Objects;
 
 public class MainScreenActivity extends AppCompatActivity {
@@ -46,6 +48,10 @@ public class MainScreenActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
                     Intent intent = new Intent(MainScreenActivity.this, LockDown.class);
+                    startActivity(intent);
+                }
+               else if (i == 2) {
+                    Intent intent = new Intent(MainScreenActivity.this, chart.class);
                     startActivity(intent);
                 }
                 else if(i==3){

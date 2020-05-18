@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ques_ans_takeInput"></activity>
+        <activity android:name=".chart"></activity>
+        <activity android:name=".ques_ans_takeInput" />
         <activity android:name=".ques_ans_select_box" />
         <activity android:name=".qus_ans_slider" />
         <activity android:name=".ShowResource" />
