@@ -47,6 +47,11 @@ public class update_profile extends AppCompatActivity {
 
         //shared preference
         pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String eemail = pref.getString("email",null);
+        email.setText(eemail);
+        email.setEnabled(false);
+
+
 
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -71,7 +76,7 @@ public class update_profile extends AppCompatActivity {
 
             //shared preferences
             editor = Objects.requireNonNull(pref).edit();
-            editor.putString("email", Email);
+          //  editor.putString("email", Email);
             editor.putString("age", Age);
             editor.putString("gender", string_gender);
             editor.putString("maritalStatus", string_maritalStatus);

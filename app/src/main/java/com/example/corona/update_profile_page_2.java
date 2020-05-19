@@ -67,6 +67,7 @@ public class update_profile_page_2 extends AppCompatActivity {
             editor.putString("occupation", occupation);
             editor.putString("familyType", familyType);
             editor.putString("mentalIllness", mentalIllness);
+
             assert mentalIllness!=null;
             //if (mentalIllness.equals("Yes")) {
                 getMentalIllness = illness_info.getText().toString();

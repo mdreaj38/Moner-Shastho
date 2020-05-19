@@ -1,7 +1,9 @@
 package com.example.corona;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -57,7 +59,17 @@ public class MainScreenActivity extends AppCompatActivity {
                 else if(i==3){
                     Intent intent = new Intent(MainScreenActivity.this, resource.class);
                     startActivity(intent);
+                }
+                else if(i==4){
+                    SharedPreferences settings = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    settings.edit().clear().apply();
+                    Intent next = new Intent(getApplicationContext(), LoginActivity.class);
 
+                    //kill all the previous activity
+                    next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    startActivity(next);
+                    finish();
                 }
                 else if (i == 5) {
                     Intent intent = new Intent(MainScreenActivity.this, profile.class);

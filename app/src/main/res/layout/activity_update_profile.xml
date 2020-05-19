@@ -59,10 +59,12 @@
         <EditText
             android:id="@+id/update_email"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:autofillHints="textEmail"
             android:focusable="true"
-            android:inputType="textEmailAddress"
+            android:background="#B5CCC9"
+            android:gravity="center"
+            android:textStyle="bold"
             android:textColorHint="@color/colorPrimaryDark" />
 
 

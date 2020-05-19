@@ -1,8 +1,10 @@
 package com.example.corona;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -39,6 +41,9 @@ public class LoginActivity extends AppCompatActivity {
     public String email1, pass1;
     String string_email_login, string_email_pass;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
@@ -46,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
+
         pgsdialog = new ProgressDialog(LoginActivity.this);
         pgsdialog.setTitle("Please Wait");
         pgsdialog.setMessage("Logging In..");
@@ -121,6 +126,7 @@ public class LoginActivity extends AppCompatActivity {
                 email1 = string_email_login;
                 pass1 = string_email_pass;
 
+
                 JSONObject res = new JSONObject();
                 try {
 
@@ -130,7 +136,6 @@ public class LoginActivity extends AppCompatActivity {
                     res.put("password", pass1);
                     String res1 = res.toString();
                     Log.e("Response", res1.toString());
-                    //new HttpPostRequest().execute("https://bad-blogger.herokuapp.com/admin/login/android",res.toString()).get();
 
 
                 } catch (JSONException e) {
@@ -155,29 +160,23 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public class HttpPostRequest extends AsyncTask<String, Void, String> {
+    public class HttpPostRequest extends AsyncTask<String, Void, Void> {
         String verdict, message;
         ProgressDialog progressDialog;
+        int statusCode;
+        StringBuilder sb = new StringBuilder();
 
         protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(LoginActivity.this, "ProgressDialog", "Wait");
+            progressDialog = ProgressDialog.show(LoginActivity.this, "Login...", "Wait");
 
         }
 
-        protected String doInBackground(String... strings) {
+        protected Void doInBackground(String... strings) {
             HttpURLConnection urlConnection;
             String url = strings[0];
             String data = strings[1];
             String result = null;
             try {
-
-                /*JSONObject res = new JSONObject();
-                res.put("name","Reaj");
-                res.put("username","Reaj");
-                res.put("email","reaj123@gmail.com");
-                res.put("password","Reaj123");
-                data = res.toString();*/
-
 
                 //Connect
                 urlConnection = (HttpURLConnection) ((new URL(url).openConnection()));
@@ -195,47 +194,50 @@ public class LoginActivity extends AppCompatActivity {
                 outputStream.close();
 
                 //Read
+                 statusCode = urlConnection.getResponseCode();
+                Log.e("code",Integer.toString(statusCode));
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
 
                 String line = null;
-                StringBuilder sb = new StringBuilder();
-
                 while ((line = bufferedReader.readLine()) != null) {
                     sb.append(line);
                 }
 
                 bufferedReader.close();
 
-                Log.e("Res2", data);
+                Log.e("Response2", data);
                 Log.e("Response2", sb.toString());
-
 
                 //////////////////////test
 
-                JSONObject reader = new JSONObject(sb.toString());
+                /*JSONObject reader = new JSONObject(sb.toString());
                 verdict = reader.getString("status");
                 message = reader.getString("msg");
-                Log.e("Response2(msg)", message);
+                Log.e("Response2(msg)", message);*/
                 //////////////test
-            } catch (IOException | JSONException e) {
+            } catch (IOException  e) {
                 e.printStackTrace();
             }
-            return result;
+            return null;
         }
 
 
-        @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(Void code) {
             progressDialog.dismiss();
-            if (verdict.equals("true")) {
+            if (statusCode == 200) {
+                pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                editor = Objects.requireNonNull(pref).edit();
+                editor.putString("email", string_email_login);
+                editor.apply();
+
                 Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 startActivity(intent);
-                Toast.makeText((LoginActivity.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
+               // Toast.makeText((LoginActivity.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
             } else {
                 android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(LoginActivity.this);
                 builder1.setCancelable(false);
-                builder1.setTitle(message);
-                builder1.setMessage("Try again");
+                builder1.setTitle("Invalid Mail or Password");
+                builder1.setMessage("Try again...");
                 builder1.setPositiveButton(
                         Html.fromHtml("<font color='#FF0000'>Ok</font>"),
                         new DialogInterface.OnClickListener() {
@@ -246,7 +248,7 @@ public class LoginActivity extends AppCompatActivity {
                 android.app.AlertDialog alert11 = builder1.create();
                 alert11.show();
             }
-            super.onPostExecute(s);
+            super.onPostExecute(code);
         }
     }
 
