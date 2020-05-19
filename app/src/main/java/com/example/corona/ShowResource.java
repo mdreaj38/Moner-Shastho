@@ -28,13 +28,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class ShowResource extends AppCompatActivity {
     Bitmap bitmap;
     ImageView imageView;
 
-    TextView textView,btitle,author,date;
+    TextView textView, btitle, author, date;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_resource);
@@ -43,7 +45,7 @@ public class ShowResource extends AppCompatActivity {
 
         setTitle("Blog");
         /*back button*/
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         btitle = findViewById(R.id.title);
@@ -53,7 +55,7 @@ public class ShowResource extends AppCompatActivity {
         imageView = findViewById(R.id.blogImg);
 
         //editText.setText(Html.fromHtml("<b>"+message+"</b>"));
-        Log.e("this","a");
+        Log.e("this", "a");
         try {
             new HttpGetRequest().execute(message).get();
         } catch (ExecutionException e) {
@@ -62,18 +64,21 @@ public class ShowResource extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Log.e("this","a");
+        Log.e("this", "a");
     }
+
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==android.R.id.home);{
+        if (item.getItemId() == android.R.id.home) ;
+        {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
-    public class HttpGetRequest extends AsyncTask<String,Void,String> {
 
-        String data ="";
-        String singleParsed ="";
+    public class HttpGetRequest extends AsyncTask<String, Void, String> {
+
+        String data = "";
+        String singleParsed = "";
         String dataParsed = "";
         JSONObject real_data;
         ProgressDialog progressDialog;
@@ -81,35 +86,36 @@ public class ShowResource extends AppCompatActivity {
         public static final int READ_TIMEOUT = 15000;
         public static final int CONNECTION_TIMEOUT = 15000;
 
-        protected void onPreExecute(){
-            progressDialog = ProgressDialog.show(ShowResource.this, "","Loading...");
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(ShowResource.this, "", "Loading...");
         }
 
         @Override
         protected String doInBackground(String... strings) {
-            Log.e("Check","ok");
+            Log.e("Check", "ok");
             try {
-                String st = "https://bad-blogger.herokuapp.com/users/view/"+strings[0]+"?device=android";
+                String st = "https://bad-blogger.herokuapp.com/users/view/" + strings[0] + "?device=android";
                 URL url = new URL(st);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set method
                 httpURLConnection.setRequestMethod("GET");
-                httpURLConnection.connect();;
+                httpURLConnection.connect();
+                ;
 
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line = "";
-                while(line != null){
+                while (line != null) {
                     line = bufferedReader.readLine();
                     data = data + line;
                 }
 
                 JSONObject jo = new JSONObject(data);
-                 real_data = jo.getJSONObject("data");
+                real_data = jo.getJSONObject("data");
                 Log.e("this2", (String) real_data.toString());
                 Log.e("this2", (String) real_data.get("title"));
                 Log.e("this2body", (String) real_data.get("body"));
-                Log.e("this2",data);
+                Log.e("this2", data);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -129,7 +135,7 @@ public class ShowResource extends AppCompatActivity {
 
                 textView.setText(Html.fromHtml((String) real_data.get("body")));
 
-                author.setText(Html.fromHtml("<i>Written by</i>  "+(String) real_data.get("author")));
+                author.setText(Html.fromHtml("<i>Written by</i>  " + (String) real_data.get("author")));
                 date.setText((String) real_data.get("date"));
 
                 progressDialog.dismiss();
@@ -143,8 +149,8 @@ public class ShowResource extends AppCompatActivity {
             super.onPostExecute(aVoid);
         }
     }
-    public class loadImage extends AsyncTask<String, String, String>
-    {
+
+    public class loadImage extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... param) {
@@ -155,10 +161,9 @@ public class ShowResource extends AppCompatActivity {
 
                 url = new URL(param[0]);
                 strm = new BufferedInputStream(url.openStream());
-            }
-            catch (MalformedURLException e) {
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
-            }catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             bitmap = BitmapFactory.decodeStream(strm);

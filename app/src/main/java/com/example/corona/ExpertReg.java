@@ -47,7 +47,7 @@ import java.util.regex.Pattern;
 
 public class ExpertReg extends AppCompatActivity {
     EditText country;
-    String[] countryNames = {"abc","bcd"};
+    String[] countryNames = {"abc", "bcd"};
 
     Button joinUs;
     EditText name, email, mobile, password, cpassword, affiliation, city, designation, licence, hiDegree, institute, field;
@@ -64,7 +64,6 @@ public class ExpertReg extends AppCompatActivity {
         /*back button*/
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
 
 
         joinUs = findViewById(R.id.ex_joinus);

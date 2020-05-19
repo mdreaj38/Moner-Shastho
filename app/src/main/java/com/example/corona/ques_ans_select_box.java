@@ -27,7 +27,6 @@ public class ques_ans_select_box extends AppCompatActivity {
         setContentView(R.layout.activity_ques_ans_select_box);
 
 
-
         TextView question = findViewById(R.id.textQuestion);
         RadioGroup radioGroup = findViewById(R.id.radio_group);
         RadioButton button1 = findViewById(R.id.radio_button1);
