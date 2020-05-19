@@ -32,29 +32,57 @@ public class LockDown extends AppCompatActivity {
         setContentView(R.layout.activity_lock_down);
         gridView = findViewById(R.id.gridview);
         imageView = findViewById(R.id.sleep);
-        Handler handle = new Handler();
-        imageView.setOnClickListener(handle);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LockDown.this, LockdownResource.class);
+                intent.putExtra("CAT", "Sleep");
+                startActivity(intent);
+
+
+            }
+        });
 
         CustomAdapter customAdapter = new CustomAdapter();
         gridView.setAdapter((ListAdapter) customAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0) {
-                    Intent intent = new Intent(LockDown.this, qus_ans_slider.class);
+
+                Intent next = new Intent(LockDown.this, LockdownResource.class);
+                next.putExtra("CAT", Options[i]);
+                startActivity(next);
+
+                /*if (i == 0) {
+                    Intent intent = new Intent(LockDown.this, LockdownResource.class);
+                    intent.putExtra("CAT", Options[0]);
                     startActivity(intent);
+
+                   *//*
+
+                   //muntaha /
+                   Intent intent = new Intent(LockDown.this, qus_ans_slider.class);
+                    startActivity(intent);
+
+                    *//*
                     Toast.makeText((LockDown.this), "Zero", Toast.LENGTH_SHORT).show();
                 } else if (i == 1) {
+
+
+                    *//*
+                    //sorry bro :"(
+
                     Intent intent = new Intent(LockDown.this, ques_ans_takeInput.class);
                     startActivity(intent);
-                    Toast.makeText((LockDown.this), "One", Toast.LENGTH_SHORT).show();
+                    Toast.makeText((LockDown.this), "One", Toast.LENGTH_SHORT).show();*//*
                 } else if (i == 2) {
-                    Intent intent = new Intent(LockDown.this, ques_ans_select_box.class);
-                    startActivity(intent);
+                    Intent ii = new Intent(LockDown.this, ques_ans_select_box.class);
+                    startActivity(ii);
                     Toast.makeText((LockDown.this), "Two", Toast.LENGTH_SHORT).show();
                 } else if (i == 3) {
                     Toast.makeText((LockDown.this), "Three", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -112,16 +140,6 @@ public class LockDown extends AppCompatActivity {
             return view1;
         }
 
-    }
-
-    class Handler implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            if (v.getId() == R.id.sleep) {
-                Toast.makeText((LockDown.this), "SLEEEPPPPPPP", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
 }

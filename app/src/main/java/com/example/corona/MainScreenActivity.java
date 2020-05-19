@@ -32,7 +32,7 @@ public class MainScreenActivity extends AppCompatActivity {
     int[] OptionImage = {R.drawable.lockdown, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.logout, R.drawable.man};
     int cnt = 0;
     public String email;
-
+    SharedPreferences pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,10 @@ public class MainScreenActivity extends AppCompatActivity {
 
         //finding listview
         gridView = findViewById(R.id.gridview);
+
+        pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String _name = pref.getString("name",null);
+        Options[5] = _name;
 
         CustomAdapter customAdapter = new CustomAdapter();
         gridView.setAdapter(customAdapter);

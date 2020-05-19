@@ -1,6 +1,8 @@
 package com.example.corona;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,21 +22,31 @@ import java.util.Objects;
 public class profile extends AppCompatActivity {
     RemoteFindIterable<Document> findIterable;
     public String email, pass;
-    TextView emailID;
+    TextView emailID,u_name;
     ImageView imageView;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         Intent intent = getIntent();
-        String mail = intent.getStringExtra("email");
         emailID = findViewById(R.id.email_idd);
-        Log.d("app", "successfully found documents" + mail);
-        emailID.setText(mail);
+        u_name = findViewById(R.id.name);
+        //Log.d("app", "successfully found documents" + mail);
         LoginActivity x = new LoginActivity();
         email = x.email1;
         pass = x.pass1;
+
+
+        //shared preference
+        pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String _email = pref.getString("email",null);
+        String _name = pref.getString("name",null);
+        emailID.setText(_email);
+        u_name.setText(_name);
+
         //Log.d("app", "successfully found documents" + email + pass);
         /*TextView update = findViewById(R.id.update_profile);
         update.setOnClickListener(new View.OnClickListener() {

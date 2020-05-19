@@ -93,8 +93,8 @@
                 android:layout_below="@+id/name"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="muntahatasnim29@gmail.com"
                 android:textColor="#fff"
+                android:textStyle="italic|bold"
                 android:textSize="18sp" />
         </RelativeLayout>
     </RelativeLayout>

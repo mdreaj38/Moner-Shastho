@@ -227,6 +227,15 @@ public class LoginActivity extends AppCompatActivity {
             if (statusCode == 200) {
                 pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                 editor = Objects.requireNonNull(pref).edit();
+                String user_name = "";
+                try {
+                    JSONObject jb = new JSONObject(sb.toString());
+                    JSONObject jc = jb.getJSONObject("user");
+                     user_name = (String) jc.get("name");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                editor.putString("name",user_name);
                 editor.putString("email", string_email_login);
                 editor.apply();
 
