@@ -105,7 +105,6 @@ public class GeneralReg extends AppCompatActivity {
     }
 
 
-
     public class HttpPostRequest extends AsyncTask<String, Void, String> {
         String verdict, message;
         ProgressDialog progressDialog;

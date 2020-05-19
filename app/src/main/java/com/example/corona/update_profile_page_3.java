@@ -65,15 +65,15 @@ public class update_profile_page_3 extends AppCompatActivity {
             editor.putString("stressfulLife", stringStressfulLife);
             editor.putString("personalityPattern", stringPersonalityPattern);
             editor.putString("relationshipPrb", stringRelationshipPrb);
-          //  if (stringRelationshipPrb.equals("yes")) {
-                yes_relationprb = relationship_prb.getText().toString();
-                editor.putString("relationPrbDetails", yes_relationprb);
+            //  if (stringRelationshipPrb.equals("yes")) {
+            yes_relationprb = relationship_prb.getText().toString();
+            editor.putString("relationPrbDetails", yes_relationprb);
 
-           // }
+            // }
             editor.putString("childAbuse", stringChildAbuse);
-           // if (stringChildAbuse.equals("yes")) {
-                yes_childhood_abuse = child_abuse.getText().toString();
-                editor.putString("childAbuseDetails", yes_childhood_abuse);
+            // if (stringChildAbuse.equals("yes")) {
+            yes_childhood_abuse = child_abuse.getText().toString();
+            editor.putString("childAbuseDetails", yes_childhood_abuse);
             //}
             editor.apply();
 

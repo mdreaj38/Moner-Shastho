@@ -49,19 +49,16 @@ public class MainScreenActivity extends AppCompatActivity {
                 if (i == 0) {
                     Intent intent = new Intent(MainScreenActivity.this, LockDown.class);
                     startActivity(intent);
-                }
-               else if (i == 2) {
+                } else if (i == 2) {
                     Intent intent = new Intent(MainScreenActivity.this, chart.class);
                     startActivity(intent);
-                }
-                else if(i==3){
+                } else if (i == 3) {
                     Intent intent = new Intent(MainScreenActivity.this, resource.class);
                     startActivity(intent);
 
-                }
-                else if (i == 5) {
+                } else if (i == 5) {
                     Intent intent = new Intent(MainScreenActivity.this, profile.class);
-                    intent.putExtra("email",email);
+                    intent.putExtra("email", email);
                     startActivity(intent);
                 } else {
                     Toast.makeText((MainScreenActivity.this), "STOP", Toast.LENGTH_SHORT).show();

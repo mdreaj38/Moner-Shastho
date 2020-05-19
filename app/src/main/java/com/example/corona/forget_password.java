@@ -48,8 +48,8 @@ public class forget_password extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
 
-       /* setTitle("Forget Password");
-        *//*back button*//*
+        /* setTitle("Forget Password");
+         *//*back button*//*
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 */
@@ -109,8 +109,6 @@ public class forget_password extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
     public class HttpPostRequest extends AsyncTask<String, Void, String> {

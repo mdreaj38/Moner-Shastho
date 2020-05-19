@@ -67,10 +67,10 @@ public class update_profile_page_2 extends AppCompatActivity {
             editor.putString("occupation", occupation);
             editor.putString("familyType", familyType);
             editor.putString("mentalIllness", mentalIllness);
-            assert mentalIllness!=null;
+            assert mentalIllness != null;
             //if (mentalIllness.equals("Yes")) {
-                getMentalIllness = illness_info.getText().toString();
-                editor.putString("mentalIllnessDetails", getMentalIllness);
+            getMentalIllness = illness_info.getText().toString();
+            editor.putString("mentalIllnessDetails", getMentalIllness);
             //}
             editor.putString("areaOfLiving", areaOfLiving);
             editor.putString("monthlyIncome", monthlyIncome);

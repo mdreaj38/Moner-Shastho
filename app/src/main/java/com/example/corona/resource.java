@@ -39,8 +39,9 @@ import java.util.concurrent.ExecutionException;
 
 public class resource extends AppCompatActivity {
     private ListView listView;
-    public  ArrayList<String> mydata = new ArrayList<String>();
-    public  ArrayList<String> blogid = new ArrayList<String>();
+    public ArrayList<String> mydata = new ArrayList<String>();
+    public ArrayList<String> blogid = new ArrayList<String>();
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
@@ -51,7 +52,7 @@ public class resource extends AppCompatActivity {
 
 
         listView = findViewById(R.id.listView);
-       // mydata.add("first");
+        // mydata.add("first");
 
         try {
             new HttpGetRequest().execute().get();
@@ -62,8 +63,7 @@ public class resource extends AppCompatActivity {
         }
 
 
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(resource.this,R.layout.sample_view,R.id.textView,mydata);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(resource.this, R.layout.sample_view, R.id.textView, mydata);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,18 +72,18 @@ public class resource extends AppCompatActivity {
                 Animation animation1 = new AlphaAnimation(0.7f, 1.0f);
                 animation1.setDuration(2000);
                 view.startAnimation(animation1);
-               // Toast.makeText(resource.this,mydata.get(position),Toast.LENGTH_SHORT).show();
+                // Toast.makeText(resource.this,mydata.get(position),Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(resource.this, ShowResource.class);
                 String temp = blogid.get(position);
-                intent.putExtra("ID",temp);
+                intent.putExtra("ID", temp);
                 startActivity(intent);
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(resource.this,"long",Toast.LENGTH_SHORT).show();
+                Toast.makeText(resource.this, "long", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -91,27 +91,29 @@ public class resource extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==android.R.id.home);{
+        if (item.getItemId() == android.R.id.home) ;
+        {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
 
+    public class HttpGetRequest extends AsyncTask<Void, Void, String> {
 
-    public class HttpGetRequest extends AsyncTask<Void,Void,String> {
-
-        String data ="";
-        String singleParsed ="";
+        String data = "";
+        String singleParsed = "";
         String dataParsed = "";
         ProgressDialog progressDialog;
         public static final String REQUEST_METHOD = "GET";
         public static final int READ_TIMEOUT = 15000;
         public static final int CONNECTION_TIMEOUT = 15000;
-        protected void onPreExecute(){
+
+        protected void onPreExecute() {
             progressDialog = ProgressDialog.show(resource.this, "Loading...", "");
 
         }
+
         protected String doInBackground(Void... voids) {
             try {
                 URL url = new URL("https://bad-blogger.herokuapp.com/users/blogs?device=android");
@@ -119,31 +121,32 @@ public class resource extends AppCompatActivity {
                 //Set methods and timeouts
                 httpURLConnection.setRequestMethod("GET");
 
-                httpURLConnection.connect();;
+                httpURLConnection.connect();
+                ;
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line = "";
-                while(line != null){
+                while (line != null) {
                     line = bufferedReader.readLine();
                     data = data + line;
                 }
-               // Log.e("check",data.toString());
-                JSONObject temp =new JSONObject(data);
+                // Log.e("check",data.toString());
+                JSONObject temp = new JSONObject(data);
 
                 JSONArray JA = temp.getJSONArray("data");
                 String idstring = " ";
-                if(JA!=null){
-                    for(int i=0;i<JA.length();i++){
+                if (JA != null) {
+                    for (int i = 0; i < JA.length(); i++) {
                         JSONObject obj = null;
-                         obj = (JSONObject) JA.get(i);
-                         idstring += obj.get("thumbnail")+" ,";
-                         mydata.add((String) obj.get("title"));
-                         blogid.add((String) obj.get("_id"));
-                         //mydata.add("111");
-                       // Log.e("checkk2", (String) obj.get("title"));
+                        obj = (JSONObject) JA.get(i);
+                        idstring += obj.get("thumbnail") + " ,";
+                        mydata.add((String) obj.get("title"));
+                        blogid.add((String) obj.get("_id"));
+                        //mydata.add("111");
+                        // Log.e("checkk2", (String) obj.get("title"));
                     }
                 }
-              //  Log.e("check22", idstring.toString());
+                //  Log.e("check22", idstring.toString());
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -154,6 +157,7 @@ public class resource extends AppCompatActivity {
             }
             return data;
         }
+
         @Override
         protected void onPostExecute(String aVoid) {
             progressDialog.dismiss();

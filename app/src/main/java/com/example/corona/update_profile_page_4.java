@@ -40,9 +40,9 @@ public class update_profile_page_4 extends AppCompatActivity {
         pref.getString("occupation", null);
         pref.getString("familyType", null);
         pref.getString("mentalIllness", null);
-      //  if (mentalIllness.equals("Yes")) {
-            pref.getString("mentalIllnessDetails", null);
-       // }
+        //  if (mentalIllness.equals("Yes")) {
+        pref.getString("mentalIllnessDetails", null);
+        // }
         pref.getString("areaOfLiving", null);
         pref.getString("monthlyIncome", null);
         pref.getString("complaints", null);
@@ -51,14 +51,14 @@ public class update_profile_page_4 extends AppCompatActivity {
         stringRelationshipPrb = pref.getString("relationshipPrb", null);
         assert stringRelationshipPrb != null;
 //        if (stringRelationshipPrb.equals("yes")) {
-            pref.getString("relationPrbDetails", null);
+        pref.getString("relationPrbDetails", null);
 
-       // }
+        // }
         stringChildAbuse = pref.getString("childAbuse", null);
         assert stringChildAbuse != null;
 //        if (stringChildAbuse.equals("yes")) {
-            pref.getString("childAbuseDetails", null);
-      //  }
+        pref.getString("childAbuseDetails", null);
+        //  }
 
 
         /*Log.d("Pref", email);

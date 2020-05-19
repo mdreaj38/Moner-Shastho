@@ -27,7 +27,7 @@ public class profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Intent intent = getIntent();
         String mail = intent.getStringExtra("email");
-        emailID=findViewById(R.id.email_idd);
+        emailID = findViewById(R.id.email_idd);
         Log.d("app", "successfully found documents" + mail);
         emailID.setText(mail);
         LoginActivity x = new LoginActivity();
