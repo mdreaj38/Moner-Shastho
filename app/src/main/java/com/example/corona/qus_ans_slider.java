@@ -10,6 +10,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +26,7 @@ public class qus_ans_slider extends AppCompatActivity {
         setContentView(R.layout.activity_qus_ans_slider);
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
         TextView value = findViewById(R.id.range);
-
+        FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
 
         value.setText("Range: " + seekBar.getProgress() + "/" + seekBar.getMax());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -55,12 +57,11 @@ public class qus_ans_slider extends AppCompatActivity {
         i = 0;
         List<String> stringArrayList = new ArrayList<>(Arrays.asList(s));
         i = 0;
-        Button nextQues = findViewById(R.id.next_ques);
         TextView question = findViewById(R.id.questionSlider);
         question.setText(stringArrayList.get(0));
         i = i + 1;
         int len = s.length;
-        nextQues.setOnClickListener(new View.OnClickListener() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(qus_ans_slider.this, qus_ans_slider.class);

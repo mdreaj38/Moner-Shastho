@@ -1,6 +1,9 @@
 package com.example.corona;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,7 +24,13 @@ import java.util.Objects;
 
 public class update_profile extends AppCompatActivity {
     public EditText email, pass, age;
-    public String Email, Age;
+    public TextView gender, maritalStatus;
+    public String Email, Age, string_gender, string_maritalStatus;
+    public String result, result1;
+
+    SharedPreferences pref;
+    Editor editor;
+
 
     @Override
 
@@ -33,6 +42,11 @@ public class update_profile extends AppCompatActivity {
         email = findViewById(R.id.update_email);
         pass = findViewById(R.id.password);
         age = findViewById(R.id.age);
+        gender = findViewById(R.id.gender);
+        maritalStatus = findViewById(R.id.maritualStatus);
+
+        //shared preference
+        pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
 
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -52,8 +66,17 @@ public class update_profile extends AppCompatActivity {
             Intent intent = new Intent(update_profile.this, update_profile_page_2.class);
             Email = email.getText().toString();
             Age = age.getText().toString();
-            setAge(Age);
-            intent.putExtra("Age", "22");
+            string_gender = result;
+            string_maritalStatus = result1;
+
+            //shared preferences
+            editor = Objects.requireNonNull(pref).edit();
+            editor.putString("email", Email);
+            editor.putString("age", Age);
+            editor.putString("gender", string_gender);
+            editor.putString("maritalStatus", string_maritalStatus);
+            editor.apply();
+            // intent.putExtra("Age", "22");
             startActivity(intent);
 
             //Change Toast Color
@@ -78,31 +101,54 @@ public class update_profile extends AppCompatActivity {
         boolean checked = ((CheckBox) view).isChecked();
 
         // Check which checkbox was clicked
-        switch (view.getId()) {
-            case R.id.checkbox_male:
-                if (checked)
-                    Toast.makeText(getApplicationContext(), "Male checked", Toast.LENGTH_SHORT).show();
-                    // do something like update database
-                else
-                    //remove it
-                    break;
-            case R.id.checkbox_female:
-                if (checked)
-                    //o something like update database
-                    Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-                else
-                    // something
-                    break;
-                //
+        int id = view.getId();
+        if (id == R.id.checkbox_male) {
+            if (checked) {
+                result = "Male";
+                Toast.makeText(getApplicationContext(), "Male checked", Toast.LENGTH_SHORT).show();
+                // do something like update database
+            }
+        } else if (id == R.id.checkbox_female) {
+            if (checked) {
+                result = "female";
+                //do something like update database
+                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 
-    public void setAge(String s) {
-        this.Age = s;
-    }
+    public void onCheckboxClicked1(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
 
-    public String getAge() {
-        return this.Age;
+        // Check which checkbox was clicked
+        int id = view.getId();
+        if (id == R.id.married) {
+            if (checked) {
+                result1 = "married";
+                Toast.makeText(getApplicationContext(), "Married", Toast.LENGTH_SHORT).show();
+                // do something like update database
+            }
+        } else if (id == R.id.unmarried) {
+            if (checked) {
+                result1 = "unmarried";
+                //do something like update database
+                Toast.makeText(getApplicationContext(), "unmarried", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.widow) {
+            if (checked) {
+                result1 = "widow";
+                Toast.makeText(getApplicationContext(), "widow", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.divorced) {
+            if (checked) {
+                result1 = "divorced";
+                Toast.makeText(getApplicationContext(), "divorced", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
     }
 }
 

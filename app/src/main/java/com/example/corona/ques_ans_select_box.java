@@ -12,6 +12,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,12 +27,13 @@ public class ques_ans_select_box extends AppCompatActivity {
         setContentView(R.layout.activity_ques_ans_select_box);
 
 
-        Button nextQues = findViewById(R.id.next_ques);
+
         TextView question = findViewById(R.id.textQuestion);
         RadioGroup radioGroup = findViewById(R.id.radio_group);
         RadioButton button1 = findViewById(R.id.radio_button1);
         RadioButton button2 = findViewById(R.id.radio_button2);
         RadioButton button3 = findViewById(R.id.radio_button3);
+        FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
 
 
         //set radiobutton options
@@ -50,7 +53,7 @@ public class ques_ans_select_box extends AppCompatActivity {
         i = i + 1;
         int len = s.length;
 
-        nextQues.setOnClickListener(new View.OnClickListener() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (flag == 0) {

@@ -1,14 +1,15 @@
 package com.example.corona;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +32,7 @@ public class ques_ans_takeInput extends AppCompatActivity {
         List<String> stringArrayList = new ArrayList<>(Arrays.asList(s));
         i = 0;
 
-        Button nextQues = findViewById(R.id.next_ques);
+        FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
         EditText editText = findViewById(R.id.editText);
         TextView question = findViewById(R.id.textQuestion);
         Button submit = findViewById(R.id.submit);
@@ -57,7 +58,7 @@ public class ques_ans_takeInput extends AppCompatActivity {
                 //store ans to db
             }
         });
-        nextQues.setOnClickListener(new View.OnClickListener() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ans = editText.getText().toString();

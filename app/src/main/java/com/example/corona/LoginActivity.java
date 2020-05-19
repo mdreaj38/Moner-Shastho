@@ -3,7 +3,6 @@ package com.example.corona;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -18,8 +17,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mongodb.stitch.android.core.StitchAppClient;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,7 +30,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
     String[] user_type;
@@ -117,7 +113,9 @@ public class LoginActivity extends AppCompatActivity {
                 mdialog.show();
             }
             if (v.getId() == R.id.login) {
-
+                /*Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                startActivity(intent);
+*/
                 string_email_login = emailLogin.getText().toString();
                 string_email_pass = passLogin.getText().toString();
                 email1 = string_email_login;
@@ -126,21 +124,21 @@ public class LoginActivity extends AppCompatActivity {
                 JSONObject res = new JSONObject();
                 try {
 
-                    res.put("device","android");
-                    res.put("handle","email");
-                    res.put("email",email1);
-                    res.put("password",pass1);
-
-                    new HttpPostRequest().execute("https://bad-blogger.herokuapp.com/admin/login",res.toString()).get();
+                    res.put("device", "android");
+                    res.put("handle", "email");
+                    res.put("email", email1);
+                    res.put("password", pass1);
+                    String res1 = res.toString();
+                    Log.e("Response", res1.toString());
+                    //new HttpPostRequest().execute("https://bad-blogger.herokuapp.com/admin/login/android",res.toString()).get();
 
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
+                HttpPostRequest httpPostRequest = new HttpPostRequest();
+                httpPostRequest.execute("https://bad-blogger.herokuapp.com/admin/login/android", res.toString());
+
 
                 /*Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 intent.putExtra("email",email1);
@@ -175,7 +173,11 @@ public class LoginActivity extends AppCompatActivity {
 
                 /*JSONObject res = new JSONObject();
                 res.put("name","Reaj");
+                res.put("username","Reaj");
+                res.put("email","reaj123@gmail.com");
+                res.put("password","Reaj123");
                 data = res.toString();*/
+
 
                 //Connect
                 urlConnection = (HttpURLConnection) ((new URL(url).openConnection()));
@@ -189,12 +191,8 @@ public class LoginActivity extends AppCompatActivity {
                 OutputStream outputStream = urlConnection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 writer.write(data);
-                writer.flush();
                 writer.close();
                 outputStream.close();
-
-                int responseCode = urlConnection.getResponseCode();
-                Log.e("Response Code : ", "" + responseCode);
 
                 //Read
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
@@ -208,40 +206,36 @@ public class LoginActivity extends AppCompatActivity {
 
                 bufferedReader.close();
 
-                Log.e("Responsedata", data);
-                Log.e("Responsesb", sb.toString());
+                Log.e("Res2", data);
+                Log.e("Response2", sb.toString());
+
 
                 //////////////////////test
 
-               /* JSONObject reader = new JSONObject(sb.toString());
+                JSONObject reader = new JSONObject(sb.toString());
                 verdict = reader.getString("status");
                 message = reader.getString("msg");
-                Log.e("Response2(msg)", message);*/
-
+                Log.e("Response2(msg)", message);
                 //////////////test
-
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return result;
         }
 
+
         @Override
         protected void onPostExecute(String s) {
             progressDialog.dismiss();
-           /* if (verdict.equals("true")) {
-                Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+            if (verdict.equals("true")) {
+                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 startActivity(intent);
                 Toast.makeText((LoginActivity.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
-
             } else {
                 android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(LoginActivity.this);
                 builder1.setCancelable(false);
                 builder1.setTitle(message);
                 builder1.setMessage("Try again");
-
                 builder1.setPositiveButton(
                         Html.fromHtml("<font color='#FF0000'>Ok</font>"),
                         new DialogInterface.OnClickListener() {
@@ -251,10 +245,9 @@ public class LoginActivity extends AppCompatActivity {
                         });
                 android.app.AlertDialog alert11 = builder1.create();
                 alert11.show();
-            }*/
+            }
             super.onPostExecute(s);
         }
     }
 
 }
-

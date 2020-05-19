@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".update_profile">
+    tools:context=".update_profile_page_4">
 
     <!--androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -24,24 +24,6 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:text="17.Stressful life events mention with duration"
-            android:textColor="#ba160c"
-            android:textSize="20sp" />
-
-
-        <EditText
-            android:id="@+id/stressful_life"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="text"
-            android:ems="10"
-            android:inputType="text"
-            android:textColorHint="@color/colorPrimaryDark" />
 
 
         <TextView
@@ -63,9 +45,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:text="No" />
-
-            />
+                android:text="No"
+                android:onClick="onCheckboxClicked"/>
         </TableRow>
 
         <TableRow
@@ -77,7 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:text="Yes,Specify the drug with duration" />
+                android:text="Yes,Specify the drug with duration"
+                android:onClick="onCheckboxClicked"/>
 
 
         </TableRow>
@@ -110,9 +92,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:text="No" />
-
-            />
+                android:text="No"
+                android:onClick="onCheckboxClicked"/>
         </TableRow>
 
         <TableRow
@@ -124,7 +105,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:text="Yes" />
+                android:text="Yes"
+                android:onClick="onCheckboxClicked"/>
 
         </TableRow>
 

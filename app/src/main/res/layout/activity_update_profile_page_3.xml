@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".update_profile">
+    tools:context=".update_profile_page_3">
 
     <!--<androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -26,7 +26,7 @@
             android:textColor="#000000"
             android:textSize="20sp" />-->
 
-   <!-- </androidx.appcompat.widget.Toolbar>-->
+    <!-- </androidx.appcompat.widget.Toolbar>-->
 
 
     <LinearLayout
@@ -34,7 +34,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
-
 
 
         <TextView
@@ -55,30 +54,30 @@
             android:inputType="text"
             android:textColorHint="@color/colorPrimaryDark" />
 
+        <EditText
+            android:id="@+id/area_of_living"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:autofillHints="text"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginStart="10dp"
-            android:text="13.Area of Living"
+            android:text="17.Stressful life events mention with duration"
             android:textColor="#ba160c"
             android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="40dp"
-            android:text="Name of district, Thana and village"
-            android:textColor="#000"
-            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/area_of_living"
+            android:id="@+id/stressful_life"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:autofillHints="text"
             android:ems="10"
             android:inputType="text"
@@ -102,6 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="No" />
         </TableRow>
 
@@ -114,13 +114,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:text="Yes,Specify" />
+                android:text="Yes,Specify"
+                android:onClick="onCheckboxClicked"/>
 
 
         </TableRow>
 
         <EditText
-            android:id="@+id/abuse"
+            android:id="@+id/abuse_details"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -147,7 +148,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:text="No" />
+                android:text="No"
+                android:onClick="onCheckboxClicked"/>
 
         </TableRow>
 
@@ -160,13 +162,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Yes \n Specify with whom" />
 
 
         </TableRow>
 
         <EditText
-            android:id="@+id/relation_prb"
+            android:id="@+id/relation_prb_details"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -174,6 +177,7 @@
             android:ems="10"
             android:inputType="text"
             android:textColorHint="@color/colorPrimaryDark" />
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -191,7 +195,6 @@
             android:ems="10"
             android:inputType="text"
             android:textColorHint="@color/colorPrimaryDark" />
-
 
 
     </LinearLayout>

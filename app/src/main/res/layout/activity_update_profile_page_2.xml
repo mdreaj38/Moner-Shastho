@@ -1,12 +1,12 @@
 <?xml version = "1.0" encoding = "utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:adroid="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".update_profile">
+    tools:context=".update_profile_page_2">
 
     <!--<androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -17,15 +17,15 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 -->
-       <!-- <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="320dp"
-            android:text="Next"
-            android:textColor="#000000"
-            android:textSize="20sp" />-->
-  <!--  </androidx.appcompat.widget.Toolbar>-->
+    <!-- <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="start"
+         android:layout_marginStart="320dp"
+         android:text="Next"
+         android:textColor="#000000"
+         android:textSize="20sp" />-->
+    <!--  </androidx.appcompat.widget.Toolbar>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="illiterate" />
 
             <CheckBox
@@ -59,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="upto_class_five" />
         </TableRow>
 
@@ -71,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="SSC" />
 
             <CheckBox
@@ -78,6 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="65dp"
+                android:onClick="onCheckboxClicked"
                 android:text="HSC" />
         </TableRow>
 
@@ -90,6 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Graduate" />
 
             <CheckBox
@@ -97,6 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="35dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Post Graduate" />
         </TableRow>
 
@@ -119,6 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Student" />
 
             <CheckBox
@@ -126,6 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Unemployed" />
         </TableRow>
 
@@ -138,6 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Service" />
 
             <CheckBox
@@ -145,6 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="43dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Businessman" />
         </TableRow>
 
@@ -157,6 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Housewife" />
 
             <CheckBox
@@ -164,7 +175,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="23dp"
-                android:text="Post Graduate" />
+                android:onClick="onCheckboxClicked"
+                android:text="Farmer" />
         </TableRow>
 
         <TableRow
@@ -176,6 +188,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Teachers" />
 
             <CheckBox
@@ -183,6 +196,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Others" />
         </TableRow>
 
@@ -251,6 +265,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Nuclear" />
 
             <CheckBox
@@ -258,6 +273,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Joint" />
         </TableRow>
 
@@ -279,6 +295,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="No" />
 
         </TableRow>
@@ -292,6 +309,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
                 android:text="Yes,\nName the illness or problem" />
 
 
