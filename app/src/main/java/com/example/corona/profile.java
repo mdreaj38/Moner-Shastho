@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class profile extends AppCompatActivity {
     RemoteFindIterable<Document> findIterable;
     public String email, pass;
     TextView emailID;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,17 @@ public class profile extends AppCompatActivity {
         email = x.email1;
         pass = x.pass1;
         //Log.d("app", "successfully found documents" + email + pass);
-        TextView update = findViewById(R.id.update_profile);
+        /*TextView update = findViewById(R.id.update_profile);
         update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(profile.this, update_profile.class);
+                startActivity(intent);
+            }
+        });*/
+
+        imageView = findViewById(R.id.edit);
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(profile.this, update_profile.class);
