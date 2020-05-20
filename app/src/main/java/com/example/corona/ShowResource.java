@@ -94,7 +94,7 @@ public class ShowResource extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             Log.e("Check", "ok");
             try {
-                String st = "https://bad-blogger.herokuapp.com/users/view/" + strings[0] + "?device=android";
+                String st =  strings[0];
                 URL url = new URL(st);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set method

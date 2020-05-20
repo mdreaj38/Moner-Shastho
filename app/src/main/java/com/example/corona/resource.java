@@ -76,7 +76,7 @@ public class resource extends AppCompatActivity {
 
                 Intent intent = new Intent(resource.this, ShowResource.class);
                 String temp = blogid.get(position);
-                intent.putExtra("ID", temp);
+                intent.putExtra("ID", "https://bad-blogger.herokuapp.com/users/view/"+temp + "?device=android");
                 startActivity(intent);
             }
         });

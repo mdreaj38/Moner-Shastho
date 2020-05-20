@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -65,6 +66,11 @@ public class LockdownResource extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(LockdownResource.this, LockdownBlog.class);
+                String temp = "https://bad-blogger.herokuapp.com/users/single-material/"+blogid.get(position)+"?device=android";
+                Log.e("now",temp);
+               intent.putExtra("url",temp );
+                startActivity(intent);
                 Toast.makeText(LockdownResource.this, Integer.toString(position), Toast.LENGTH_SHORT).show();
             }
         });
