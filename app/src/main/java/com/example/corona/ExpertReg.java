@@ -17,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,10 +50,11 @@ import java.util.regex.Pattern;
 public class ExpertReg extends AppCompatActivity {
     EditText country;
     String[] countryNames = {"abc", "bcd"};
-
+    RadioButton radioButton;
+    RadioGroup radioGroup;
     Button joinUs;
     EditText name, email, mobile, password, cpassword, affiliation, city, designation, licence, hiDegree, institute, field;
-    String stringName, stringEmail, stringMobile, stringPass, stringCpassword, stringAffiliation, stringCountry, stringCity, stringDesignation, stringLicence, stringHDegree, stringInstitute, stringfield;
+    String stringName, stringEmail, stringMobile, stringPass, stringCpassword, stringAffiliation, stringCountry, stringCity, stringDesignation, stringLicence, stringHDegree, stringInstitute, stringfield,GenderString;
     String url = "https://bad-blogger.herokuapp.com/admin/register/expert";
 
     @Override
@@ -80,7 +83,7 @@ public class ExpertReg extends AppCompatActivity {
         hiDegree = findViewById(R.id.hdegree);
         institute = findViewById(R.id.institute);
         field = findViewById(R.id.field);
-
+        radioGroup=(RadioGroup)findViewById(R.id.radioExpert);
 
         joinUs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +128,14 @@ public class ExpertReg extends AppCompatActivity {
                 stringfield = field.getText().toString();
                 flag *= stringfield.length();
 
-                if (flag == 0) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                radioButton = (RadioButton) findViewById(selectedId);
+                if(selectedId!=-1){
+                    GenderString = (String) radioButton.getText();
+                    Toast.makeText(ExpertReg.this,GenderString, Toast.LENGTH_SHORT).show();
+                }
+
+                if (flag == 0 || selectedId==-1) {
                     Toast.makeText((ExpertReg.this), "You have to enter all the field", Toast.LENGTH_SHORT).show();
                 } else if (!isValidPhoneNumber(stringMobile.trim())) {
                     Toast.makeText((ExpertReg.this), "Enter Valid Phone number", Toast.LENGTH_SHORT).show();
@@ -245,7 +255,9 @@ public class ExpertReg extends AppCompatActivity {
             startActivity(intent);*/
             if (verdict.equals("true")) {
                 Intent intent = new Intent(ExpertReg.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
                 Toast.makeText((ExpertReg.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
 
             } else {

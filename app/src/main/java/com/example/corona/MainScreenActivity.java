@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +22,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.Chart;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class MainScreenActivity extends AppCompatActivity {
 
@@ -42,6 +55,16 @@ public class MainScreenActivity extends AppCompatActivity {
 
         //finding listview
         gridView = findViewById(R.id.gridview);
+
+
+        try {
+            new HttpGetRequestTest().execute("https://bad-blogger.herokuapp.com/admin/getUser").get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String _name = pref.getString("name",null);
@@ -141,6 +164,55 @@ public class MainScreenActivity extends AppCompatActivity {
             return view1;
         }
 
+    }
+
+
+    public class HttpGetRequestTest extends AsyncTask<String, Void, String> {
+
+        String data = "";
+        String singleParsed = "";
+        String dataParsed = "";
+        JSONObject real_data;
+        ProgressDialog progressDialog;
+        public static final String REQUEST_METHOD = "GET";
+        public static final int READ_TIMEOUT = 15000;
+        public static final int CONNECTION_TIMEOUT = 15000;
+
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Log.e("Check", "ok");
+            try {
+                String st =  strings[0];
+                URL url = new URL(st);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                //Set method
+                httpURLConnection.setRequestMethod("GET");
+                httpURLConnection.connect();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+                while (line != null) {
+                    line = bufferedReader.readLine();
+                    data = data + line;
+                }
+                Log.e("testlogin",data.toString());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(String aVoid) {
+
+            super.onPostExecute(aVoid);
+        }
     }
 
     /*@Override

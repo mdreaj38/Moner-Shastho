@@ -100,11 +100,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (which == 0) {
                             Intent intent = new Intent(LoginActivity.this, GeneralReg.class);
                             startActivity(intent);
-                            finish();
                         } else {
                             Intent intent = new Intent(LoginActivity.this, ExpertReg.class);
                             startActivity(intent);
-                            finish();
                         }
                         dialog.dismiss();
                     }
@@ -227,16 +225,18 @@ public class LoginActivity extends AppCompatActivity {
             if (statusCode == 200) {
                 pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                 editor = Objects.requireNonNull(pref).edit();
-                String user_name = "";
+                String user_name = "",_gender="";
                 try {
                     JSONObject jb = new JSONObject(sb.toString());
                     JSONObject jc = jb.getJSONObject("user");
                      user_name = (String) jc.get("name");
+                     _gender = (String) jc.get("gender");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 editor.putString("name",user_name);
                 editor.putString("email", string_email_login);
+                editor.putString("gender",_gender);
                 editor.apply();
 
                 Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);

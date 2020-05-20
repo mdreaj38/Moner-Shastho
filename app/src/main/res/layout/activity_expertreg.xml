@@ -198,7 +198,28 @@
                 android:inputType="text"
                 android:paddingLeft="15dp"
                 android:textColorHint="#C3BABA" />
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:id="@+id/radioExpert">
 
+                <RadioButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:checked="false"
+                    android:textSize="20dp" />
+
+                <RadioButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:checked="false"
+                    android:textSize="20dp" />
+
+            </RadioGroup>
             <Button
                 android:id="@+id/ex_joinus"
                 android:layout_width="280dp"

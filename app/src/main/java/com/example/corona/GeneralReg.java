@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,8 +39,10 @@ import java.util.regex.Pattern;
 
 public class GeneralReg extends AppCompatActivity {
 
-    public String EmailString, PhoneString, PasswordString, NameString, CPasswordString;
+    public String EmailString, PhoneString, PasswordString, NameString, CPasswordString,GenderString;
     String url = "https://bad-blogger.herokuapp.com/admin/register/general";
+    RadioButton radioButton;
+    RadioGroup radioGroup;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +59,23 @@ public class GeneralReg extends AppCompatActivity {
         EditText Password = findViewById(R.id.password);
         EditText confirmpass = findViewById(R.id.conpassword);
         EditText Phone = findViewById(R.id.phone);
+        radioGroup=(RadioGroup)findViewById(R.id.radioGeneral);
+
+
 
         joinus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                radioButton = (RadioButton) findViewById(selectedId);
+                if(selectedId==-1){
+                    Toast.makeText(GeneralReg.this,"Select gender", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    GenderString = (String) radioButton.getText();
+                    Toast.makeText(GeneralReg.this,GenderString, Toast.LENGTH_SHORT).show();
+                }
+
                 NameString = Name.getText().toString();
                 EmailString = Email.getText().toString();
                 PhoneString = Phone.getText().toString();
@@ -182,7 +200,9 @@ public class GeneralReg extends AppCompatActivity {
             progressDialog.dismiss();
             if (verdict.equals("true")) {
                 Intent intent = new Intent(GeneralReg.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
                 Toast.makeText((GeneralReg.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
 
             } else {
