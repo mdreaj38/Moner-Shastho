@@ -1,28 +1,13 @@
 <?xml version = "1.0" encoding = "utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
     android:orientation="vertical"
     tools:context=".update_profile">
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/todo"
-            app:srcCompat="@drawable/man" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,92 +16,16 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:text="1.Email"
-            android:textColor="#ba160c"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/expert_email"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:autofillHints="textEmail"
-            android:background="#B5CCC9"
-            android:focusable="true"
-            android:gravity="center"
-            android:textColorHint="@color/colorPrimaryDark"
-            android:textStyle="bold" />
-
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginStart="10dp"
-            android:text="2.Password"
+            android:text="7.Institute"
             android:textColor="#ba160c"
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/expert_password"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="textPassword"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:textColorHint="@color/colorPrimaryDark" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:text="Phone Number"
-            android:textColor="#ba160c"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/expert_phoneNo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="textPassword"
-            android:ems="10"
-            android:inputType="phone"
-            android:textColorHint="@color/colorPrimaryDark" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:text="4.Designation"
-            android:textColor="#ba160c"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/expert_designation"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="textPassword"
-            android:ems="10"
-            android:inputType="text"
-            android:textColorHint="@color/colorPrimaryDark" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:text="5.Organization"
-            android:textColor="#ba160c"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/expert_organization"
+            android:id="@+id/expert_institute"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autofillHints="textPassword"
@@ -129,17 +38,82 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginStart="10dp"
-            android:text="6.License"
+            android:text="8.Highest Degree"
             android:textColor="#ba160c"
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/expert_license"
+            android:id="@+id/expert_hDegree"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autofillHints="textPassword"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:text="9.Field"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/expert_field"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="text"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:text="10.City"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/expert_city"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="textPassword"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:text="11.Country"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/expert_country"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="text"
             android:ems="10"
             android:inputType="text"
             android:textColorHint="@color/colorPrimaryDark" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/expert_updateProfileButton"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="#ba160c"
+        android:text="@string/update"
+        android:textColor="#ffff" />
 </LinearLayout>
