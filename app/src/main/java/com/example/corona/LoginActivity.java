@@ -116,9 +116,9 @@ public class LoginActivity extends AppCompatActivity {
                 mdialog.show();
             }
             if (v.getId() == R.id.login) {
-                /*Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 startActivity(intent);
-*/
+
                 string_email_login = emailLogin.getText().toString();
                 string_email_pass = passLogin.getText().toString();
                 email1 = string_email_login;
@@ -239,9 +239,9 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("gender",_gender);
                 editor.apply();
 
-                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+               /* Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 startActivity(intent);
-               // Toast.makeText((LoginActivity.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
+               */// Toast.makeText((LoginActivity.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
             } else {
                 android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(LoginActivity.this);
                 builder1.setCancelable(false);

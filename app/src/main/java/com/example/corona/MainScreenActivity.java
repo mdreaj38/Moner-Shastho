@@ -1,12 +1,9 @@
 package com.example.corona;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,20 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.github.mikephil.charting.charts.Chart;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 
 public class MainScreenActivity extends AppCompatActivity {
 
@@ -45,7 +29,7 @@ public class MainScreenActivity extends AppCompatActivity {
     int[] OptionImage = {R.drawable.lockdown, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.logout, R.drawable.man};
     int cnt = 0;
     public String email;
-    SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,20 +40,6 @@ public class MainScreenActivity extends AppCompatActivity {
         //finding listview
         gridView = findViewById(R.id.gridview);
 
-
-        try {
-            new HttpGetRequestTest().execute("https://bad-blogger.herokuapp.com/admin/getUser").get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String _name = pref.getString("name",null);
-        Options[5] = _name;
-
         CustomAdapter customAdapter = new CustomAdapter();
         gridView.setAdapter(customAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,16 +48,16 @@ public class MainScreenActivity extends AppCompatActivity {
                 if (i == 0) {
                     Intent intent = new Intent(MainScreenActivity.this, LockDown.class);
                     startActivity(intent);
-                }
-               else if (i == 2) {
+                } else if (i == 1) {
+                    Intent intent = new Intent(MainScreenActivity.this, scored_ans_based_qstn.class);
+                    startActivity(intent);
+                } else if (i == 2) {
                     Intent intent = new Intent(MainScreenActivity.this, chart.class);
                     startActivity(intent);
-                }
-                else if(i==3){
+                } else if (i == 3) {
                     Intent intent = new Intent(MainScreenActivity.this, resource.class);
                     startActivity(intent);
-                }
-                else if(i==4){
+                } else if (i == 4) {
                     SharedPreferences settings = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                     settings.edit().clear().apply();
                     Intent next = new Intent(getApplicationContext(), LoginActivity.class);
@@ -97,10 +67,9 @@ public class MainScreenActivity extends AppCompatActivity {
 
                     startActivity(next);
                     finish();
-                }
-                else if (i == 5) {
+                } else if (i == 5) {
                     Intent intent = new Intent(MainScreenActivity.this, profile.class);
-                    intent.putExtra("email",email);
+                    intent.putExtra("email", email);
                     startActivity(intent);
                 } else {
                     Toast.makeText((MainScreenActivity.this), "STOP", Toast.LENGTH_SHORT).show();
@@ -164,55 +133,6 @@ public class MainScreenActivity extends AppCompatActivity {
             return view1;
         }
 
-    }
-
-
-    public class HttpGetRequestTest extends AsyncTask<String, Void, String> {
-
-        String data = "";
-        String singleParsed = "";
-        String dataParsed = "";
-        JSONObject real_data;
-        ProgressDialog progressDialog;
-        public static final String REQUEST_METHOD = "GET";
-        public static final int READ_TIMEOUT = 15000;
-        public static final int CONNECTION_TIMEOUT = 15000;
-
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            Log.e("Check", "ok");
-            try {
-                String st =  strings[0];
-                URL url = new URL(st);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                //Set method
-                httpURLConnection.setRequestMethod("GET");
-                httpURLConnection.connect();
-
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String line = "";
-                while (line != null) {
-                    line = bufferedReader.readLine();
-                    data = data + line;
-                }
-                Log.e("testlogin",data.toString());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return data;
-        }
-
-        @Override
-        protected void onPostExecute(String aVoid) {
-
-            super.onPostExecute(aVoid);
-        }
     }
 
     /*@Override

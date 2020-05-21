@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.corona">
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LockdownBlog"/>
-        <activity android:name=".LockdownResource" />
+        <activity android:name=".profile_expert_user"></activity>
+        <activity android:name=".MyMarkerView" />
+        <activity android:name=".scored_ans_based_qstn" />
         <activity android:name=".chart" />
         <activity android:name=".ques_ans_takeInput" />
         <activity android:name=".ques_ans_select_box" />

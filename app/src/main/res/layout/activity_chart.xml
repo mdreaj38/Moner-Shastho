@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="">
 
     <TextView
         android:layout_width="match_parent"
@@ -15,8 +16,8 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barchart"
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="281dp"
         android:layout_marginTop="150dp" />

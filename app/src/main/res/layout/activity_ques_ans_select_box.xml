@@ -91,7 +91,7 @@
             app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
     </LinearLayout>
 
-    <!--<Button
+
         android:id="@+id/button_confirm_next"
         android:layout_width="196dp"
         android:layout_height="wrap_content"
