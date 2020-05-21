@@ -105,7 +105,7 @@
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.annotation:annotation:1.1.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout-solver:2.0.0-beta5@jar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout-solver:2.0.0-beta6@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:stitch-core-sdk:4.7.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:3.0.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:stitch-core-services-mongodb-remote:4.7.0@jar" level="project" />
@@ -113,12 +113,13 @@
     <orderEntry type="library" name="Gradle: org.mongodb:mongodb-driver-sync:3.10.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:mongodb-driver-core:3.10.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:bson:3.10.1@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.github.PhilJay:MPAndroidChart:v2.2.4@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.PhilJay:MPAndroidChart:v3.0.3@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:stitch-core-services-fcm:4.7.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:stitch-core-services-http:4.7.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:stitch-core-services-twilio:4.7.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.material:material:1.2.0-alpha06@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:2.0.0-beta5@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:2.0.0-beta6@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.sujithkanna:smileyrating:1.6.8@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.cardview:cardview:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:stitch-android-sdk:4.7.0@aar" level="project" />
