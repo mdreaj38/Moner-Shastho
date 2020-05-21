@@ -12,12 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -29,7 +27,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
@@ -39,10 +36,15 @@ import java.util.regex.Pattern;
 
 public class GeneralReg extends AppCompatActivity {
 
-    public String EmailString, PhoneString, PasswordString, NameString, CPasswordString,GenderString;
+    public String EmailString, PhoneString, PasswordString, NameString, CPasswordString, GenderString;
     String url = "https://bad-blogger.herokuapp.com/admin/register/general";
     RadioButton radioButton;
     RadioGroup radioGroup;
+
+    public static boolean isValidPhoneNumber(String data) {
+        if (data.length() == 0) return true;
+        return data.length() == 11 && data.charAt(0) == '0';
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class GeneralReg extends AppCompatActivity {
 
         setTitle("General User Registration");
         /*back button*/
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Button joinus = findViewById(R.id.joinus);
@@ -59,8 +61,7 @@ public class GeneralReg extends AppCompatActivity {
         EditText Password = findViewById(R.id.password);
         EditText confirmpass = findViewById(R.id.conpassword);
         EditText Phone = findViewById(R.id.phone);
-        radioGroup=(RadioGroup)findViewById(R.id.radioGeneral);
-
+        radioGroup = (RadioGroup) findViewById(R.id.radioGeneral);
 
 
         joinus.setOnClickListener(new View.OnClickListener() {
@@ -68,12 +69,11 @@ public class GeneralReg extends AppCompatActivity {
 
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(selectedId);
-                if(selectedId==-1){
-                    Toast.makeText(GeneralReg.this,"Select gender", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                if (selectedId == -1) {
+                    Toast.makeText(GeneralReg.this, "Select gender", Toast.LENGTH_SHORT).show();
+                } else {
                     GenderString = (String) radioButton.getText();
-                    Toast.makeText(GeneralReg.this,GenderString, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GeneralReg.this, GenderString, Toast.LENGTH_SHORT).show();
                 }
 
                 NameString = Name.getText().toString();
@@ -122,6 +122,12 @@ public class GeneralReg extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private boolean validateEmail(String data) {
+        if (data.length() == 0) return true;
+        Pattern emailPattern = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher emailMatcher = emailPattern.matcher(data);
+        return emailMatcher.matches();
+    }
 
     public class HttpPostRequest extends AsyncTask<String, Void, String> {
         String verdict, message;
@@ -185,11 +191,7 @@ public class GeneralReg extends AppCompatActivity {
                 message = reader.getString("msg");
                 Log.e("Response2(msg)", message);
                 //////////////test
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return result;
@@ -223,18 +225,6 @@ public class GeneralReg extends AppCompatActivity {
             }
             super.onPostExecute(s);
         }
-    }
-
-    private boolean validateEmail(String data) {
-        if (data.length() == 0) return true;
-        Pattern emailPattern = Pattern.compile(".+@.+\\.[a-z]+");
-        Matcher emailMatcher = emailPattern.matcher(data);
-        return emailMatcher.matches();
-    }
-
-    public static final boolean isValidPhoneNumber(String data) {
-        if (data.length() == 0) return true;
-        return data.length() == 11 && data.charAt(0) == '0';
     }
 }
 

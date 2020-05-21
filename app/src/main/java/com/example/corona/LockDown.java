@@ -1,7 +1,5 @@
 package com.example.corona;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,14 +12,14 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
 
 public class LockDown extends AppCompatActivity {
 
     GridView gridView;
-    private ImageView imageView;
 
     String[] Options = {"Manage Stress", "Keep Connected", "Relaxation", "Mindfulness"};
     int[] OptionImage = {R.drawable.stress_mng, R.drawable.connect, R.drawable.relax, R.drawable.mind};
@@ -31,7 +29,7 @@ public class LockDown extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_down);
         gridView = findViewById(R.id.gridview);
-        imageView = findViewById(R.id.sleep);
+        ImageView imageView = findViewById(R.id.sleep);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

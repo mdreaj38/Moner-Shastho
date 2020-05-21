@@ -61,11 +61,11 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:autofillHints="textEmail"
-            android:focusable="true"
             android:background="#B5CCC9"
+            android:focusable="true"
             android:gravity="center"
-            android:textStyle="bold"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textStyle="bold" />
 
 
         <TextView

@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import java.util.Objects;
 
@@ -68,10 +67,10 @@ public class update_profile_page_2 extends AppCompatActivity {
             editor.putString("familyType", familyType);
             editor.putString("mentalIllness", mentalIllness);
 
-            assert mentalIllness!=null;
+            assert mentalIllness != null;
             //if (mentalIllness.equals("Yes")) {
-                getMentalIllness = illness_info.getText().toString();
-                editor.putString("mentalIllnessDetails", getMentalIllness);
+            getMentalIllness = illness_info.getText().toString();
+            editor.putString("mentalIllnessDetails", getMentalIllness);
             //}
             editor.putString("areaOfLiving", areaOfLiving);
             editor.putString("monthlyIncome", monthlyIncome);

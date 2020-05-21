@@ -5,19 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import java.util.Objects;
 
@@ -47,11 +42,9 @@ public class update_profile extends AppCompatActivity {
 
         //shared preference
         pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String eemail = pref.getString("email",null);
+        String eemail = pref.getString("email", null);
         email.setText(eemail);
         email.setEnabled(false);
-
-
 
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -76,7 +69,7 @@ public class update_profile extends AppCompatActivity {
 
             //shared preferences
             editor = Objects.requireNonNull(pref).edit();
-          //  editor.putString("email", Email);
+            //  editor.putString("email", Email);
             editor.putString("age", Age);
             editor.putString("gender", string_gender);
             editor.putString("maritalStatus", string_maritalStatus);

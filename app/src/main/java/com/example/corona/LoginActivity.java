@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,17 +27,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
+    public String email1, pass1;
     String[] user_type;
     /*ProgressBar pgsBar;*/
     ProgressDialog pgsdialog;
     TextView forgetPass;
-    public String email1, pass1;
     String string_email_login, string_email_pass;
 
     SharedPreferences pref;
@@ -192,8 +190,8 @@ public class LoginActivity extends AppCompatActivity {
                 outputStream.close();
 
                 //Read
-                 statusCode = urlConnection.getResponseCode();
-                Log.e("code",Integer.toString(statusCode));
+                statusCode = urlConnection.getResponseCode();
+                Log.e("code", Integer.toString(statusCode));
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
 
                 String line = null;
@@ -213,7 +211,7 @@ public class LoginActivity extends AppCompatActivity {
                 message = reader.getString("msg");
                 Log.e("Response2(msg)", message);*/
                 //////////////test
-            } catch (IOException  e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             return null;
@@ -225,18 +223,18 @@ public class LoginActivity extends AppCompatActivity {
             if (statusCode == 200) {
                 pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                 editor = Objects.requireNonNull(pref).edit();
-                String user_name = "",_gender="";
+                String user_name = "", _gender = "";
                 try {
                     JSONObject jb = new JSONObject(sb.toString());
                     JSONObject jc = jb.getJSONObject("user");
-                     user_name = (String) jc.get("name");
-                     _gender = (String) jc.get("gender");
+                    user_name = (String) jc.get("name");
+                    _gender = (String) jc.get("gender");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                editor.putString("name",user_name);
+                editor.putString("name", user_name);
                 editor.putString("email", string_email_login);
-                editor.putString("gender",_gender);
+                editor.putString("gender", _gender);
                 editor.apply();
 
                /* Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);

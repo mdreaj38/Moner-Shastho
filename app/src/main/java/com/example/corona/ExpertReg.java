@@ -1,8 +1,5 @@
 package com.example.corona;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -13,23 +10,14 @@ import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.mongodb.stitch.android.core.Stitch;
-import com.mongodb.stitch.android.core.StitchAppClient;
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
-import com.mongodb.stitch.core.services.mongodb.remote.RemoteInsertOneResult;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,7 +27,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
@@ -54,8 +41,12 @@ public class ExpertReg extends AppCompatActivity {
     RadioGroup radioGroup;
     Button joinUs;
     EditText name, email, mobile, password, cpassword, affiliation, city, designation, licence, hiDegree, institute, field;
-    String stringName, stringEmail, stringMobile, stringPass, stringCpassword, stringAffiliation, stringCountry, stringCity, stringDesignation, stringLicence, stringHDegree, stringInstitute, stringfield,GenderString;
+    String stringName, stringEmail, stringMobile, stringPass, stringCpassword, stringAffiliation, stringCountry, stringCity, stringDesignation, stringLicence, stringHDegree, stringInstitute, stringfield, GenderString;
     String url = "https://bad-blogger.herokuapp.com/admin/register/expert";
+
+    public static boolean isValidPhoneNumber(String data) {
+        return data.length() == 11 && data.charAt(0) == '0';
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +56,7 @@ public class ExpertReg extends AppCompatActivity {
 
         setTitle("Expert Registration");
         /*back button*/
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
@@ -83,7 +74,7 @@ public class ExpertReg extends AppCompatActivity {
         hiDegree = findViewById(R.id.hdegree);
         institute = findViewById(R.id.institute);
         field = findViewById(R.id.field);
-        radioGroup=(RadioGroup)findViewById(R.id.radioExpert);
+        radioGroup = (RadioGroup) findViewById(R.id.radioExpert);
 
         joinUs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,12 +121,12 @@ public class ExpertReg extends AppCompatActivity {
 
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(selectedId);
-                if(selectedId!=-1){
+                if (selectedId != -1) {
                     GenderString = (String) radioButton.getText();
-                    Toast.makeText(ExpertReg.this,GenderString, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ExpertReg.this, GenderString, Toast.LENGTH_SHORT).show();
                 }
 
-                if (flag == 0 || selectedId==-1) {
+                if (flag == 0 || selectedId == -1) {
                     Toast.makeText((ExpertReg.this), "You have to enter all the field", Toast.LENGTH_SHORT).show();
                 } else if (!isValidPhoneNumber(stringMobile.trim())) {
                     Toast.makeText((ExpertReg.this), "Enter Valid Phone number", Toast.LENGTH_SHORT).show();
@@ -162,11 +153,7 @@ public class ExpertReg extends AppCompatActivity {
                         res.put("field", stringfield);
                         HttpPostRequest httpPostRequest = new HttpPostRequest();
                         String verdict = httpPostRequest.execute(url, res.toString()).get();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
+                    } catch (JSONException | InterruptedException | ExecutionException e) {
                         e.printStackTrace();
                     }
 
@@ -185,6 +172,11 @@ public class ExpertReg extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private boolean validateEmail(String data) {
+        Pattern emailPattern = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher emailMatcher = emailPattern.matcher(data);
+        return emailMatcher.matches();
+    }
 
     public class HttpPostRequest extends AsyncTask<String, Void, String> {
         String verdict, message;
@@ -238,11 +230,7 @@ public class ExpertReg extends AppCompatActivity {
                 Log.e("Res2", data);
                 Log.e("Response2", sb.toString());
 
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return result;
@@ -278,16 +266,6 @@ public class ExpertReg extends AppCompatActivity {
             }
             super.onPostExecute(s);
         }
-    }
-
-    private boolean validateEmail(String data) {
-        Pattern emailPattern = Pattern.compile(".+@.+\\.[a-z]+");
-        Matcher emailMatcher = emailPattern.matcher(data);
-        return emailMatcher.matches();
-    }
-
-    public static final boolean isValidPhoneNumber(String data) {
-        return data.length() == 11 && data.charAt(0) == '0';
     }
 }
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,9 +19,9 @@ import java.util.Objects;
 
 
 public class profile extends AppCompatActivity {
-    RemoteFindIterable<Document> findIterable;
     public String email, pass;
-    TextView emailID,u_name;
+    RemoteFindIterable<Document> findIterable;
+    TextView emailID, u_name;
     ImageView imageView;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -42,8 +41,8 @@ public class profile extends AppCompatActivity {
 
         //shared preference
         pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String _email = pref.getString("email",null);
-        String _name = pref.getString("name",null);
+        String _email = pref.getString("email", null);
+        String _name = pref.getString("name", null);
         emailID.setText(_email);
         u_name.setText(_name);
 

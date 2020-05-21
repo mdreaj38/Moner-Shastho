@@ -1,8 +1,5 @@
 package com.example.corona;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,11 +8,12 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONArray;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,9 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
@@ -58,9 +54,7 @@ public class ShowResource extends AppCompatActivity {
         Log.e("this", "a");
         try {
             new HttpGetRequest().execute(message).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -77,14 +71,14 @@ public class ShowResource extends AppCompatActivity {
 
     public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
+        public static final String REQUEST_METHOD = "GET";
+        public static final int READ_TIMEOUT = 15000;
+        public static final int CONNECTION_TIMEOUT = 15000;
         String data = "";
         String singleParsed = "";
         String dataParsed = "";
         JSONObject real_data;
         ProgressDialog progressDialog;
-        public static final String REQUEST_METHOD = "GET";
-        public static final int READ_TIMEOUT = 15000;
-        public static final int CONNECTION_TIMEOUT = 15000;
 
         protected void onPreExecute() {
             progressDialog = ProgressDialog.show(ShowResource.this, "", "Loading...");
@@ -94,7 +88,7 @@ public class ShowResource extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             Log.e("Check", "ok");
             try {
-                String st =  strings[0];
+                String st = strings[0];
                 URL url = new URL(st);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set method
@@ -116,11 +110,7 @@ public class ShowResource extends AppCompatActivity {
                 Log.e("this2", (String) real_data.get("title"));
                 Log.e("this2body", (String) real_data.get("body"));
                 Log.e("this2", data);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return data;
@@ -139,11 +129,7 @@ public class ShowResource extends AppCompatActivity {
                 date.setText((String) real_data.get("date"));
 
                 progressDialog.dismiss();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
+            } catch (JSONException | InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
             super.onPostExecute(aVoid);
@@ -161,8 +147,6 @@ public class ShowResource extends AppCompatActivity {
 
                 url = new URL(param[0]);
                 strm = new BufferedInputStream(url.openStream());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }

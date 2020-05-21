@@ -1,46 +1,38 @@
 package com.example.corona;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class resource extends AppCompatActivity {
-    private ListView listView;
     public ArrayList<String> mydata = new ArrayList<String>();
     public ArrayList<String> blogid = new ArrayList<String>();
+    private ListView listView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +48,7 @@ public class resource extends AppCompatActivity {
 
         try {
             new HttpGetRequest().execute().get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -76,7 +66,7 @@ public class resource extends AppCompatActivity {
 
                 Intent intent = new Intent(resource.this, ShowResource.class);
                 String temp = blogid.get(position);
-                intent.putExtra("ID", "https://bad-blogger.herokuapp.com/users/view/"+temp + "?device=android");
+                intent.putExtra("ID", "https://bad-blogger.herokuapp.com/users/view/" + temp + "?device=android");
                 startActivity(intent);
             }
         });
@@ -91,7 +81,7 @@ public class resource extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) ;
+        item.getItemId();
         {
             finish();
         }
@@ -101,13 +91,13 @@ public class resource extends AppCompatActivity {
 
     public class HttpGetRequest extends AsyncTask<Void, Void, String> {
 
+        public static final String REQUEST_METHOD = "GET";
+        public static final int READ_TIMEOUT = 15000;
+        public static final int CONNECTION_TIMEOUT = 15000;
         String data = "";
         String singleParsed = "";
         String dataParsed = "";
         ProgressDialog progressDialog;
-        public static final String REQUEST_METHOD = "GET";
-        public static final int READ_TIMEOUT = 15000;
-        public static final int CONNECTION_TIMEOUT = 15000;
 
         protected void onPreExecute() {
             progressDialog = ProgressDialog.show(resource.this, "Loading...", "");
@@ -135,24 +125,18 @@ public class resource extends AppCompatActivity {
 
                 JSONArray JA = temp.getJSONArray("data");
                 String idstring = " ";
-                if (JA != null) {
-                    for (int i = 0; i < JA.length(); i++) {
-                        JSONObject obj = null;
-                        obj = (JSONObject) JA.get(i);
-                        idstring += obj.get("thumbnail") + " ,";
-                        mydata.add((String) obj.get("title"));
-                        blogid.add((String) obj.get("_id"));
-                        //mydata.add("111");
-                        // Log.e("checkk2", (String) obj.get("title"));
-                    }
+                for (int i = 0; i < JA.length(); i++) {
+                    JSONObject obj = null;
+                    obj = (JSONObject) JA.get(i);
+                    idstring += obj.get("thumbnail") + " ,";
+                    mydata.add((String) obj.get("title"));
+                    blogid.add((String) obj.get("_id"));
+                    //mydata.add("111");
+                    // Log.e("checkk2", (String) obj.get("title"));
                 }
                 //  Log.e("check22", idstring.toString());
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return data;

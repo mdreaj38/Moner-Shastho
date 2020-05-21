@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
@@ -45,7 +44,7 @@
             android:background="#8CB6B3"
             android:gravity="center"
             android:text="Written By"
-            android:textSize="10sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/date"
@@ -55,7 +54,7 @@
             android:gravity="center"
 
             android:text="date"
-            android:textSize="10sp" />
+            android:textSize="13sp" />
     </LinearLayout>
 
 </ScrollView>

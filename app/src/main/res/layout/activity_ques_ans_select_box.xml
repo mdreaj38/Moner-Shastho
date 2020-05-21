@@ -92,16 +92,16 @@
     </LinearLayout>
 
 
-        android:id="@+id/button_confirm_next"
-        android:layout_width="196dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/radio_group"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorAccent"
-        android:freezesText="true"
-        android:text="Confirm"
-        android:textSize="20sp" />-->
+    android:id="@+id/button_confirm_next"
+    android:layout_width="196dp"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/radio_group"
+    android:layout_gravity="center"
+    android:layout_marginTop="16dp"
+    android:background="@color/colorAccent"
+    android:freezesText="true"
+    android:text="Confirm"
+    android:textSize="20sp" />-->
 
     <!--<Button
         android:id="@+id/next_ques"

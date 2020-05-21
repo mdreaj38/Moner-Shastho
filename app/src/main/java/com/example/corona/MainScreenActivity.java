@@ -22,13 +22,12 @@ import java.util.Objects;
 public class MainScreenActivity extends AppCompatActivity {
 
 
+    public String email;
     GridView gridView;
-    private ImageView imageView;
-
     String[] Options = {"Lock Down", "Remain Healthy", "Track Record", "Resources", "Log Out", "Profile"};
     int[] OptionImage = {R.drawable.lockdown, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.logout, R.drawable.man};
     int cnt = 0;
-    public String email;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

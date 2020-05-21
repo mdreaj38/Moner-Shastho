@@ -93,8 +93,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:textColor="#fff"
-                android:textStyle="italic|bold"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="italic|bold" />
         </RelativeLayout>
     </RelativeLayout>
 </ScrollView>
