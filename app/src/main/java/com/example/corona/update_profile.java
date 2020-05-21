@@ -18,9 +18,9 @@ import java.util.Objects;
 
 
 public class update_profile extends AppCompatActivity {
-    public EditText email, pass, age;
+    public EditText email, age,name;
     public TextView gender, maritalStatus;
-    public String Email, Age, string_gender, string_maritalStatus;
+    public String Email, Age, string_gender, string_maritalStatus,username;
     public String result, result1;
 
     SharedPreferences pref;
@@ -35,7 +35,7 @@ public class update_profile extends AppCompatActivity {
         /*Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);*/
         email = findViewById(R.id.update_email);
-        pass = findViewById(R.id.password);
+        name = findViewById(R.id.usernamegen);
         age = findViewById(R.id.age);
         gender = findViewById(R.id.gender);
         maritalStatus = findViewById(R.id.maritualStatus);
@@ -70,6 +70,7 @@ public class update_profile extends AppCompatActivity {
             //shared preferences
             editor = Objects.requireNonNull(pref).edit();
             //  editor.putString("email", Email);
+            editor.putString("name",username);
             editor.putString("age", Age);
             editor.putString("gender", string_gender);
             editor.putString("maritalStatus", string_maritalStatus);
