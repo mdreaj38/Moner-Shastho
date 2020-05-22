@@ -92,21 +92,73 @@ public class update_profile_page_2 extends AppCompatActivity {
         boolean checked = ((CheckBox) view).isChecked();
 
         // Check which checkbox was clicked
+         CheckBox Illiterate,Ssc,Hsc,Graduate,Post_graduate,Uptofive,nuc,jo,fn,fy;
+         CheckBox St,se,ho,te,un,bu,fa,ot;
+
+         Illiterate = findViewById(R.id.illiterate);
+         Ssc = findViewById(R.id.ssc);
+         Hsc = findViewById(R.id.hsc);
+         Graduate = findViewById(R.id.graduate);
+         Post_graduate = findViewById(R.id.post_gradute);
+         Uptofive = findViewById(R.id.upto_class_five);
+
+
+
+         St = findViewById(R.id.student);
+         se = findViewById(R.id.service);
+         ho = findViewById(R.id.housewife);
+         te = findViewById(R.id.teachers);
+         un = findViewById(R.id.unemployed);
+         bu = findViewById(R.id.businessman);
+         fa = findViewById(R.id.farmer);
+         ot = findViewById(R.id.others);
+
+         nuc = findViewById(R.id.nuclear);
+         jo = findViewById(R.id.joint);
+
+         fn = findViewById(R.id.no_illness);
+         fy = findViewById(R.id.yes_illness);
+
         int id = view.getId();
         if (id == R.id.illiterate) {
+
             if (checked) {
+                Illiterate.setChecked(true);
+                Ssc.setChecked(false);
+                Hsc.setChecked(false);
+                Graduate.setChecked(false);
+                Post_graduate.setChecked(false);
+                Uptofive.setChecked(false);
+
                 education = "illiterate";
                 Toast.makeText(getApplicationContext(), "Male checked", Toast.LENGTH_SHORT).show();
                 // do something like update database
             }
         } else if (id == R.id.upto_class_five) {
+
             if (checked) {
+
+                Illiterate.setChecked(false);
+                Ssc.setChecked(false);
+                Hsc.setChecked(false);
+                Graduate.setChecked(false);
+                Post_graduate.setChecked(false);
+                Uptofive.setChecked(true);
+
                 education = "upto_class_five";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.ssc) {
             if (checked) {
+
+                Illiterate.setChecked(false);
+                Ssc.setChecked(true);
+                Hsc.setChecked(false);
+                Graduate.setChecked(false);
+                Post_graduate.setChecked(false);
+                Uptofive.setChecked(false);
+
                 education = "ssc";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
@@ -114,91 +166,199 @@ public class update_profile_page_2 extends AppCompatActivity {
 
         } else if (id == R.id.hsc) {
             if (checked) {
+                Illiterate.setChecked(false);
+                Ssc.setChecked(false);
+                Hsc.setChecked(true);
+                Graduate.setChecked(false);
+                Post_graduate.setChecked(false);
+                Uptofive.setChecked(false);
+
                 education = "hsc";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.graduate) {
             if (checked) {
+                Illiterate.setChecked(false);
+                Ssc.setChecked(false);
+                Hsc.setChecked(false);
+                Post_graduate.setChecked(false);
+                Uptofive.setChecked(false);
+                Graduate.setChecked(true);
+
                 education = "graduate";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.post_gradute) {
             if (checked) {
+                Illiterate.setChecked(false);
+                Ssc.setChecked(false);
+                Hsc.setChecked(false);
+                Graduate.setChecked(false);
+                Uptofive.setChecked(false);
+                Post_graduate.setChecked(true);
+
                 education = "postGraduate";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.others) {
             if (checked) {
+                St.setChecked(false);
+                se.setChecked(false);
+                ho.setChecked(false);
+                te.setChecked(false);
+                un.setChecked(false);
+                bu.setChecked(false);
+                fa.setChecked(false);
+                ot.setChecked(true);
+
                 occupation = "others";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.teachers) {
             if (checked) {
+                St.setChecked(false);
+                se.setChecked(false);
+                ho.setChecked(false);
+                te.setChecked(true);
+                un.setChecked(false);
+                bu.setChecked(false);
+                fa.setChecked(false);
+                ot.setChecked(false);
+
                 occupation = "teachers";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.farmer) {
             if (checked) {
+                St.setChecked(false);
+                se.setChecked(false);
+                ho.setChecked(false);
+                te.setChecked(false);
+                un.setChecked(false);
+                bu.setChecked(false);
+                fa.setChecked(true);
+                ot.setChecked(false);
+
                 occupation = "farmer";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.service) {
             if (checked) {
+                St.setChecked(false);
+                se.setChecked(true);
+                ho.setChecked(false);
+                te.setChecked(false);
+                un.setChecked(false);
+                bu.setChecked(false);
+                fa.setChecked(false);
+                ot.setChecked(false);
+
                 occupation = "service";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.unemployed) {
             if (checked) {
+                St.setChecked(false);
+                se.setChecked(false);
+                ho.setChecked(false);
+                te.setChecked(false);
+                un.setChecked(true);
+                bu.setChecked(false);
+                fa.setChecked(false);
+                ot.setChecked(false);
+
                 occupation = "unemployed";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.student) {
             if (checked) {
+                St.setChecked(true);
+                se.setChecked(false);
+                ho.setChecked(false);
+                te.setChecked(false);
+                un.setChecked(false);
+                bu.setChecked(false);
+                fa.setChecked(false);
+                ot.setChecked(false);
+
                 occupation = "student";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.businessman) {
             if (checked) {
+                St.setChecked(false);
+                se.setChecked(false);
+                ho.setChecked(false);
+                te.setChecked(false);
+                un.setChecked(false);
+                bu.setChecked(true);
+                fa.setChecked(false);
+                ot.setChecked(false);
+
                 occupation = "businessman";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.housewife) {
             if (checked) {
+                St.setChecked(false);
+                se.setChecked(false);
+                ho.setChecked(true);
+                te.setChecked(false);
+                un.setChecked(false);
+                bu.setChecked(false);
+                fa.setChecked(false);
+                ot.setChecked(false);
+
                 occupation = "housewife";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.nuclear) {
             if (checked) {
+
+                nuc.setChecked(true);
+                jo.setChecked(false);
+
                 familyType = "nuclear";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.joint) {
             if (checked) {
+                nuc.setChecked(false);
+                jo.setChecked(true);
+
                 familyType = "joint";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.no_illness) {
             if (checked) {
+
+                fn.setChecked(true);
+                fy.setChecked(false);
+
                 mentalIllness = "No";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.yes_illness) {
             if (checked) {
+                fn.setChecked(false);
+                fy.setChecked(true);
+
                 mentalIllness = "Yes";
+
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }

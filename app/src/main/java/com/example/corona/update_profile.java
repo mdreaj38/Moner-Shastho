@@ -42,9 +42,12 @@ public class update_profile extends AppCompatActivity {
 
         //shared preference
         pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String eemail = pref.getString("email", null);
-        email.setText(eemail);
+        String gemail = pref.getString("email", null);
+        String gname = pref.getString("name", null);
+        email.setText(gemail);
         email.setEnabled(false);
+
+        name.setText(gname);
 
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -98,17 +101,26 @@ public class update_profile extends AppCompatActivity {
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
+        CheckBox one,two;
+        one  = findViewById(R.id.checkbox_male);
+        two = findViewById(R.id.checkbox_female);
+
 
         // Check which checkbox was clicked
         int id = view.getId();
         if (id == R.id.checkbox_male) {
             if (checked) {
+                one.setChecked(true);
+                two.setChecked(false);
+
                 result = "Male";
                 Toast.makeText(getApplicationContext(), "Male checked", Toast.LENGTH_SHORT).show();
                 // do something like update database
             }
         } else if (id == R.id.checkbox_female) {
             if (checked) {
+                one.setChecked(false);
+                two.setChecked(true);
                 result = "female";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
@@ -120,28 +132,55 @@ public class update_profile extends AppCompatActivity {
     public void onCheckboxClicked1(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
+        CheckBox u,d,m,w;
+        u = findViewById(R.id.unmarried);
+        d = findViewById(R.id.divorced);
+        m = findViewById(R.id.married);
+        w = findViewById(R.id.widow);
+
+
 
         // Check which checkbox was clicked
         int id = view.getId();
         if (id == R.id.married) {
             if (checked) {
+                u.setChecked(false);
+                d.setChecked(false);
+                m.setChecked(true);
+                w.setChecked(false);
+
                 result1 = "married";
                 Toast.makeText(getApplicationContext(), "Married", Toast.LENGTH_SHORT).show();
                 // do something like update database
             }
         } else if (id == R.id.unmarried) {
             if (checked) {
+                u.setChecked(true);
+                d.setChecked(false);
+                m.setChecked(false);
+                w.setChecked(false);
+
                 result1 = "unmarried";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "unmarried", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.widow) {
             if (checked) {
+                u.setChecked(false);
+                d.setChecked(false);
+                m.setChecked(false);
+                w.setChecked(true);
+
                 result1 = "widow";
                 Toast.makeText(getApplicationContext(), "widow", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.divorced) {
             if (checked) {
+                u.setChecked(false);
+                d.setChecked(true);
+                m.setChecked(false);
+                w.setChecked(false);
+
                 result1 = "divorced";
                 Toast.makeText(getApplicationContext(), "divorced", Toast.LENGTH_SHORT).show();
             }

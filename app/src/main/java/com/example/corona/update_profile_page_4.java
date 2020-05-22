@@ -95,8 +95,11 @@ public class update_profile_page_4 extends AppCompatActivity {
                 } else {
                     String temp_pass = password.getText().toString();
                     if (temp_pass.equals(pass)) {
-                        
+
                         //update database
+                        stringAbuseDetails = "N/A";
+                        stringDisorderDetails = "N/A";
+
                         if (abuse.equals("yes"))
                             stringAbuseDetails = abuseDetails.getText().toString();
                         if (disorder.equals("yes"))
@@ -133,28 +136,44 @@ public class update_profile_page_4 extends AppCompatActivity {
         boolean checked = ((CheckBox) view).isChecked();
 
         // Check which checkbox was clicked
+        CheckBox one,two,three,four;
+        one = findViewById(R.id.no_abusee);
+        two = findViewById(R.id.yes_abusee);
+        three = findViewById(R.id.no_disorderr);
+        four = findViewById(R.id.yes_disorderr);
         int id = view.getId();
-        if (id == R.id.no_abuse) {
+        if (id == R.id.no_abusee) {
             if (checked) {
+                one.setChecked(true);
+                two.setChecked(false);
+
                 abuse = "no";
                 Toast.makeText(getApplicationContext(), "Male checked", Toast.LENGTH_SHORT).show();
                 // do something like update database
             }
-        } else if (id == R.id.yes_abuse) {
+        } else if (id == R.id.yes_abusee) {
             if (checked) {
+                one.setChecked(false);
+                two.setChecked(true);
+
                 abuse = "yes";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
-        } else if (id == R.id.no_disorder) {
+        } else if (id == R.id.no_disorderr) {
             if (checked) {
+                three.setChecked(true);
+                four.setChecked(false);
                 disorder = "no";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
 
-        } else if (id == R.id.yes_disorder) {
+        } else if (id == R.id.yes_disorderr) {
             if (checked) {
+                three.setChecked(false);
+                four.setChecked(true);
+
                 disorder = "yes";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();

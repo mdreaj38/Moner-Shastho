@@ -55,7 +55,9 @@ public class LoginActivity extends AppCompatActivity {
         pgsdialog.setTitle("Please Wait");
         pgsdialog.setMessage("Logging In..");
         // pgsBar = (ProgressBar) findViewById(R.id.pBar);
-
+        /*SharedPreferences settings = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        settings.edit().clear().apply();*/
+        Log.e("ok","clear");
 
         Button signup = findViewById(R.id.signup);
         Handler handler = new Handler();
@@ -114,8 +116,6 @@ public class LoginActivity extends AppCompatActivity {
                 mdialog.show();
             }
             if (v.getId() == R.id.login) {
-                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
-                startActivity(intent);
 
                 string_email_login = emailLogin.getText().toString();
                 string_email_pass = passLogin.getText().toString();
@@ -171,6 +171,7 @@ public class LoginActivity extends AppCompatActivity {
             HttpURLConnection urlConnection;
             String url = strings[0];
             String data = strings[1];
+            Log.e("login",data);
             String result = null;
             try {
 
@@ -221,27 +222,35 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Void code) {
             progressDialog.dismiss();
             if (statusCode == 200) {
-                pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-                editor = Objects.requireNonNull(pref).edit();
-                String user_name = "", _gender = "";
+                String user_name = "", _gender = "",u_type="";
                 Log.e("login",sb.toString());
                 try {
                     JSONObject jb = new JSONObject(sb.toString());
                     JSONObject jc = jb.getJSONObject("user");
                     user_name = (String) jc.get("name");
-                    _gender = (String) jc.get("gender");
+                    //_gender = (String) jc.get("gender");
+                    _gender = "male";
+                    u_type = (String) jc.get("userType");
+                    Log.e("type",u_type);
+                    Log.e("type",sb.toString());
+
                 } catch (JSONException e) {
+                    Log.e("type","eije ekhane");
                     e.printStackTrace();
                 }
+                pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                editor = Objects.requireNonNull(pref).edit();
                 editor.putString("name", user_name);
                 editor.putString("email", string_email_login);
                 editor.putString("password",pass1);
                 editor.putString("gender", _gender);
+               editor.putString("usertype",u_type);
                 editor.apply();
 
-               /* Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 startActivity(intent);
-               */// Toast.makeText((LoginActivity.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
+
+               // Toast.makeText((LoginActivity.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
             } else {
                 android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(LoginActivity.this);
                 builder1.setCancelable(false);

@@ -29,15 +29,24 @@ public class MainScreenActivity extends AppCompatActivity {
     int cnt = 0;
     private ImageView imageView;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
-
         //finding listview
         gridView = findViewById(R.id.gridview);
+
+        //set username in mainactivity
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        String temp = pref.getString("name", null);
+        String UserType = pref.getString("usertype",null);
+        Options[5] = temp;
+      //  Log.e("type2",temp);
 
         CustomAdapter customAdapter = new CustomAdapter();
         gridView.setAdapter(customAdapter);
@@ -67,9 +76,17 @@ public class MainScreenActivity extends AppCompatActivity {
                     startActivity(next);
                     finish();
                 } else if (i == 5) {
-                    Intent intent = new Intent(MainScreenActivity.this, update_profile.class);
-                    intent.putExtra("email", email);
-                    startActivity(intent);
+                    String cur = "expert";
+                    if(cur.equals(UserType)) {
+                        Intent intent = new Intent(MainScreenActivity.this, profile_expert_user.class);
+                        intent.putExtra("email", email);
+                        startActivity(intent);
+                    }
+                    else {
+                        Intent intent = new Intent(MainScreenActivity.this, profile.class);
+                        intent.putExtra("email", email);
+                        startActivity(intent);
+                    }
                 } else {
                     Toast.makeText((MainScreenActivity.this), "STOP", Toast.LENGTH_SHORT).show();
                 }

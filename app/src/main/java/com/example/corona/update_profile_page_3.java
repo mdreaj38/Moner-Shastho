@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,6 +65,7 @@ public class update_profile_page_3 extends AppCompatActivity {
             editor.putString("stressfulLife", stringStressfulLife);
             editor.putString("personalityPattern", stringPersonalityPattern);
             editor.putString("relationshipPrb", stringRelationshipPrb);
+
             //  if (stringRelationshipPrb.equals("yes")) {
             yes_relationprb = relationship_prb.getText().toString();
             editor.putString("relationPrbDetails", yes_relationprb);
@@ -90,23 +92,39 @@ public class update_profile_page_3 extends AppCompatActivity {
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
+        CheckBox one,two,three,four;
+        one = findViewById(R.id.no_abuse);
+        two = findViewById(R.id.yes_abuse);
+        three = findViewById(R.id.no_relation_prb);
+        four = findViewById(R.id.yes_relation_prb);
+
 
         // Check which checkbox was clicked
         int id = view.getId();
         if (id == R.id.no_relation_prb) {
             if (checked) {
+
+                three.setChecked(true);
+                four.setChecked(false);
                 stringRelationshipPrb = "no";
                 Toast.makeText(getApplicationContext(), "Male checked", Toast.LENGTH_SHORT).show();
                 // do something like update database
             }
         } else if (id == R.id.yes_relation_prb) {
             if (checked) {
+
+                four.setChecked(true);
+                three.setChecked(false);
+
                 stringRelationshipPrb = "yes";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.no_abuse) {
             if (checked) {
+                one.setChecked(true);
+                two.setChecked(false);
+
                 stringChildAbuse = "no";
                 //do something like update database
                 Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
@@ -114,9 +132,13 @@ public class update_profile_page_3 extends AppCompatActivity {
 
         } else if (id == R.id.yes_abuse) {
             if (checked) {
+                one.setChecked(false);
+                two.setChecked(true);
+
+                EditText editText = findViewById(R.id.abuse_details);
                 stringChildAbuse = "yes";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), stringChildAbuse, Toast.LENGTH_SHORT).show();
             }
 
         }

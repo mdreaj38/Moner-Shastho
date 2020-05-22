@@ -14,23 +14,35 @@ import java.util.Objects;
 public class profile_expert_user extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-    EditText email, password, phoneNo, designation, organization;
-    String string_email, string_password, string_phoneNo, string_designation, string_organization;
+
+    EditText email, username, phoneNo, designation, organization;
+    String string_email, string_username, string_phoneNo, string_designation, string_organization;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_expert_user);
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
+
         email = findViewById(R.id.expert_email);
-        password = findViewById(R.id.expert_password);
+        username = findViewById(R.id.expert_username);
         phoneNo = findViewById(R.id.expert_phoneNo);
         designation = findViewById(R.id.expert_designation);
         organization = findViewById(R.id.expert_organization);
 
+        //shared preference
+        pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String eemail = pref.getString("email", null);
+        email.setText(eemail);
+        email.setEnabled(false);
+
+
         pref = getSharedPreferences("MyPrefExpert", Context.MODE_PRIVATE);
+
 
 
     }
@@ -46,7 +58,7 @@ public class profile_expert_user extends AppCompatActivity {
             Intent intent = new Intent(profile_expert_user.this, activity_profile_expert_user_2.class);
 
             string_email = email.getText().toString();
-            string_password = password.getText().toString();
+            string_username = username.getText().toString();
             string_phoneNo = phoneNo.getText().toString();
             string_designation = designation.getText().toString();
             string_organization = organization.getText().toString();
@@ -54,7 +66,7 @@ public class profile_expert_user extends AppCompatActivity {
             //insert data to db
             editor = Objects.requireNonNull(pref).edit();
             editor.putString("email", string_email);
-            editor.putString("password", string_password);
+            editor.putString("name", string_username);
             editor.putString("phoneNo", string_phoneNo);
             editor.putString("designation", string_designation);
             editor.putString("organization", string_organization);

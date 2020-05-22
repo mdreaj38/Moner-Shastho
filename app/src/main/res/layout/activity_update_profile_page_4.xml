@@ -39,7 +39,7 @@
             android:layout_height="wrap_content">
 
             <CheckBox
-                android:id="@+id/no_abuse"
+                android:id="@+id/no_abusee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content">
 
             <CheckBox
-                android:id="@+id/yes_abuse"
+                android:id="@+id/yes_abusee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content">
 
             <CheckBox
-                android:id="@+id/no_disorder"
+                android:id="@+id/no_disorderr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content">
 
             <CheckBox
-                android:id="@+id/yes_disorder"
+                android:id="@+id/yes_disorderr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
