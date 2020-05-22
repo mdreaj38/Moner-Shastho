@@ -20,8 +20,8 @@ import com.github.mikephil.charting.utils.Utils;
 
 import java.util.ArrayList;
 
-public class chart extends AppCompatActivity {
-    private LineChart mChart;
+public class chart_mental_stress extends AppCompatActivity {
+    private LineChart mChart, mChart1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,14 @@ public class chart extends AppCompatActivity {
         MyMarkerView mv = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
         mv.setChartView(mChart);
         mChart.setMarker(mv);
+
+
+        mChart1 = findViewById(R.id.chart1);
+        mChart1.setTouchEnabled(true);
+        mChart1.setPinchZoom(true);
+        MyMarkerView mv1 = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
+        mv1.setChartView(mChart1);
+        mChart1.setMarker(mv1);
         renderData();
     }
 
@@ -48,6 +56,12 @@ public class chart extends AppCompatActivity {
         xAxis.setAxisMaximum(10f);
         xAxis.setAxisMinimum(0f);
         xAxis.setDrawLimitLinesBehindData(true);
+
+        XAxis xAxis1 = mChart1.getXAxis();
+        xAxis1.enableGridDashedLine(10f, 5f, 0f);
+        xAxis1.setAxisMaximum(10f);
+        xAxis1.setAxisMinimum(0f);
+        xAxis1.setDrawLimitLinesBehindData(true);
 
         LimitLine ll1 = new LimitLine(80f, "Maximum Limit");
         ll1.setLineWidth(4f);
@@ -71,8 +85,20 @@ public class chart extends AppCompatActivity {
         leftAxis.setDrawZeroLine(false);
         leftAxis.setDrawLimitLinesBehindData(false);
 
+        YAxis leftAxis1 = mChart1.getAxisLeft();
+        leftAxis1.removeAllLimitLines();
+        leftAxis1.addLimitLine(ll1);
+        leftAxis1.addLimitLine(ll2);
+        leftAxis1.setAxisMaximum(100f);
+        leftAxis1.setAxisMinimum(0f);
+        leftAxis1.enableGridDashedLine(10f, 5f, 0f);
+        leftAxis1.setDrawZeroLine(false);
+        leftAxis1.setDrawLimitLinesBehindData(false);
+
         mChart.getAxisRight().setEnabled(false);
+        mChart1.getAxisRight().setEnabled(false);
         setData();
+        setData1();
     }
 
     private void setData() {
@@ -121,4 +147,52 @@ public class chart extends AppCompatActivity {
             mChart.setData(data);
         }
     }
+
+    private void setData1() {
+
+        ArrayList<Entry> values1 = new ArrayList<>();
+        values1.add(new Entry(1, 50));
+        values1.add(new Entry(2, 60));
+        values1.add(new Entry(3, 70));
+        values1.add(new Entry(4, 80));
+        values1.add(new Entry(5, 90));
+        values1.add(new Entry(7, 100));
+
+
+        LineDataSet set1;
+        if (mChart1.getData() != null &&
+                mChart1.getData().getDataSetCount() > 0) {
+            set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
+            set1.setValues(values1);
+            mChart1.getData().notifyDataChanged();
+            mChart1.notifyDataSetChanged();
+        } else {
+            set1 = new LineDataSet(values1, "Sample Data");
+            set1.setDrawIcons(false);
+            set1.enableDashedLine(10f, 5f, 0f);
+            set1.enableDashedHighlightLine(10f, 5f, 0f);
+            set1.setColor(Color.DKGRAY);
+            set1.setCircleColor(Color.DKGRAY);
+            set1.setLineWidth(1f);
+            set1.setCircleRadius(3f);
+            set1.setDrawCircleHole(false);
+            set1.setValueTextSize(9f);
+            set1.setDrawFilled(true);
+            set1.setFormLineWidth(1f);
+            set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
+            set1.setFormSize(15.f);
+
+            if (Utils.getSDKInt() >= 18) {
+                Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fade_blue);
+                set1.setFillDrawable(drawable);
+            } else {
+                set1.setFillColor(Color.DKGRAY);
+            }
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
+            LineData data = new LineData(dataSets);
+            mChart1.setData(data);
+        }
+    }
+
 }

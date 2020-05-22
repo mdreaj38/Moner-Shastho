@@ -1,25 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:context="">
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/graphHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:text="Mental Health Progess"
         android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/before"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Before"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="281dp"
-        android:layout_marginTop="150dp" />
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/after"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="After"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp" />
 
 </LinearLayout>

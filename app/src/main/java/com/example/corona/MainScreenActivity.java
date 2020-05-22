@@ -51,7 +51,7 @@ public class MainScreenActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainScreenActivity.this, scored_ans_based_qstn.class);
                     startActivity(intent);
                 } else if (i == 2) {
-                    Intent intent = new Intent(MainScreenActivity.this, chart.class);
+                    Intent intent = new Intent(MainScreenActivity.this, chart_mental_stress.class);
                     startActivity(intent);
                 } else if (i == 3) {
                     Intent intent = new Intent(MainScreenActivity.this, resource.class);
