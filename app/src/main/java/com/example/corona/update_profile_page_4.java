@@ -1,7 +1,9 @@
 package com.example.corona;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,9 +18,9 @@ import java.util.Objects;
 public class update_profile_page_4 extends AppCompatActivity {
     SharedPreferences pref;
     String email, age, gender, maritalStatus, mentalIllness, stringChildAbuse, stringRelationshipPrb;
-    EditText abuseDetails, treatmentDetails;
-    String stringAbuseDetails, stringTreatmentDetails, stringDisorderDetails, abuse, disorder;
-
+    EditText abuseDetails, treatmentDetails,password;
+    String stringAbuseDetails, stringTreatmentDetails, stringDisorderDetails,pass;
+    String  abuse="", disorder = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +28,7 @@ public class update_profile_page_4 extends AppCompatActivity {
 
         abuseDetails = findViewById(R.id.abuse);
         treatmentDetails = findViewById(R.id.treatment);
-
+        password = findViewById(R.id.passg);
 
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         email = pref.getString("email", null);
@@ -45,6 +47,7 @@ public class update_profile_page_4 extends AppCompatActivity {
         pref.getString("complaints", null);
         pref.getString("stressfulLife", null);
         pref.getString("personalityPattern", null);
+        pass = pref.getString("password", null);
         stringRelationshipPrb = pref.getString("relationshipPrb", null);
         assert stringRelationshipPrb != null;
 //        if (stringRelationshipPrb.equals("yes")) {
@@ -72,14 +75,48 @@ public class update_profile_page_4 extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //update database
-                if (abuse.equals("yes"))
-                    stringAbuseDetails = abuseDetails.getText().toString();
-                if (disorder.equals("yes"))
-                    stringDisorderDetails = treatmentDetails.getText().toString();
-                stringTreatmentDetails = treatmentDetails.getText().toString();
 
-
+                if (abuse == "" || disorder == "") {
+                    String warn = "";
+                    if (abuse == "") warn = "Abuse can't be empty";
+                    else if (disorder == "") warn = "Disorder can't be empty";
+                    android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(update_profile_page_4.this);
+                    builder1.setCancelable(false);
+                    builder1.setTitle(warn);
+                    builder1.setPositiveButton(
+                            Html.fromHtml("<font color='#FF0000'>Ok</font>"),
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    android.app.AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                } else {
+                    String temp_pass = password.getText().toString();
+                    if (temp_pass.equals(pass)) {
+                        
+                        //update database
+                        if (abuse.equals("yes"))
+                            stringAbuseDetails = abuseDetails.getText().toString();
+                        if (disorder.equals("yes"))
+                            stringDisorderDetails = treatmentDetails.getText().toString();
+                        stringTreatmentDetails = treatmentDetails.getText().toString();
+                    } else {
+                        android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(update_profile_page_4.this);
+                        builder1.setCancelable(false);
+                        builder1.setTitle("Wrong Password!!");
+                        builder1.setPositiveButton(
+                                Html.fromHtml("<font color='#FF0000'>Ok</font>"),
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        android.app.AlertDialog alert11 = builder1.create();
+                        alert11.show();
+                    }
+                }
             }
         });
     }

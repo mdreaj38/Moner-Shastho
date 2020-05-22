@@ -224,6 +224,7 @@ public class LoginActivity extends AppCompatActivity {
                 pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                 editor = Objects.requireNonNull(pref).edit();
                 String user_name = "", _gender = "";
+                Log.e("login",sb.toString());
                 try {
                     JSONObject jb = new JSONObject(sb.toString());
                     JSONObject jc = jb.getJSONObject("user");
@@ -234,6 +235,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 editor.putString("name", user_name);
                 editor.putString("email", string_email_login);
+                editor.putString("password",pass1);
                 editor.putString("gender", _gender);
                 editor.apply();
 

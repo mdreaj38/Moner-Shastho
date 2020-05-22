@@ -67,7 +67,7 @@ public class MainScreenActivity extends AppCompatActivity {
                     startActivity(next);
                     finish();
                 } else if (i == 5) {
-                    Intent intent = new Intent(MainScreenActivity.this, profile_expert_user.class);
+                    Intent intent = new Intent(MainScreenActivity.this, update_profile.class);
                     intent.putExtra("email", email);
                     startActivity(intent);
                 } else {
