@@ -95,8 +95,8 @@ public class update_profile_page_4 extends AppCompatActivity {
                 } else {
                     String temp_pass = password.getText().toString();
                     if (temp_pass.equals(pass)) {
+                        
                         //update database
-
                         if (abuse.equals("yes"))
                             stringAbuseDetails = abuseDetails.getText().toString();
                         if (disorder.equals("yes"))
