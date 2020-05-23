@@ -69,11 +69,11 @@ public class update_profile extends AppCompatActivity {
             Age = age.getText().toString();
             string_gender = result;
             string_maritalStatus = result1;
-
+            username = name.getText().toString();
             //shared preferences
             editor = Objects.requireNonNull(pref).edit();
             //  editor.putString("email", Email);
-            editor.putString("name",username);
+            editor.putString("update_name",username);
             editor.putString("age", Age);
             editor.putString("gender", string_gender);
             editor.putString("maritalStatus", string_maritalStatus);

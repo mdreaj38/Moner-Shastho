@@ -222,20 +222,20 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Void code) {
             progressDialog.dismiss();
             if (statusCode == 200) {
-                String user_name = "", _gender = "",u_type="";
+                String user_name = "", _gender = "",u_type="",ID="";
                 Log.e("login",sb.toString());
                 try {
                     JSONObject jb = new JSONObject(sb.toString());
                     JSONObject jc = jb.getJSONObject("user");
                     user_name = (String) jc.get("name");
+                    ID = (String) jc.get("_id");
                     //_gender = (String) jc.get("gender");
                     _gender = "male";
                     u_type = (String) jc.get("userType");
-                    Log.e("type",u_type);
-                    Log.e("type",sb.toString());
+                    Log.e("type",ID);
+                    Log.e("type",jc.toString());
 
                 } catch (JSONException e) {
-                    Log.e("type","eije ekhane");
                     e.printStackTrace();
                 }
                 pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -244,7 +244,8 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("email", string_email_login);
                 editor.putString("password",pass1);
                 editor.putString("gender", _gender);
-               editor.putString("usertype",u_type);
+                editor.putString("id",ID);
+                editor.putString("usertype",u_type);
                 editor.apply();
 
                 Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
