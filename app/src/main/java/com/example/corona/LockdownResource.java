@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,7 +34,11 @@ public class LockdownResource extends AppCompatActivity {
 
     public ArrayList<String> mydata = new ArrayList<String>();
     public ArrayList<String> blogid = new ArrayList<String>();
+    public ArrayList<String> task_Id = new ArrayList<String>();
+    public ArrayList<String> task_Title = new ArrayList<String>();
+    public ArrayList<String> task_Body = new ArrayList<String>();
     String mmessage;
+    String AllInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +77,23 @@ public class LockdownResource extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity, menu);
+        return true;
+    }
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        item.getItemId();
+        int id = item.getItemId();
+        if(id == R.id.act_item1)
         {
+            Toast.makeText(LockdownResource.this, "OKOKO", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LockdownResource.this, Task.class);
+            intent.putExtra("all",AllInfo);
+            startActivity(intent);
+            return true;
+        }
+        else {
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -103,7 +122,6 @@ public class LockdownResource extends AppCompatActivity {
                 httpURLConnection.setRequestMethod("GET");
 
                 httpURLConnection.connect();
-                ;
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line = "";
@@ -116,16 +134,29 @@ public class LockdownResource extends AppCompatActivity {
 
                 JSONArray JA = temp.getJSONArray("data");
                 String idstring = " ";
+                JSONArray Jtask = null;
+                String sid = "",stitle = "",sbody = "";
                 for (int i = 0; i < JA.length(); i++) {
                     JSONObject obj = null;
                     obj = (JSONObject) JA.get(i);
                     idstring += obj.get("thumbnail") + " ,";
                     mydata.add((String) obj.get("title"));
                     blogid.add((String) obj.get("_id"));
-                    //mydata.add("111");
-                    // Log.e("checkk2", (String) obj.get("title"));
+                        Jtask = obj.getJSONArray("activities");
+                        for(int j=0;j<Jtask.length();++j){
+                            JSONObject objj = (JSONObject) Jtask.get(j);
+                            task_Id.add((String) objj.get("_id"));
+                            task_Title.add((String) objj.get("title"));
+                            task_Body.add((String) objj.get("body"));
+
+                            sid+=(String) objj.get("_id")+'#';
+                            stitle+= (String) objj.get("title")+'#';
+                            sbody+= (String) objj.get("body")+'#';
+                    }
                 }
-                //  Log.e("check22", idstring.toString());
+
+                AllInfo = sid+"$"+stitle+'$'+sbody;
+                Log.e("thissj", AllInfo);
 
             } catch (IOException | JSONException e) {
                 e.printStackTrace();

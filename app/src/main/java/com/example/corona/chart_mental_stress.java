@@ -1,10 +1,15 @@
 package com.example.corona;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -19,6 +24,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class chart_mental_stress extends AppCompatActivity {
     private LineChart mChart, mChart1;
@@ -27,6 +33,13 @@ public class chart_mental_stress extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
+
+        setTitle("Track Record");
+        /*back button*/
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
         mChart = findViewById(R.id.chart);
         mChart.setTouchEnabled(true);
         mChart.setPinchZoom(true);
@@ -43,6 +56,28 @@ public class chart_mental_stress extends AppCompatActivity {
         mChart1.setMarker(mv1);
         renderData();
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.diary,menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.Diary)
+        {
+            Toast.makeText(chart_mental_stress.this, "HERE", Toast.LENGTH_SHORT).show();
+            /*Intent intent = new Intent(LockdownResource.this, Task.class);
+            intent.putExtra("all",AllInfo);
+            startActivity(intent);*/
+            return true;
+        }
+        else {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public void renderData() {
         LimitLine llXAxis = new LimitLine(10f, "Index 10");

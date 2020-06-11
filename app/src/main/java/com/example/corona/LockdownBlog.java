@@ -38,8 +38,6 @@ public class LockdownBlog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lockdown_blog);
         String message = getIntent().getStringExtra("url");
-
-
         setTitle("Blog");
         /*back button*/
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -105,10 +103,10 @@ public class LockdownBlog extends AppCompatActivity {
 
                 JSONObject jo = new JSONObject(data);
                 real_data = jo.getJSONObject("data");
-                Log.e("this2", (String) real_data.toString());
+                /*Log.e("this2", (String) real_data.toString());
                 Log.e("this2", (String) real_data.get("title"));
                 Log.e("this2body", (String) real_data.get("body"));
-                Log.e("this2", data);
+                Log.e("this2", data);*/
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
