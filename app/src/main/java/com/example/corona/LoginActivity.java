@@ -34,7 +34,6 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
     public String email1, pass1;
     String[] user_type;
-    /*ProgressBar pgsBar;*/
     ProgressDialog pgsdialog;
     TextView forgetPass;
     String string_email_login, string_email_pass;
@@ -139,7 +138,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 HttpPostRequest httpPostRequest = new HttpPostRequest();
                 httpPostRequest.execute("https://bad-blogger.herokuapp.com/admin/login/android", res.toString());
-
 
                 /*Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 intent.putExtra("email",email1);
@@ -246,6 +244,9 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("gender", _gender);
                 editor.putString("id",ID);
                 editor.putString("usertype",u_type);
+                editor.putString("PreStress","0");
+                editor.putString("count","0");
+                editor.putString("AvgStress","0");
                 editor.apply();
 
                 Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);

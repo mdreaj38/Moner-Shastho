@@ -38,16 +38,12 @@ public class chart_mental_stress extends AppCompatActivity {
         /*back button*/
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
         mChart = findViewById(R.id.chart);
         mChart.setTouchEnabled(true);
         mChart.setPinchZoom(true);
         MyMarkerView mv = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
         mv.setChartView(mChart);
         mChart.setMarker(mv);
-
-
         mChart1 = findViewById(R.id.chart1);
         mChart1.setTouchEnabled(true);
         mChart1.setPinchZoom(true);
@@ -68,7 +64,7 @@ public class chart_mental_stress extends AppCompatActivity {
         {
             Toast.makeText(chart_mental_stress.this, "HERE", Toast.LENGTH_SHORT).show();
             /*Intent intent = new Intent(LockdownResource.this, Task.class);
-            intent.putExtra("all",AllInfo);
+
             startActivity(intent);*/
             return true;
         }
@@ -77,7 +73,6 @@ public class chart_mental_stress extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     public void renderData() {
         LimitLine llXAxis = new LimitLine(10f, "Index 10");
@@ -135,6 +130,7 @@ public class chart_mental_stress extends AppCompatActivity {
         setData();
         setData1();
     }
+
 
     private void setData() {
 

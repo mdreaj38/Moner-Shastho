@@ -1,19 +1,27 @@
 package com.example.corona;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
@@ -37,8 +45,11 @@ public class LockdownResource extends AppCompatActivity {
     public ArrayList<String> task_Id = new ArrayList<String>();
     public ArrayList<String> task_Title = new ArrayList<String>();
     public ArrayList<String> task_Body = new ArrayList<String>();
+    public String CurStress="0";
     String mmessage;
     String AllInfo;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +98,54 @@ public class LockdownResource extends AppCompatActivity {
         int id = item.getItemId();
         if(id == R.id.act_item1)
         {
-            Toast.makeText(LockdownResource.this, "OKOKO", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(LockdownResource.this, Task.class);
-            intent.putExtra("all",AllInfo);
-            startActivity(intent);
+            final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Select your current stress level ");
+            alert.setMessage("");
+            LinearLayout linear=new LinearLayout(this);
+
+            linear.setOrientation(LinearLayout.VERTICAL);
+            TextView text=new TextView(this);
+            //text.setText("Hello Android");
+            text.setPadding(450, 10, 10, 10);
+
+            SeekBar seek=new SeekBar(this);
+
+            seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+                {
+                    String stress = Integer.toString(progress + 20);
+                    text.setText(Html.fromHtml("<h3><font color='#008000'><b>"+stress+"</b></font></h3>"));
+                    CurStress = stress;
+
+                }
+                public void onStartTrackingTouch(SeekBar seekBar) {}
+                public void onStopTrackingTouch(SeekBar seekBar) {}
+            });
+
+            linear.addView(seek);
+            linear.addView(text);
+            alert.setView(linear);
+
+            alert.setPositiveButton("Ok",new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog,int id)
+                {
+                    pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    editor = Objects.requireNonNull(pref).edit();
+                    int cur = (Integer.parseInt(CurStress)*100)/120;
+                    editor.putString("PreStress",Integer.toString(cur));
+                    editor.apply();
+
+                    finish();
+                    Toast.makeText(LockdownResource.this, "ok", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LockdownResource.this, Task.class);
+                    intent.putExtra("all",AllInfo);
+                    startActivity(intent);
+                }
+            });
+
+            alert.show();
+
             return true;
         }
         else {
