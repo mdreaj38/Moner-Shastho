@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".showTask"></activity>
+        <activity android:name=".Diary" />
+        <activity android:name=".showTask" />
         <activity android:name=".Task" />
         <activity android:name=".activity_profile_expert_user_2" />
         <activity android:name=".profile_expert_user" />

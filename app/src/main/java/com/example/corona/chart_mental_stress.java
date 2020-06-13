@@ -63,9 +63,9 @@ public class chart_mental_stress extends AppCompatActivity {
         if(id == R.id.Diary)
         {
             Toast.makeText(chart_mental_stress.this, "HERE", Toast.LENGTH_SHORT).show();
-            /*Intent intent = new Intent(LockdownResource.this, Task.class);
+            Intent intent = new Intent(chart_mental_stress.this, Diary.class);
 
-            startActivity(intent);*/
+            startActivity(intent);
             return true;
         }
         else {
