@@ -2,6 +2,7 @@ package com.example.corona;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,14 +24,19 @@ public class Diary extends AppCompatActivity {
         read_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Diary.this, "Read button clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Diary.this, "Read button clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Diary.this,Read_Diary.class);
+                startActivity(intent);
             }
         });
 
         write_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Diary.this, "write clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Diary.this, "write clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Diary.this,Write_diary.class);
+                startActivity(intent);
+
             }
         });
 

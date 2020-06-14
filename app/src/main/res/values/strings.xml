@@ -11,5 +11,6 @@
     <string name="email">Email</string>
     <string name="todo">TODO</string>
     <string name="forgetpass"><u>Forget Password?</u></string>
+
     <!-- app/src/main/res/values/strings.xml -->
 </resources>

@@ -14,6 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Write_diary" />
+        <activity android:name=".Show_Diary" />
+        <activity android:name=".Read_Diary" />
         <activity android:name=".Diary" />
         <activity android:name=".showTask" />
         <activity android:name=".Task" />
