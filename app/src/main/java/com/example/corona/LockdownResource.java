@@ -192,7 +192,7 @@ public class LockdownResource extends AppCompatActivity {
                 JSONArray Jtask = null;
                 String sid = "",stitle = "",sbody = "";
                 for (int i = 0; i < JA.length(); i++) {
-                    JSONObject obj = null;
+                    JSONObject obj   = null;
                     obj = (JSONObject) JA.get(i);
                     idstring += obj.get("thumbnail") + " ,";
                     mydata.add((String) obj.get("title"));

@@ -4,19 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     tools:context=".Read_Diary">
 
 
-    <Button
-        android:id="@+id/calendar_ID"
-        android:layout_width="128dp"
-        android:layout_height="60dp"
-        android:background="@drawable/btn_yellow"
-        android:text="Calendar"
-        android:textStyle="bold"
-
-        />
+    <ListView
+        android:id="@+id/diary_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#C0CDCD"
+        android:dividerHeight="1dp"
+        android:textColor="#000000" />
 
 </LinearLayout>

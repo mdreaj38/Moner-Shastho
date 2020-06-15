@@ -34,17 +34,16 @@
                 android:textSize="18dp"
                 />
             <EditText
-                android:id="@+id/situation_id"
+                android:id="@+id/ssituation_id"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:inputType="textMultiLine"
                 android:textColor="@color/cardview_dark_background"
                 android:padding="5dp"
                 android:maxLines="20"
+                android:enabled="false"
                 android:minLines="6"
                 android:gravity="top|left"
-                android:overScrollMode="always"
                 android:scrollbarStyle="insideInset"
                 android:scrollbars="vertical"
                 android:background="@drawable/write_edittext"
@@ -60,14 +59,18 @@
                 android:textSize="18dp"
                 />
             <EditText
-                android:id="@+id/emotions_id"
+                android:id="@+id/semotions_id"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:inputType="textMultiLine"
                 android:textColorHint="#0B0A0A"
+                android:textColor="@color/cardview_dark_background"
+
                 android:padding="5dp"
                 android:maxLines="20"
+
+                android:enabled="false"
                 android:minLines="6"
                 android:gravity="top|left"
                 android:overScrollMode="always"
@@ -86,14 +89,16 @@
                 android:textSize="18dp"
                 />
             <EditText
-                android:id="@+id/thoughts_id"
+                android:id="@+id/sthoughts_id"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:inputType="textMultiLine"
                 android:padding="5dp"
+                android:enabled="false"
                 android:maxLines="20"
                 android:minLines="6"
+                android:textColor="@color/cardview_dark_background"
                 android:gravity="top|left"
                 android:overScrollMode="always"
                 android:scrollbarStyle="insideInset"
@@ -110,14 +115,16 @@
                 android:textSize="18dp"
                 />
             <EditText
-                android:id="@+id/reacitons_id"
+                android:id="@+id/sreacitons_id"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:inputType="textMultiLine"
                 android:padding="5dp"
+                android:textColor="@color/cardview_dark_background"
                 android:lines="8"
                 android:maxLines="20"
+                android:enabled="false"
                 android:minLines="6"
                 android:gravity="top|left"
                 android:overScrollMode="always"
@@ -135,13 +142,15 @@
                 android:textSize="18dp"
                 />
             <EditText
-                android:id="@+id/behaviour_ID"
+                android:id="@+id/sbehaviour_ID"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:inputType="textMultiLine"
                 android:padding="5dp"
                 android:maxLines="20"
+                android:enabled="false"
+                android:textColor="@color/cardview_dark_background"
                 android:minLines="6"
                 android:gravity="top|left"
                 android:overScrollMode="always"
@@ -151,11 +160,11 @@
                 />
 
             <Button
-                android:id="@+id/done_id"
+                android:id="@+id/sdone_id"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btn_yellow"
+                android:background="@drawable/joinbtn"
                 android:text="Done"
                 android:layout_marginBottom="10dp"
                 android:textAllCaps="false" />

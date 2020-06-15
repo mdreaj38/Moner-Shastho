@@ -1,22 +1,53 @@
 package com.example.corona;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Objects;
+import java.util.concurrent.ExecutionException;
+
 public class Write_diary extends AppCompatActivity {
 
     private EditText situation_Edittext,emotions_EditText , reactions_Edittext,thoughts_editText, behaviour_Edittext;
     private Button done_id;
+    String situation,emotion,reaction,thought,behaviour;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_diary);
+
+
+        setTitle("Write your thought");
+        /*back button*/
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         situation_Edittext = (EditText) findViewById(R.id.situation_id);
         emotions_EditText = (EditText) findViewById(R.id.emotions_id);
@@ -24,12 +55,57 @@ public class Write_diary extends AppCompatActivity {
         reactions_Edittext=(EditText) findViewById(R.id.reacitons_id);
         behaviour_Edittext=(EditText) findViewById(R.id.behaviour_ID);
 
+
+
+
         done_id = (Button) findViewById(R.id.done_id);
 
         done_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                situation = situation_Edittext.getText().toString();
+                emotion = emotions_EditText.getText().toString();
+                thought = thoughts_editText.getText().toString();
+                reaction = reactions_Edittext.getText().toString();
+                behaviour = behaviour_Edittext.getText().toString();
+                int l = situation.length()+emotion.length()+thought.length()+reaction.length()+behaviour.length();
+                //Toast.makeText(Write_diary.this, Integer.toString(l), Toast.LENGTH_SHORT).show();
+
+                if(situation.length()==0) situation = "NA";
+                if(emotion.length()==0) emotion = "NA";
+                if(thought.length()==0) thought = "NA";
+                if(reaction.length()==0) reaction = "NA";
+                if(behaviour.length()==0) behaviour = "NA";
+                if(l==0){
+                    finish();
+                }
+                else{
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                String Id = pref.getString("id", "");
                 Toast.makeText(Write_diary.this, "Done", Toast.LENGTH_SHORT).show();
+                JSONObject res = new JSONObject();
+                try {
+
+                    res.put("user_id", Id);
+                    res.put("situation", situation);
+                    res.put("emotions", emotion);
+                    res.put("thoughts", thought);
+                    res.put("reactions", reaction);
+                    res.put("behaiviour", behaviour);
+
+                    new HttpPostRequest().execute("https://bad-blogger.herokuapp.com/users/profile/add-record/android",res.toString()).get();
+
+                    String res1 = res.toString();
+                    Log.e("Response", res1.toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                }
             }
         });
 
@@ -120,8 +196,76 @@ public class Write_diary extends AppCompatActivity {
             }
         });
 
-
-
-
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
+
+    public class HttpPostRequest extends AsyncTask<String, Void, Void> {
+        String verdict, message;
+        ProgressDialog progressDialog;
+        int statusCode;
+        StringBuilder sb = new StringBuilder();
+
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(Write_diary.this, "Wait...", "");
+
+        }
+
+        protected Void doInBackground(String... strings) {
+            HttpURLConnection urlConnection;
+            String url = strings[0];
+            String data = strings[1];
+            Log.e("dataaa",data);
+            String result = null;
+            try {
+
+                //Connect
+                urlConnection = (HttpURLConnection) ((new URL(url).openConnection()));
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Accept", "application/json");
+                urlConnection.setRequestMethod("POST");
+                urlConnection.connect();
+
+                //Write
+                OutputStream outputStream = urlConnection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                writer.write(data);
+                writer.close();
+                outputStream.close();
+
+                //Read
+                statusCode = urlConnection.getResponseCode();
+                Log.e("code", Integer.toString(statusCode));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+
+                String line = null;
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+                Log.e("dataaa",sb.toString());
+
+                bufferedReader.close();
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        protected void onPostExecute(Void code) {
+            progressDialog.dismiss();
+            /*Intent intent = new Intent(Write_diary.this, Diary.class);
+            startActivity(intent);*/
+            finish();
+            super.onPostExecute(code);
+        }
+    }
+
 }
