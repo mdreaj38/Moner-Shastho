@@ -71,6 +71,15 @@
             android:onClick="onRadioButtonClicked"
             android:text="Both"
             android:textSize="30sp" />
+        <RadioButton
+            android:id="@+id/radio_button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:freezesText="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="Both"
+            android:textSize="30sp" />
 
     </RadioGroup>
 

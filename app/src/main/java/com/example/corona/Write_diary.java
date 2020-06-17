@@ -1,6 +1,7 @@
 package com.example.corona;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -48,6 +49,26 @@ public class Write_diary extends AppCompatActivity {
         /*back button*/
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(Write_diary.this);
+        builder1.setMessage("Situation:Whats your current situtation of your mental health now?"+"\n\n"+"Emotions:Write down how you feel now"
+        +"\n\n"+"Thoughts:What are you thinking now?"+"\n\n"+"Reaction:How do you like to react now?"+"\n\n"+"Behaviour:What kind of behaviour do you have now?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Got it",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
 
         situation_Edittext = (EditText) findViewById(R.id.situation_id);
         emotions_EditText = (EditText) findViewById(R.id.emotions_id);

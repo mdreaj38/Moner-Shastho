@@ -36,8 +36,7 @@ public class MainScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        Intent intent = getIntent();
-        email = intent.getStringExtra("email");
+        email = getIntent().getStringExtra("email");
         //finding listview
         gridView = findViewById(R.id.gridview);
 
@@ -57,7 +56,7 @@ public class MainScreenActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainScreenActivity.this, LockDown.class);
                     startActivity(intent);
                 } else if (i == 1) {
-                    Intent intent = new Intent(MainScreenActivity.this, scored_ans_based_qstn.class);
+                    Intent intent = new Intent(MainScreenActivity.this, ques_ans_select_box.class);
                     startActivity(intent);
                 } else if (i == 2) {
                     Intent intent = new Intent(MainScreenActivity.this, chart_mental_stress.class);
@@ -151,59 +150,5 @@ public class MainScreenActivity extends AppCompatActivity {
 
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the main_menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (R.id.item1 == item.getItemId()) {
-            MyAlertDialog();
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
-
-        return true;
-    }
-
-    public void MyAlertDialog() {
-        final Dialog myDialog = new Dialog(this);
-        myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        myDialog.setContentView(R.layout.activity_demo_dialog);
-        myDialog.setTitle("App Demo");
-        imageView = findViewById(R.id.imageView);
-
-        Button skip = findViewById(R.id.skipp);
-        Button next = findViewById(R.id.nextt);
-
-        assert skip != null;
-
-
-        //skip.setEnabled(true);
-        //next.setEnabled(true);
-
-
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.cancel();
-            }
-        });
-
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (cnt > 5) myDialog.cancel();
-                imageView.setImageResource(OptionImage[cnt]);
-                cnt++;
-            }
-        });
-        myDialog.show();
-    }
-*/
 }
 
