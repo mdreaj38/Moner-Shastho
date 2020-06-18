@@ -6,9 +6,7 @@
         android:title="Next"
         android:id="@+id/item2"
         android:visible="true"
-        app:showAsAction="always"
-
-        >
+        app:showAsAction="always">
     </item>
     <item
         android:title="sfdghj"

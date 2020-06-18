@@ -54,8 +54,8 @@ public class showTask extends AppCompatActivity {
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
             {
-                String stress = Integer.toString(progress + 20);
-                text.setText(Html.fromHtml("<h3><font color='#008000'><b>"+stress+"</b></font></h3>"));
+                String stress = Integer.toString(progress);
+                text.setText(Html.fromHtml("<h3><font color='#008000'><b>"+stress+"/"+seek.getMax()+"</b></font></h3>"));
                 CurStress = stress;
             }
             public void onStartTrackingTouch(SeekBar seekBar) {}

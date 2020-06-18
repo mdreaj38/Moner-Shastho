@@ -3,7 +3,9 @@ package com.example.corona;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,6 +32,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class ques_ans_select_box extends AppCompatActivity {
@@ -40,9 +43,14 @@ public class ques_ans_select_box extends AppCompatActivity {
     public ArrayList<String> option2  = new ArrayList<String>();
     public ArrayList<String> option3  = new ArrayList<String>();
     public ArrayList<String> option4  = new ArrayList<String>();
+    public ArrayList<Integer> scale  = new ArrayList<Integer>();
+
     int[][] score = new int[150][150];
+    int cur_score=0,select=-1;
 
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,12 +76,6 @@ public class ques_ans_select_box extends AppCompatActivity {
         }
 
 
-        //set radiobutton options
-        button1.setText(option1.get(0));
-        button2.setText(option2.get(0));
-        button3.setText(option3.get(0));
-        button4.setText(option4.get(0));
-
 
         //set question
         String[] s = new String[100];
@@ -81,8 +83,14 @@ public class ques_ans_select_box extends AppCompatActivity {
             s[i] = Radio_Question.get(i);
         }
         List<String> stringArrayList = new ArrayList<>(Arrays.asList(s));
+
+        //set radiobutton options
+        button1.setText(option1.get(0));
+        button2.setText(option2.get(0));
+        button3.setText(option3.get(0));
+        button4.setText(option4.get(0));
         question.setText(s[0]);
-        i = 1;
+        i = 0;
         int len = Radio_Question.size();
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +101,10 @@ public class ques_ans_select_box extends AppCompatActivity {
                     View view1 = toast.getView();
                     view1.setBackgroundResource(R.color.colorAccent);
                     toast.show();
-                } else if(i<len){
+                }
+                else if(i<len-1){
+                    cur_score+= (scale.get(i) *score[i][select]);
+                    i += 1;
                     question.setText(stringArrayList.get(i));
                     radioGroup.clearCheck();
                     flag = 0;
@@ -103,14 +114,22 @@ public class ques_ans_select_box extends AppCompatActivity {
                     button2.setText(option2.get(i));
                     button3.setText(option3.get(i));
                     button4.setText(option4.get(i));
-                    Toast.makeText(ques_ans_select_box.this, "length" + stringArrayList.get(i%3), Toast.LENGTH_SHORT).show();
-                    i += 1;
-                    //startActivity(intent);
-                }else{
+                }
+                else if(i==len-1){
+                    cur_score+= (scale.get(i) *score[i][select]);
+                    pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    editor = Objects.requireNonNull(pref).edit();
+                    editor.putString("ques_score", String.valueOf(cur_score));
+                    editor.apply();
+
                     Intent intent = new Intent(ques_ans_select_box.this, qus_ans_slider.class);
                     intent.putExtra("q_id",ID);
                     startActivity(intent);
+
+                    //startActivity(intent);
                 }
+                Toast.makeText(ques_ans_select_box.this, Integer.toString(cur_score), Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -127,16 +146,25 @@ public class ques_ans_select_box extends AppCompatActivity {
                 str = "1";
                 flag = 1;
                 Toast.makeText(ques_ans_select_box.this, "checked 1!", Toast.LENGTH_SHORT).show();
+                select = 0;
             }
         } else if (id == R.id.radio_button2) {
             if (checked) {
                 str = "2";
                 flag = 1;
+                select = 1;
             }
         } else if (id == R.id.radio_button3) {
             if (checked) {
                 str = "3";
                 flag = 1;
+                select = 2;
+            }
+        }else if (id == R.id.radio_button4) {
+            if (checked) {
+                str = "4";
+                flag = 1;
+                select = 3;
             }
         }
     }
@@ -193,6 +221,7 @@ public class ques_ans_select_box extends AppCompatActivity {
                         Log.e("dataaa2", "Radio");
 
                         Radio_Question.add((String) obj.get("question"));
+                        scale.add(Integer.parseInt((String) obj.get("scale")));
 
                         JSONArray op = obj.getJSONArray("Options");
                         Log.e("dataaa2", String.valueOf(op.length()));
@@ -225,9 +254,7 @@ public class ques_ans_select_box extends AppCompatActivity {
                         Log.e("dataaa2", "Ranger");
 
                     }
-
                 }
-
 
             } catch (IOException | JSONException e) {
                 e.printStackTrace();

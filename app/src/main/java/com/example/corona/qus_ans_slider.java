@@ -3,9 +3,13 @@ package com.example.corona;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,14 +24,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class qus_ans_slider extends AppCompatActivity {
@@ -35,20 +43,34 @@ public class qus_ans_slider extends AppCompatActivity {
     public int i = 0;
     public ArrayList<String> Question  = new ArrayList<String>();
     public ArrayList<String> range  = new ArrayList<String>();
-    public ArrayList<String> Progress  = new ArrayList<String>();
+    public ArrayList<Integer> scale  = new ArrayList<Integer>();
+
     public String temp;
+
+    String User_Id,User_name,ques_ID;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
+    int cur_score=0,last_prog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qus_ans_slider);
 
-        String ID = getIntent().getStringExtra("q_id");
+         ques_ID = getIntent().getStringExtra("q_id");
+
+
+        pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String tt = pref.getString("ques_score", null);
+        User_Id = pref.getString("id",null);
+        User_name = pref.getString("name",null);
+        cur_score =Integer.parseInt(tt);
+
         try {
-            new HttpGetRequest().execute(ID).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+            new HttpGetRequest().execute(ques_ID).get();
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -62,7 +84,7 @@ public class qus_ans_slider extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 //Toast.makeText(getApplicationContext(), progress + "", Toast.LENGTH_SHORT).show();
 
-                value.setText("Range: " + progress + "/" + seekBar.getMax());
+                value.setText( progress + "/" + seekBar.getMax());
                 progress_value = Integer.toString(progress);
                 //store progress value in db
             }
@@ -72,8 +94,7 @@ public class qus_ans_slider extends AppCompatActivity {
             }
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                temp = progress_value;
-
+                last_prog = Integer.parseInt(progress_value);
             }
         });
 
@@ -84,24 +105,53 @@ public class qus_ans_slider extends AppCompatActivity {
         List<String> stringArrayList = new ArrayList<>(Arrays.asList(s));
         TextView question = findViewById(R.id.questionSlider);
         question.setText(stringArrayList.get(0));
-        i = 1;
+        seekBar.setMax(Integer.parseInt(range.get(0)));
+        i = 0;
         int len = Question.size();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(i<len){
+                if(i<len-1){
                     //Intent intent = new Intent(qus_ans_slider.this, qus_ans_slider.class);
+                    cur_score+=(scale.get(i)*last_prog);
                     question.setText(stringArrayList.get(i));
                     seekBar.setProgress(0);
+                    seekBar.setMax(Integer.parseInt(range.get(i)));
                     i += 1;
                 }
-                else {
-                    Intent intent = new Intent(qus_ans_slider.this, MainScreenActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    Toast.makeText(qus_ans_slider.this, "Last progress  " + temp, Toast.LENGTH_SHORT).show();
+                else if(i==len-1){
 
-                    // startActivity(intent);
-                    //finish();
+
+                    cur_score+=(scale.get(i)*last_prog);
+                    Toast.makeText(getApplicationContext(), String.valueOf( scale.get(i))+" "+String.valueOf(last_prog), Toast.LENGTH_SHORT).show();
+                    pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    editor = Objects.requireNonNull(pref).edit();
+                    editor.putString("ques_score", String.valueOf(cur_score));
+                    editor.apply();
+
+                    //make json object
+
+                    JSONObject res = new JSONObject();
+                    try {
+                        res.put("score", String.valueOf(cur_score));
+                        res.put("id", ques_ID);
+                        res.put("name", User_name);
+                        res.put("device", "android");
+                        res.put("user_id", User_Id);
+                        new HttpPostRequest().execute(res.toString()).get();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+
+                  /*  Intent intent = new Intent(qus_ans_slider.this, MainScreenActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();*/
                 }
 
             }
@@ -154,9 +204,13 @@ public class qus_ans_slider extends AppCompatActivity {
                 Log.e("dataaa2", String.valueOf(JA.length()));
 
                 for(int i=0;i<JA.length();++i){
+
                     JSONObject obj = (JSONObject) JA.get(i);
                     String type = (String) obj.get("inputType");
+
                     if(type.equals("ranger")){
+
+                        scale.add(Integer.parseInt((String) obj.get("scale")));
                         JSONObject cur = (JSONObject) JA.get(i);
                         JSONObject mx = cur.getJSONObject("ranger");
                         range.add((String) mx.get("max"));
@@ -177,6 +231,67 @@ public class qus_ans_slider extends AppCompatActivity {
             super.onPostExecute(aVoid);
         }
     }
+    public class HttpPostRequest extends AsyncTask<String, Void, Void> {
+        String verdict, message;
+        ProgressDialog progressDialog;
+        int statusCode;
+        StringBuilder sb = new StringBuilder();
+
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(qus_ans_slider.this, "Loading...", "");
+
+        }
+
+        protected Void doInBackground(String... strings) {
+            HttpURLConnection urlConnection;
+            String url =  "https://bad-blogger.herokuapp.com/app-admin/test/new";
+            String data = strings[0];
+            Log.e("code1",data);
+            String result = null;
+            try {
+                //Connect
+                urlConnection = (HttpURLConnection) ((new URL(url).openConnection()));
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Accept", "application/json");
+                urlConnection.setRequestMethod("POST");
+                urlConnection.connect();
+
+                //Write
+                OutputStream outputStream = urlConnection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                writer.write(data);
+                writer.close();
+                outputStream.close();
+
+                //Read
+                statusCode = urlConnection.getResponseCode();
+                Log.e("code1", Integer.toString(statusCode));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+
+                String line = null;
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                Log.e("code1", sb.toString());
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        protected void onPostExecute(Void code) {
+            progressDialog.dismiss();
+            super.onPostExecute(code);
+        }
+    }
+
 
 }
 

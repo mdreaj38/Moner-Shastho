@@ -2,10 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:title="Task"
+        android:id="@+id/act_item2"
+        android:visible="true"
+        app:showAsAction="always">
+    </item>
+    <item
         android:title="Activity"
         android:id="@+id/act_item1"
         android:visible="true"
-        android:icon="@drawable/buttonicon"
+        android:icon="@drawable/task_icon"
         app:showAsAction="ifRoom"
         >
     </item>
