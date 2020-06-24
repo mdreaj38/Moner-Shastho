@@ -53,7 +53,6 @@ public class qus_ans_slider extends AppCompatActivity {
 
     int cur_score=0,last_prog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,15 +67,33 @@ public class qus_ans_slider extends AppCompatActivity {
         User_name = pref.getString("name",null);
         cur_score =Integer.parseInt(tt);
 
-        try {
+          try {
             new HttpGetRequest().execute(ques_ID).get();
 
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
+        if(Question.size()==0){
+            JSONObject res = new JSONObject();
+            try {
+                res.put("score", String.valueOf(cur_score));
+                res.put("id", ques_ID);
+                res.put("name", User_name);
+                res.put("device", "android");
+                res.put("user_id", User_Id);
+                new HttpPostRequest().execute(res.toString()).get();
 
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
 
+        }
+        else {
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
         TextView value = findViewById(R.id.range);
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
@@ -122,8 +139,8 @@ public class qus_ans_slider extends AppCompatActivity {
                     seekBar.setMax(Integer.parseInt(range.get(i)));
                     i += 1;
                 }
-                else if(i==len-1){
-
+                else if(i==len-1)
+                {
 
                     cur_score+=(scale.get(i)*last_prog);
                     Toast.makeText(getApplicationContext(), String.valueOf( scale.get(i))+" "+String.valueOf(last_prog), Toast.LENGTH_SHORT).show();
@@ -132,7 +149,6 @@ public class qus_ans_slider extends AppCompatActivity {
                     editor.putString("ques_score", String.valueOf(cur_score));
                     editor.apply();
 
-                    //make json object
 
                     JSONObject res = new JSONObject();
                     try {
@@ -150,12 +166,14 @@ public class qus_ans_slider extends AppCompatActivity {
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
-
-
                 }
-
             }
         });
+        }
+
+
+
+
     }
     public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
@@ -211,14 +229,6 @@ public class qus_ans_slider extends AppCompatActivity {
                         range.add((String) mx.get("max"));
                         Question.add((String) obj.get("question"));
                     }
-                }
-
-                if (Question.size() == 0) {
-
-                    Intent intent = new Intent(qus_ans_slider.this, MainScreenActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
                 }
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
@@ -289,6 +299,10 @@ public class qus_ans_slider extends AppCompatActivity {
 
         protected void onPostExecute(Void code) {
             progressDialog.dismiss();
+            Intent intent = new Intent(qus_ans_slider.this, MainScreenActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
             super.onPostExecute(code);
         }
     }

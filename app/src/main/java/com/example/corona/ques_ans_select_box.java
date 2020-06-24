@@ -124,6 +124,7 @@ public class ques_ans_select_box extends AppCompatActivity {
 
                     Intent intent = new Intent(ques_ans_select_box.this, qus_ans_slider.class);
                     intent.putExtra("t_id",ID);
+                    Log.e("code1",ID);
 
                     startActivity(intent);
                     Toast.makeText(ques_ans_select_box.this, "LAst", Toast.LENGTH_SHORT).show();
