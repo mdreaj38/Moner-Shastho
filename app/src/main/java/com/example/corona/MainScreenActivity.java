@@ -56,7 +56,7 @@ public class MainScreenActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainScreenActivity.this, LockDown.class);
                     startActivity(intent);
                 } else if (i == 1) {
-                    Intent intent = new Intent(MainScreenActivity.this, ques_ans_select_box.class);
+                    Intent intent = new Intent(MainScreenActivity.this, TestList.class);
                     startActivity(intent);
                 } else if (i == 2) {
                     Intent intent = new Intent(MainScreenActivity.this, chart_mental_stress.class);

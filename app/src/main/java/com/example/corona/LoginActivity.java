@@ -30,6 +30,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
     public String email1, pass1;
@@ -129,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                     res.put("handle", "email");
                     res.put("email", email1);
                     res.put("password", pass1);
+
                     String res1 = res.toString();
                     Log.e("Response", res1.toString());
 
@@ -137,9 +139,15 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 HttpPostRequest httpPostRequest = new HttpPostRequest();
-                httpPostRequest.execute("https://bad-blogger.herokuapp.com/admin/login/android", res.toString());
+                try {
+                    httpPostRequest.execute("https://bad-blogger.herokuapp.com/admin/login/android", res.toString()).get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-                /*Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+              /*  Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                 intent.putExtra("email",email1);
                 startActivity(intent);*/
 
@@ -154,6 +162,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
     public class HttpPostRequest extends AsyncTask<String, Void, Void> {
         String verdict, message;
         ProgressDialog progressDialog;
@@ -166,6 +175,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         protected Void doInBackground(String... strings) {
+
+
             HttpURLConnection urlConnection;
             String url = strings[0];
             String data = strings[1];
@@ -216,6 +227,7 @@ public class LoginActivity extends AppCompatActivity {
             return null;
         }
 
+        
 
         protected void onPostExecute(Void code) {
             progressDialog.dismiss();
@@ -224,6 +236,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("login",sb.toString());
                 try {
                     JSONObject jb = new JSONObject(sb.toString());
+
                     JSONObject jc = jb.getJSONObject("user");
                     user_name = (String) jc.get("name");
                     ID = (String) jc.get("_id");

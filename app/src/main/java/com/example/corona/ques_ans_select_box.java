@@ -66,7 +66,7 @@ public class ques_ans_select_box extends AppCompatActivity {
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
 
 
-        String ID = "5ee8d2ea2c44dd0017edd2b3";
+        String ID = getIntent().getStringExtra("ID");
         try {
             new HttpGetRequest().execute(ID).get();
         } catch (ExecutionException e) {
@@ -91,8 +91,8 @@ public class ques_ans_select_box extends AppCompatActivity {
         button4.setText(option4.get(0));
         question.setText(s[0]);
         i = 0;
-        int len = Radio_Question.size();
-
+//        int len = Radio_Question.size();
+        int len = 2;
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,9 +123,10 @@ public class ques_ans_select_box extends AppCompatActivity {
                     editor.apply();
 
                     Intent intent = new Intent(ques_ans_select_box.this, qus_ans_slider.class);
-                    intent.putExtra("q_id",ID);
-                    startActivity(intent);
+                    intent.putExtra("t_id",ID);
 
+                    startActivity(intent);
+                    Toast.makeText(ques_ans_select_box.this, "LAst", Toast.LENGTH_SHORT).show();
                     //startActivity(intent);
                 }
                 Toast.makeText(ques_ans_select_box.this, Integer.toString(cur_score), Toast.LENGTH_SHORT).show();
@@ -187,7 +188,6 @@ public class ques_ans_select_box extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                String st = strings[0];
                 URL url = new URL("https://bad-blogger.herokuapp.com/app-admin/single-test/"+strings[0]+"?device=android");
                 Log.e("Check", url.toString());
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -210,44 +210,39 @@ public class ques_ans_select_box extends AppCompatActivity {
                 JSONObject jo = new JSONObject(data);
                 jo = jo.getJSONObject("data");
                 JSONArray JA = jo.getJSONArray("questionSet");
-
-                Log.e("dataaa2", jo.toString());
+                int ll = JA.length();
+                Log.e("dataaa2->", String.valueOf(ll));
                 Log.e("dataaa2", String.valueOf(JA.length()));
-
+                int c = 0;
                 for(int i=0;i<JA.length();++i){
                     JSONObject obj = (JSONObject) JA.get(i);
                     String type = (String) obj.get("inputType");
                     if(type.equals("radio")){
+                        c++;
                         Log.e("dataaa2", "Radio");
 
                         Radio_Question.add((String) obj.get("question"));
                         scale.add(Integer.parseInt((String) obj.get("scale")));
 
                         JSONArray op = obj.getJSONArray("Options");
-                        Log.e("dataaa2", String.valueOf(op.length()));
-
 
 
                         JSONObject cur = (JSONObject) op.get(0);
                         option1.add((String) cur.get("option"));
                         score[i][0] = Integer.parseInt((String) cur.get("scale"));
-                        Log.e("dataaa21", (String) cur.get("option"));
 
                         cur = (JSONObject) op.get(1);
                         option2.add((String) cur.get("option"));
                         score[i][1] = Integer.parseInt((String) cur.get("scale"));
-                        Log.e("dataaa22", (String) cur.get("option"));
 
                         cur = (JSONObject) op.get(2);
                         option3.add((String) cur.get("option"));
                         score[i][2] = Integer.parseInt((String) cur.get("scale"));
-                        Log.e("dataaa23", (String) cur.get("option"));
 
 
                         cur = (JSONObject) op.get(3);
                         option4.add((String) cur.get("option"));
                         score[i][3] = Integer.parseInt((String) cur.get("scale"));
-                        Log.e("dataaa24", (String) cur.get("option"));
 
                     }
                     else {
@@ -255,6 +250,7 @@ public class ques_ans_select_box extends AppCompatActivity {
 
                     }
                 }
+                Log.e("dataaa2->", String.valueOf(c));
 
             } catch (IOException | JSONException e) {
                 e.printStackTrace();

@@ -59,8 +59,8 @@ public class qus_ans_slider extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qus_ans_slider);
 
-         ques_ID = getIntent().getStringExtra("q_id");
-
+         ques_ID = getIntent().getStringExtra("t_id");
+        Log.e("ccheck", ques_ID);
 
         pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String tt = pref.getString("ques_score", null);
@@ -70,9 +70,12 @@ public class qus_ans_slider extends AppCompatActivity {
 
         try {
             new HttpGetRequest().execute(ques_ID).get();
+
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+
+
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
         TextView value = findViewById(R.id.range);
@@ -148,15 +151,11 @@ public class qus_ans_slider extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                  /*  Intent intent = new Intent(qus_ans_slider.this, MainScreenActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();*/
+
                 }
 
             }
         });
-
     }
     public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
@@ -170,7 +169,7 @@ public class qus_ans_slider extends AppCompatActivity {
         ProgressDialog progressDialog;
 
         protected void onPreExecute() {
-            // progressDialog = ProgressDialog.show(Read_Diary.this, "", "Loading...");
+            progressDialog = ProgressDialog.show(qus_ans_slider.this, "", "Loading...");
         }
 
         @Override
@@ -194,14 +193,10 @@ public class qus_ans_slider extends AppCompatActivity {
                     line = bufferedReader.readLine();
                     data = data + line;
                 }
-                Log.e("dataaa1", data.toString());
 
                 JSONObject jo = new JSONObject(data);
                 jo = jo.getJSONObject("data");
                 JSONArray JA = jo.getJSONArray("questionSet");
-
-                Log.e("dataaa2", jo.toString());
-                Log.e("dataaa2", String.valueOf(JA.length()));
 
                 for(int i=0;i<JA.length();++i){
 
@@ -218,7 +213,13 @@ public class qus_ans_slider extends AppCompatActivity {
                     }
                 }
 
+                if (Question.size() == 0) {
 
+                    Intent intent = new Intent(qus_ans_slider.this, MainScreenActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                }
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
@@ -227,7 +228,7 @@ public class qus_ans_slider extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String aVoid) {
-            //  progressDialog.cancel();
+             progressDialog.cancel();
             super.onPostExecute(aVoid);
         }
     }
