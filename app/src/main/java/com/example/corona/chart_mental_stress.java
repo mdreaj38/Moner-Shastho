@@ -1,11 +1,15 @@
 package com.example.corona;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -24,23 +28,47 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class chart_mental_stress extends AppCompatActivity {
     private LineChart mChart, mChart1;
     SharedPreferences mypref;
     SharedPreferences.Editor editor;
     String UserId;
+    public ArrayList<String> test_score = new ArrayList<String>();
+    String User_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
-
+    //shared preference
+        SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        User_id = pref.getString("id", null);
         setTitle("Track Record");
         /*back button*/
         mypref = getApplicationContext().getSharedPreferences("MyPref",0);
         UserId = mypref.getString("id",null);
+
+        try {
+            new HttpGetRequest().execute(User_id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -116,7 +144,7 @@ public class chart_mental_stress extends AppCompatActivity {
         leftAxis.removeAllLimitLines();
 
         leftAxis.setAxisMaximum(100f);
-        leftAxis.setAxisMinimum(-100f);
+        leftAxis.setAxisMinimum(0f);
         leftAxis.enableGridDashedLine(10f, 5f, 0f);
         leftAxis.setDrawZeroLine(false);
          leftAxis.setDrawLimitLinesBehindData(false);
@@ -140,12 +168,20 @@ public class chart_mental_stress extends AppCompatActivity {
     private void setData() {
 
         ArrayList<Entry> values = new ArrayList<>();
-        values.add(new Entry(1, 50));
+        for(int i=0;i<test_score.size();++i){
+            String cur = test_score.get(i);
+            values.add(new Entry(i+1, (float) Double.parseDouble(cur)));
+        }
+        for(int i = test_score.size();i<7;++i){
+            values.add(new Entry(i+1,0));
+        }
+
+       /* values.add(new Entry(1, 50));
         values.add(new Entry(2, 60));
         values.add(new Entry(3, -70));
         values.add(new Entry(4, 0));
         values.add(new Entry(5, 0));
-        values.add(new Entry(7, 0));
+        values.add(new Entry(7, 0));*/
 
 
         LineDataSet set1;
@@ -229,5 +265,62 @@ public class chart_mental_stress extends AppCompatActivity {
             mChart1.setData(data);
         }
     }
+    public class HttpGetRequest extends AsyncTask<String, Void, String> {
+
+        public static final String REQUEST_METHOD = "GET";
+        public static final int READ_TIMEOUT = 15000;
+        public static final int CONNECTION_TIMEOUT = 15000;
+        String data = "";
+        String singleParsed = "";
+        String dataParsed = "";
+        JSONObject real_data;
+        ProgressDialog progressDialog;
+
+        protected void onPreExecute() {
+             progressDialog = ProgressDialog.show(chart_mental_stress.this, "", "Loading...");
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                URL url = new URL("https://bad-blogger.herokuapp.com/app-admin/tests/getScores/"+strings[0]);
+                Log.e("Check", url.toString());
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                //Set method
+                httpURLConnection.setRequestMethod("GET");
+                httpURLConnection.connect();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+
+                Log.e("Check", url.toString());
+
+                while (line != null) {
+                    line = bufferedReader.readLine();
+                    data = data + line;
+                }
+                JSONObject jo = new JSONObject(data);
+                JSONArray JA = jo.getJSONArray("scores");
+                for(int i=0;i<JA.length();++i){
+                    //test_score.add((String) JA.get(i));
+                    String cur = String.valueOf(JA.get(i));
+                    test_score.add(cur);
+                }
+                Log.e("dataaa1", String.valueOf(test_score.size()));
+
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(String aVoid) {
+             progressDialog.cancel();
+            super.onPostExecute(aVoid);
+        }
+    }
+
 
 }

@@ -66,6 +66,7 @@
             android:layout_height="wrap_content"
             android:autofillHints="textPassword"
             android:ems="10"
+            android:gravity="center"
             android:inputType="text"
             android:textColorHint="@color/colorPrimaryDark" />
 
