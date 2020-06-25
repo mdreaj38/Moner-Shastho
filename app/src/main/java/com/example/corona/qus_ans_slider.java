@@ -42,6 +42,7 @@ public class qus_ans_slider extends AppCompatActivity {
     public String progress_value;
     public int i = 0;
     public ArrayList<String> Question  = new ArrayList<String>();
+    String title="";
     public ArrayList<String> range  = new ArrayList<String>();
     public ArrayList<Integer> scale  = new ArrayList<Integer>();
 
@@ -154,7 +155,7 @@ public class qus_ans_slider extends AppCompatActivity {
                     try {
                         res.put("score", String.valueOf(cur_score));
                         res.put("id", ques_ID);
-                        res.put("name", User_name);
+                        res.put("name", title);
                         res.put("device", "android");
                         res.put("user_id", User_Id);
                         new HttpPostRequest().execute(res.toString()).get();
@@ -214,6 +215,7 @@ public class qus_ans_slider extends AppCompatActivity {
 
                 JSONObject jo = new JSONObject(data);
                 jo = jo.getJSONObject("data");
+                title = (String) jo.get("title");
                 JSONArray JA = jo.getJSONArray("questionSet");
 
                 for(int i=0;i<JA.length();++i){

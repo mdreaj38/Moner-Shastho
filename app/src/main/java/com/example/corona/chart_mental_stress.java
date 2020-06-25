@@ -1,6 +1,7 @@
 package com.example.corona;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.drawable.Drawable;
@@ -28,7 +29,9 @@ import java.util.Objects;
 
 public class chart_mental_stress extends AppCompatActivity {
     private LineChart mChart, mChart1;
-
+    SharedPreferences mypref;
+    SharedPreferences.Editor editor;
+    String UserId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,9 @@ public class chart_mental_stress extends AppCompatActivity {
 
         setTitle("Track Record");
         /*back button*/
+        mypref = getApplicationContext().getSharedPreferences("MyPref",0);
+        UserId = mypref.getString("id",null);
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mChart = findViewById(R.id.chart);
@@ -47,6 +53,7 @@ public class chart_mental_stress extends AppCompatActivity {
         mChart1 = findViewById(R.id.chart1);
         mChart1.setTouchEnabled(true);
         mChart1.setPinchZoom(true);
+
         MyMarkerView mv1 = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
         mv1.setChartView(mChart1);
         mChart1.setMarker(mv1);
@@ -83,14 +90,14 @@ public class chart_mental_stress extends AppCompatActivity {
 
         XAxis xAxis = mChart.getXAxis();
         xAxis.enableGridDashedLine(10f, 5f, 0f);
-        xAxis.setAxisMaximum(10f);
-        xAxis.setAxisMinimum(0f);
+       /* xAxis.setAxisMaximum(10f);
+        xAxis.setAxisMinimum(0f);*/
         xAxis.setDrawLimitLinesBehindData(true);
 
         XAxis xAxis1 = mChart1.getXAxis();
         xAxis1.enableGridDashedLine(10f, 5f, 0f);
-        xAxis1.setAxisMaximum(10f);
-        xAxis1.setAxisMinimum(0f);
+        /*xAxis1.setAxisMaximum(10f);
+        xAxis1.setAxisMinimum(0f);*/
         xAxis1.setDrawLimitLinesBehindData(true);
 
         LimitLine ll1 = new LimitLine(80f, "Maximum Limit");
@@ -107,20 +114,18 @@ public class chart_mental_stress extends AppCompatActivity {
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.removeAllLimitLines();
-        leftAxis.addLimitLine(ll1);
-        leftAxis.addLimitLine(ll2);
+
         leftAxis.setAxisMaximum(100f);
-        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMinimum(-100f);
         leftAxis.enableGridDashedLine(10f, 5f, 0f);
         leftAxis.setDrawZeroLine(false);
-        leftAxis.setDrawLimitLinesBehindData(false);
+         leftAxis.setDrawLimitLinesBehindData(false);
 
         YAxis leftAxis1 = mChart1.getAxisLeft();
         leftAxis1.removeAllLimitLines();
-        leftAxis1.addLimitLine(ll1);
-        leftAxis1.addLimitLine(ll2);
+
         leftAxis1.setAxisMaximum(100f);
-        leftAxis1.setAxisMinimum(0f);
+        leftAxis1.setAxisMinimum(-100f);
         leftAxis1.enableGridDashedLine(10f, 5f, 0f);
         leftAxis1.setDrawZeroLine(false);
         leftAxis1.setDrawLimitLinesBehindData(false);
@@ -137,10 +142,10 @@ public class chart_mental_stress extends AppCompatActivity {
         ArrayList<Entry> values = new ArrayList<>();
         values.add(new Entry(1, 50));
         values.add(new Entry(2, 60));
-        values.add(new Entry(3, 70));
-        values.add(new Entry(4, 80));
-        values.add(new Entry(5, 90));
-        values.add(new Entry(7, 100));
+        values.add(new Entry(3, -70));
+        values.add(new Entry(4, 0));
+        values.add(new Entry(5, 0));
+        values.add(new Entry(7, 0));
 
 
         LineDataSet set1;
@@ -156,7 +161,7 @@ public class chart_mental_stress extends AppCompatActivity {
             set1.enableDashedLine(10f, 5f, 0f);
             set1.enableDashedHighlightLine(10f, 5f, 0f);
             set1.setColor(Color.DKGRAY);
-            set1.setCircleColor(Color.DKGRAY);
+            set1.setCircleColor(Color.RED);
             set1.setLineWidth(1f);
             set1.setCircleRadius(3f);
             set1.setDrawCircleHole(false);
@@ -191,8 +196,7 @@ public class chart_mental_stress extends AppCompatActivity {
 
 
         LineDataSet set1;
-        if (mChart1.getData() != null &&
-                mChart1.getData().getDataSetCount() > 0) {
+        if (mChart1.getData() != null && mChart1.getData().getDataSetCount() > 0) {
             set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
             set1.setValues(values1);
             mChart1.getData().notifyDataChanged();
@@ -203,7 +207,7 @@ public class chart_mental_stress extends AppCompatActivity {
             set1.enableDashedLine(10f, 5f, 0f);
             set1.enableDashedHighlightLine(10f, 5f, 0f);
             set1.setColor(Color.DKGRAY);
-            set1.setCircleColor(Color.DKGRAY);
+             set1.setCircleColor(Color.RED);
             set1.setLineWidth(1f);
             set1.setCircleRadius(3f);
             set1.setDrawCircleHole(false);
