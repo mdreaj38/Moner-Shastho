@@ -21,7 +21,7 @@ public class profile_expert_user extends AppCompatActivity {
     EditText designation;
     EditText organization,license;
     String Pass;
-    String string_email, string_username, string_phoneNo, string_designation, string_organization,string_license;
+    String string_email, string_username, string_phoneNo, string_designation, string_organization,string_license,string_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,6 @@ public class profile_expert_user extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
 
 
         email = findViewById(R.id.expert_email);
@@ -44,6 +43,7 @@ public class profile_expert_user extends AppCompatActivity {
         pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String eemail = pref.getString("email", null);
         String t_name = pref.getString("name", null);
+        string_id = pref.getString("id",null);
         Pass = pref.getString("password",null);
         username.setText(t_name);
         email.setText(eemail);
@@ -51,7 +51,6 @@ public class profile_expert_user extends AppCompatActivity {
 
 
         pref = getSharedPreferences("MyPrefExpert", Context.MODE_PRIVATE);
-
 
 
     }
@@ -76,6 +75,7 @@ public class profile_expert_user extends AppCompatActivity {
             //insert data to db
             editor = Objects.requireNonNull(pref).edit();
             editor.putString("email", string_email);
+            editor.putString("id",string_id);
             editor.putString("name", string_username);
             editor.putString("phoneNo", string_phoneNo);
             editor.putString("license",string_license);
