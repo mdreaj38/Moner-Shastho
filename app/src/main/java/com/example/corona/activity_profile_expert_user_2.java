@@ -38,7 +38,6 @@ public class activity_profile_expert_user_2 extends AppCompatActivity {
     Button update;
     String string_institute, string_license, string_hdegree, string_field, string_country, string_city,string_password;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,10 +80,10 @@ public class activity_profile_expert_user_2 extends AppCompatActivity {
                 string_country = country.getText().toString();
                 string_city = city.getText().toString();
                 String temp = Epassword.getText().toString();
-                Log.e("kop","ok");
+                /*Log.e("kop","ok");
                 Log.e("kop","ok3"+password);
 
-                Log.e("kop",temp+" <> "+password);
+                Log.e("kop",temp+" <> "+password);*/
                 if(temp.equals(password)){
                     //update database here
                     //1.make json object
@@ -111,7 +110,7 @@ public class activity_profile_expert_user_2 extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    String url = "http://bad-blogger.herokuapp.com/users/update-expert-profile";
+                    String url = "https://bad-blogger.herokuapp.com/users/update-expert-profile";
                     try{
                         new HttpPostRequest().execute(url,object.toString()).get();
                     }
@@ -156,7 +155,7 @@ public class activity_profile_expert_user_2 extends AppCompatActivity {
         StringBuilder sb = new StringBuilder();
 
         protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(activity_profile_expert_user_2.this, "Login...", "Wait");
+            progressDialog = ProgressDialog.show(activity_profile_expert_user_2.this, "", "Wait");
 
         }
 
@@ -192,18 +191,8 @@ public class activity_profile_expert_user_2 extends AppCompatActivity {
                 while ((line = bufferedReader.readLine()) != null) {
                     sb.append(line);
                 }
-
                 bufferedReader.close();
-                Log.e("Response23", Integer.toString(statusCode));
-                Log.e("Response23", data);
-                Log.e("Response23", sb.toString());
 
-                //////////////////////test
-                /*JSONObject reader = new JSONObject(sb.toString());
-                verdict = reader.getString("status");
-                message = reader.getString("msg");
-                Log.e("Response2(msg)", message);*/
-                //////////////test
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -221,8 +210,8 @@ public class activity_profile_expert_user_2 extends AppCompatActivity {
             editor.apply();
 
             Intent intent = new Intent(activity_profile_expert_user_2.this, MainScreenActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            // Toast.makeText((LoginActivity.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
             super.onPostExecute(code);
         }
     }
