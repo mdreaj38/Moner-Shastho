@@ -75,18 +75,8 @@ public class update_profile_page_4 extends AppCompatActivity {
 
         stringChildAbuse = pref.getString("childAbuse", "");
         assert stringChildAbuse != null;
-//        if (stringChildAbuse.equals("yes")) {
         stringChildAbuse+=" "+pref.getString("childAbuseDetails", "");
-        //  }
 
-
-        /*Log.d("Pref", email);
-        Log.d("Pref", age);
-    //    Log.d("Pref", gender);
-        Log.d("Pref", maritalStatus);
-*/
-        /*Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);*/
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -187,9 +177,7 @@ public class update_profile_page_4 extends AppCompatActivity {
                 two.setChecked(false);
 
                 abuse = "no";
-                Toast.makeText(getApplicationContext(), "Male checked", Toast.LENGTH_SHORT).show();
-                // do something like update database
-            }
+             }
         } else if (id == R.id.yes_abusee) {
             if (checked) {
                 one.setChecked(false);
@@ -198,26 +186,20 @@ public class update_profile_page_4 extends AppCompatActivity {
                 abuse = "yes.";
                 EditText t = findViewById(R.id.abuseg);
                 abuse+= t.getText().toString();
-                //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+              }
         } else if (id == R.id.no_disorderr) {
             if (checked) {
                 three.setChecked(true);
                 four.setChecked(false);
                 disorder = "no";
-                //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+              }
 
         } else if (id == R.id.yes_disorderr) {
             if (checked) {
                 three.setChecked(false);
                 four.setChecked(true);
                 disorder = "yes";
-                //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+              }
         }
     }
     public class HttpPostRequest extends AsyncTask<String, Void, Void> {
@@ -269,12 +251,6 @@ public class update_profile_page_4 extends AppCompatActivity {
                 Log.e("Response23", data);
                 Log.e("Response23", sb.toString());
 
-                //////////////////////test
-                /*JSONObject reader = new JSONObject(sb.toString());
-                verdict = reader.getString("status");
-                message = reader.getString("msg");
-                Log.e("Response2(msg)", message);*/
-                //////////////test
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -293,7 +269,6 @@ public class update_profile_page_4 extends AppCompatActivity {
 
             Intent intent = new Intent(update_profile_page_4.this, MainScreenActivity.class);
             startActivity(intent);
-            // Toast.makeText((LoginActivity.this), "Successfully Regstered", Toast.LENGTH_SHORT).show();
             super.onPostExecute(code);
         }
     }

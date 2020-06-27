@@ -80,8 +80,7 @@ public class update_profile_page_3 extends AppCompatActivity {
 
 
             startActivity(intent);
-            Toast.makeText(this, "Tapped on icon", Toast.LENGTH_SHORT).show();
-            return true;
+             return true;
         }
         if (item.getItemId() == android.R.id.home) {
             this.finish();
@@ -107,8 +106,7 @@ public class update_profile_page_3 extends AppCompatActivity {
                 three.setChecked(true);
                 four.setChecked(false);
                 stringRelationshipPrb = "no";
-                Toast.makeText(getApplicationContext(), "Male checked", Toast.LENGTH_SHORT).show();
-                // do something like update database
+                 // do something like update database
             }
         } else if (id == R.id.yes_relation_prb) {
             if (checked) {
@@ -118,8 +116,7 @@ public class update_profile_page_3 extends AppCompatActivity {
 
                 stringRelationshipPrb = "yes";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.no_abuse) {
             if (checked) {
                 one.setChecked(true);
@@ -127,8 +124,7 @@ public class update_profile_page_3 extends AppCompatActivity {
 
                 stringChildAbuse = "no";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
 
         } else if (id == R.id.yes_abuse) {
             if (checked) {
@@ -138,8 +134,7 @@ public class update_profile_page_3 extends AppCompatActivity {
                 EditText editText = findViewById(R.id.abuse_details);
                 stringChildAbuse = "yes";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), stringChildAbuse, Toast.LENGTH_SHORT).show();
-            }
+             }
 
         }
 

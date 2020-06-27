@@ -253,6 +253,7 @@ public class LoginActivity extends AppCompatActivity {
                 editor = Objects.requireNonNull(pref).edit();
                 editor.putString("name", user_name);
                 editor.putString("email", string_email_login);
+                editor.putString("CurStress","0");
                 editor.putString("password",pass1);
                 editor.putString("gender", _gender);
                 editor.putString("id",ID);

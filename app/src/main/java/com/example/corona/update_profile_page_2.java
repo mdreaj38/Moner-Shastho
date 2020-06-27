@@ -78,8 +78,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
 
             startActivity(intent);
-            Toast.makeText(this, "Tapped on icon", Toast.LENGTH_SHORT).show();
-            return true;
+             return true;
         }
         if (item.getItemId() == android.R.id.home) {
             this.finish();
@@ -131,8 +130,7 @@ public class update_profile_page_2 extends AppCompatActivity {
                 Uptofive.setChecked(false);
 
                 education = "illiterate";
-                Toast.makeText(getApplicationContext(), "Male checked", Toast.LENGTH_SHORT).show();
-                // do something like update database
+                 // do something like update database
             }
         } else if (id == R.id.upto_class_five) {
 
@@ -147,8 +145,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 education = "upto_class_five";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.ssc) {
             if (checked) {
 
@@ -161,8 +158,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 education = "ssc";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
 
         } else if (id == R.id.hsc) {
             if (checked) {
@@ -175,8 +171,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 education = "hsc";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.graduate) {
             if (checked) {
                 Illiterate.setChecked(false);
@@ -188,8 +183,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 education = "graduate";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.post_gradute) {
             if (checked) {
                 Illiterate.setChecked(false);
@@ -201,8 +195,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 education = "postGraduate";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.others) {
             if (checked) {
                 St.setChecked(false);
@@ -216,8 +209,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 occupation = "others";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.teachers) {
             if (checked) {
                 St.setChecked(false);
@@ -231,8 +223,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 occupation = "teachers";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.farmer) {
             if (checked) {
                 St.setChecked(false);
@@ -246,8 +237,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 occupation = "farmer";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.service) {
             if (checked) {
                 St.setChecked(false);
@@ -261,8 +251,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 occupation = "service";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.unemployed) {
             if (checked) {
                 St.setChecked(false);
@@ -276,8 +265,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 occupation = "unemployed";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.student) {
             if (checked) {
                 St.setChecked(true);
@@ -291,8 +279,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 occupation = "student";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.businessman) {
             if (checked) {
                 St.setChecked(false);
@@ -306,8 +293,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 occupation = "businessman";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.housewife) {
             if (checked) {
                 St.setChecked(false);
@@ -321,8 +307,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 occupation = "housewife";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.nuclear) {
             if (checked) {
 
@@ -331,8 +316,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 familyType = "nuclear";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.joint) {
             if (checked) {
                 nuc.setChecked(false);
@@ -340,8 +324,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 familyType = "joint";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.no_illness) {
             if (checked) {
 
@@ -350,8 +333,7 @@ public class update_profile_page_2 extends AppCompatActivity {
 
                 mentalIllness = "No";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.yes_illness) {
             if (checked) {
                 fn.setChecked(false);
@@ -360,8 +342,7 @@ public class update_profile_page_2 extends AppCompatActivity {
                 mentalIllness = "Yes";
 
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
         }
 
 

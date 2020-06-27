@@ -123,8 +123,7 @@ public class ExpertReg extends AppCompatActivity {
                 radioButton = (RadioButton) findViewById(selectedId);
                 if (selectedId != -1) {
                     GenderString = (String) radioButton.getText();
-                    Toast.makeText(ExpertReg.this, GenderString, Toast.LENGTH_SHORT).show();
-                }
+                 }
 
                 if (flag == 0 || selectedId == -1) {
                     Toast.makeText((ExpertReg.this), "You have to enter all the field", Toast.LENGTH_SHORT).show();

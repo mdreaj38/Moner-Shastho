@@ -1,6 +1,8 @@
 package com.example.corona;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,17 +26,23 @@ public class LockDown extends AppCompatActivity {
     String[] Options = {"Manage Stress", "Keep Connected", "Relaxation", "Mindfulness"};
     int[] OptionImage = {R.drawable.stress_mng, R.drawable.connect, R.drawable.relax, R.drawable.mind};
     int cnt = 0;
-
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_down);
         gridView = findViewById(R.id.gridview);
         ImageView imageView = findViewById(R.id.sleep);
+        pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        editor = Objects.requireNonNull(pref).edit();
+       // editor.putString("name", user_name);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LockDown.this, LockdownResource.class);
+                editor.putString("Tag", "Sleep");
+                editor.apply();
                 intent.putExtra("CAT", "Sleep");
                 startActivity(intent);
 
@@ -49,6 +57,9 @@ public class LockDown extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent next = new Intent(LockDown.this, LockdownResource.class);
+                editor.putString("Tag",Options[i]);
+                editor.apply();
+
                 next.putExtra("CAT", Options[i]);
                 startActivity(next);
             }

@@ -71,24 +71,23 @@ public class showTask extends AppCompatActivity {
             public void onClick(DialogInterface dialog,int id)
             {
                 pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                String avgstress = pref.getString("AvgStress",null);
-                String cnt = pref.getString("count",null);
-                int avg = Integer.parseInt(avgstress);
+                String current_stress = pref.getString("CurStress","0");
+                String pre_stress  = pref.getString("PreStress","0");
+                String cnt = pref.getString("count","0");
+              //  int avg = Integer.parseInt(avgstress);
                 int c = Integer.parseInt(cnt);
-                int cur = (Integer.parseInt(CurStress)*100)/120;
-                avg = (avg*c)+cur;
-                c++;
-                avg = (avg)/c;
-                Log.e("this",CurStress);
-                avgstress = Integer.toString(avg);
-                cnt = Integer.toString(c);
+                int now_stress = (Integer.parseInt(CurStress)*100)/120;
+                int p_stress  = Integer.parseInt(pre_stress);
+                int diff  = now_stress-p_stress;
+
+                now_stress = (diff+(Integer.parseInt(current_stress)))/2;
 
                 pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-               editor = Objects.requireNonNull(pref).edit();
+                editor = Objects.requireNonNull(pref).edit();
                 editor.putString("count",cnt);
-                editor.putString("AvgStress",avgstress);
+                editor.putString("CurStress", Integer.toString(now_stress));
                 editor.apply();
-                Toast.makeText(getApplicationContext(),Integer.toString(avg),Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(),Integer.toString(avg),Toast.LENGTH_LONG).show();
                 finish();
             }
         });

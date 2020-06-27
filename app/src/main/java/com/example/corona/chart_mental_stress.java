@@ -47,7 +47,9 @@ public class chart_mental_stress extends AppCompatActivity {
     SharedPreferences mypref;
     SharedPreferences.Editor editor;
     String UserId;
-    public ArrayList<String> test_score = new ArrayList<String>();
+    public ArrayList<String> test_score = new ArrayList<String>(); // graph - 1
+    public ArrayList<String> task_score = new ArrayList<String>(); // graph - 1
+
     String User_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +64,9 @@ public class chart_mental_stress extends AppCompatActivity {
         UserId = mypref.getString("id",null);
 
         try {
-            new HttpGetRequest().execute(User_id).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+            new HttpGetRequest().execute(User_id).get(); // graph 1
+            new HttpGetRequest2().execute(User_id).get();// graph 2
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -224,11 +225,13 @@ public class chart_mental_stress extends AppCompatActivity {
 
         ArrayList<Entry> values1 = new ArrayList<>();
         values1.add(new Entry(1, 50));
-        values1.add(new Entry(2, 60));
-        values1.add(new Entry(3, 70));
-        values1.add(new Entry(4, 80));
-        values1.add(new Entry(5, 90));
-        values1.add(new Entry(7, 100));
+        for(int i=0;i<task_score.size();++i){
+            String cur = test_score.get(i);
+            values1.add(new Entry(i+1, (float) Double.parseDouble(cur)));
+        }
+        for(int i = task_score.size();i<7;++i){
+            values1.add(new Entry(i+1,0));
+        }
 
 
         LineDataSet set1;
@@ -265,6 +268,8 @@ public class chart_mental_stress extends AppCompatActivity {
             mChart1.setData(data);
         }
     }
+
+    //graph 1
     public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
         public static final String REQUEST_METHOD = "GET";
@@ -321,6 +326,65 @@ public class chart_mental_stress extends AppCompatActivity {
             super.onPostExecute(aVoid);
         }
     }
+
+    //graph 2
+    public class HttpGetRequest2 extends AsyncTask<String, Void, String> {
+
+        public static final String REQUEST_METHOD = "GET";
+        public static final int READ_TIMEOUT = 15000;
+        public static final int CONNECTION_TIMEOUT = 15000;
+        String data = "";
+        String singleParsed = "";
+        String dataParsed = "";
+        JSONObject real_data;
+        ProgressDialog progressDialog;
+
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(chart_mental_stress.this, "", "Loading...");
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                URL url = new URL("https://bad-blogger.herokuapp.com/users/materials/getScores/"+strings[0]);
+                Log.e("Check", url.toString());
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                //Set method
+                httpURLConnection.setRequestMethod("GET");
+                httpURLConnection.connect();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+
+                Log.e("Check", url.toString());
+
+                while (line != null) {
+                    line = bufferedReader.readLine();
+                    data = data + line;
+                }
+                JSONObject jo = new JSONObject(data);
+                JSONArray JA = jo.getJSONArray("scores");
+                for(int i=0;i<JA.length();++i){
+                    //test_score.add((String) JA.get(i));
+                    String cur = String.valueOf(JA.get(i));
+                    task_score.add(cur);
+                }
+                Log.e("dataaa111", String.valueOf(test_score.size()));
+
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(String aVoid) {
+            progressDialog.cancel();
+            super.onPostExecute(aVoid);
+        }
+    }
+
 
 
 }

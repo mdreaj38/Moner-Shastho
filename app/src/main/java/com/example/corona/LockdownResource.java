@@ -134,6 +134,7 @@ public class LockdownResource extends AppCompatActivity {
                     editor = Objects.requireNonNull(pref).edit();
                     int cur = (Integer.parseInt(CurStress)*100)/120;
                     editor.putString("PreStress",Integer.toString(cur));
+                    editor.putString("score_id",blogid.get(0));
                     editor.apply();
 
                     finish();

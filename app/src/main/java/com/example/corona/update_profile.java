@@ -81,12 +81,7 @@ public class update_profile extends AppCompatActivity {
             // intent.putExtra("Age", "22");
             startActivity(intent);
 
-            //Change Toast Color
-            Toast toast = Toast.makeText(this, "Tapped on icon", Toast.LENGTH_SHORT);
-            Toast.makeText(this, "Age" + Age, Toast.LENGTH_SHORT).show();
-            View view = toast.getView();
-            view.setBackgroundResource(R.color.colorAccent);
-            toast.show();
+
 
 
             return true;
@@ -114,8 +109,7 @@ public class update_profile extends AppCompatActivity {
                 two.setChecked(false);
 
                 result = "Male";
-                Toast.makeText(getApplicationContext(), "Male checked", Toast.LENGTH_SHORT).show();
-                // do something like update database
+                 // do something like update database
             }
         } else if (id == R.id.checkbox_female) {
             if (checked) {
@@ -123,8 +117,7 @@ public class update_profile extends AppCompatActivity {
                 two.setChecked(true);
                 result = "female";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "FeMale checked", Toast.LENGTH_SHORT).show();
-            }
+             }
 
         }
     }
@@ -150,8 +143,7 @@ public class update_profile extends AppCompatActivity {
                 w.setChecked(false);
 
                 result1 = "married";
-                Toast.makeText(getApplicationContext(), "Married", Toast.LENGTH_SHORT).show();
-                // do something like update database
+                 // do something like update database
             }
         } else if (id == R.id.unmarried) {
             if (checked) {
@@ -162,8 +154,7 @@ public class update_profile extends AppCompatActivity {
 
                 result1 = "unmarried";
                 //do something like update database
-                Toast.makeText(getApplicationContext(), "unmarried", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.widow) {
             if (checked) {
                 u.setChecked(false);
@@ -172,8 +163,7 @@ public class update_profile extends AppCompatActivity {
                 w.setChecked(true);
 
                 result1 = "widow";
-                Toast.makeText(getApplicationContext(), "widow", Toast.LENGTH_SHORT).show();
-            }
+             }
         } else if (id == R.id.divorced) {
             if (checked) {
                 u.setChecked(false);
@@ -182,8 +172,7 @@ public class update_profile extends AppCompatActivity {
                 w.setChecked(false);
 
                 result1 = "divorced";
-                Toast.makeText(getApplicationContext(), "divorced", Toast.LENGTH_SHORT).show();
-            }
+             }
         }
 
 

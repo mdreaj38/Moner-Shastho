@@ -82,12 +82,10 @@ public class MainScreenActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     else {
-                        Intent intent = new Intent(MainScreenActivity.this, profile.class);
+                        Intent intent = new Intent(MainScreenActivity.this, update_profile.class);
                         intent.putExtra("email", email);
                         startActivity(intent);
                     }
-                } else {
-                    Toast.makeText((MainScreenActivity.this), "STOP", Toast.LENGTH_SHORT).show();
                 }
             }
         });

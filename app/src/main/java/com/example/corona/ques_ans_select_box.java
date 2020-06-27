@@ -78,7 +78,7 @@ public class ques_ans_select_box extends AppCompatActivity {
 
 
         //set question
-        String[] s = new String[100];
+        String[] s = new String[500];
         for(int i=0;i<Radio_Question.size();++i){
             s[i] = Radio_Question.get(i);
         }
@@ -91,8 +91,7 @@ public class ques_ans_select_box extends AppCompatActivity {
         button4.setText(option4.get(0));
         question.setText(s[0]);
         i = 0;
-//        int len = Radio_Question.size();
-        int len = 2;
+       int len = Radio_Question.size();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,10 +126,8 @@ public class ques_ans_select_box extends AppCompatActivity {
                     Log.e("code1",ID);
 
                     startActivity(intent);
-                    Toast.makeText(ques_ans_select_box.this, "LAst", Toast.LENGTH_SHORT).show();
                     //startActivity(intent);
                 }
-                Toast.makeText(ques_ans_select_box.this, Integer.toString(cur_score), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -147,7 +144,6 @@ public class ques_ans_select_box extends AppCompatActivity {
             if (checked) {
                 str = "1";
                 flag = 1;
-                Toast.makeText(ques_ans_select_box.this, "checked 1!", Toast.LENGTH_SHORT).show();
                 select = 0;
             }
         } else if (id == R.id.radio_button2) {
