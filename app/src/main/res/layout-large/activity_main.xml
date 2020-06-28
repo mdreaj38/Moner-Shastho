@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:background="#E9EFEE"
     android:orientation="vertical"
-    android:padding="10dp"
     android:gravity="center"
+    android:padding="10dp"
     tools:context=".GeneralReg">
 
 
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Create Your Account"
+            android:text="Create  Your Account"
             android:textColor="#139EAF"
             android:textSize="30sp"
             android:textStyle="bold" />

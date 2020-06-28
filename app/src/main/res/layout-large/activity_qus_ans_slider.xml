@@ -35,31 +35,14 @@
         android:textAlignment="center"
         android:textSize="30sp"/>
 -->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="70dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="380dp"
-            android:layout_marginTop="0dp"
-            android:text="10"
-            android:textColor="#ba160c"
-            android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="0dp"
-            android:text="1"
-            android:textColor="#ba160c"
-            android:textSize="20sp" />
 
         <SeekBar
             android:id="@+id/seekBar"

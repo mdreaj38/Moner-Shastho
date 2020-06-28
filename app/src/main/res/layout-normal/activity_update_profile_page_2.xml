@@ -1,0 +1,325 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".update_profile_page_2">
+
+    <!--<androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+-->
+    <!-- <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="start"
+         android:layout_marginStart="320dp"
+         android:text="Next"
+         android:textColor="#000000"
+         android:textSize="20sp" />-->
+    <!--  </androidx.appcompat.widget.Toolbar>-->
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="6.Educational Back ground"
+        android:textColor="#ba160c"
+        android:textSize="20sp" />
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/illiterate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="illiterate" />
+
+        <CheckBox
+            android:id="@+id/upto_class_five"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="upto_class_five" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/ssc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="SSC" />
+
+        <CheckBox
+            android:id="@+id/hsc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:onClick="onCheckboxClicked"
+            android:text="HSC" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/graduate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Graduate" />
+
+        <CheckBox
+            android:id="@+id/post_gradute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Post Graduate" />
+    </TableRow>
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="10dp"
+        android:text="7.Occupation"
+        android:textColor="#ba160c"
+        android:textSize="20sp" />
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Student" />
+
+        <CheckBox
+            android:id="@+id/unemployed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Unemployed" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Service" />
+
+        <CheckBox
+            android:id="@+id/businessman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="43dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Businessman" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/housewife"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Housewife" />
+
+        <CheckBox
+            android:id="@+id/farmer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Farmer" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/teachers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Teachers" />
+
+        <CheckBox
+            android:id="@+id/others"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Others" />
+    </TableRow>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="10dp"
+        android:text="8.Area of Living"
+        android:textColor="#ba160c"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="40dp"
+        android:text="Name of district, Thana and village"
+        android:textColor="#000"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/area_of_living"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:autofillHints="text"
+        android:ems="10"
+        android:inputType="text"
+        android:textColorHint="@color/colorPrimaryDark" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="10dp"
+        android:text="9.Monthly income (in taka)"
+        android:textColor="#ba160c"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/monthly_income"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="text"
+        android:ems="10"
+        android:inputType="text"
+        android:textColorHint="@color/colorPrimaryDark" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="10dp"
+        android:text="10.Family type"
+        android:textColor="#ba160c"
+        android:textSize="20sp" />
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/nuclear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Nuclear" />
+
+        <CheckBox
+            android:id="@+id/joint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Joint" />
+    </TableRow>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="10dp"
+        android:text="11.Family History of Mental illness"
+        android:textColor="#ba160c"
+        android:textSize="20sp" />
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/no_illness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="No" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/yes_illness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:onClick="onCheckboxClicked"
+            android:text="Yes,\nName the illness or problem" />
+
+
+    </TableRow>
+
+    <EditText
+        android:id="@+id/illness"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:autofillHints="text"
+        android:ems="10"
+        android:inputType="text"
+        android:textColorHint="@color/colorPrimaryDark" />
+
+
+</LinearLayout>
+
+

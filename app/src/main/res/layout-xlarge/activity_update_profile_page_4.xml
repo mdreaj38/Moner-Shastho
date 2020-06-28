@@ -1,0 +1,164 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".update_profile_page_4">
+
+    <!--androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="18.Substance abuse"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/no_abusee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
+                android:text="No" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/yes_abusee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
+                android:text="Yes,Specify the drug with duration" />
+
+
+        </TableRow>
+
+        <EditText
+            android:id="@+id/abuseg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:autofillHints="text"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:text="19.Any Diagnose mental disorder"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/no_disorderr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
+                android:text="No" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/yes_disorderr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
+                android:text="Yes" />
+
+        </TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:text="20.Mention the treatment history"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/treatment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="text"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:text="21. Password"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/passg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="text"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/updateProfileButton"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ba160c"
+                android:text="@string/update"
+                android:textColor="#ffff" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+
+

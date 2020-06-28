@@ -1,0 +1,192 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".update_profile_page_3">
+
+    <!--<androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+      -->  <!--<TextView
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="320dp"
+            android:text="Next"
+            android:textColor="#000000"
+            android:textSize="20sp" />-->
+
+    <!-- </androidx.appcompat.widget.Toolbar>-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:text="12.Clients main concerns/ complaints with duration (in telegraphic at least 3)"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/complaints"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="text"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:text="17.Stressful life events mention with duration"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+
+        <EditText
+            android:id="@+id/stressful_life"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="text"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:text="14.Any History of Childhood abuse or deprivation"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/no_abuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
+                android:text="No" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/yes_abuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
+                android:text="Yes,Specify" />
+
+
+        </TableRow>
+
+        <EditText
+            android:id="@+id/abuse_details"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:autofillHints="text"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:text="15.Any relationship problem"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/no_relation_prb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
+                android:text="No" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/yes_relation_prb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:onClick="onCheckboxClicked"
+                android:text="Yes \n Specify with whom" />
+
+
+        </TableRow>
+
+        <EditText
+            android:id="@+id/relation_prb_details"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:autofillHints="text"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:text="16.Personality Pattern"
+            android:textColor="#ba160c"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/personality_pattern"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="text"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark" />
+
+
+    </LinearLayout>
+</LinearLayout>
+
+

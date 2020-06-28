@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="290dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bgquestion"
+        android:backgroundTint="@color/colorAccent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="6dp"
+            android:text="1.Are you hungry?"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <!--<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:text="1.hello how are you?"
+        android:textAlignment="center"
+        android:textSize="30sp"/>
+-->
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp">
+
+        <RadioButton
+            android:id="@+id/radio_button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:freezesText="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="Yes"
+            android:textSize="15sp" />
+
+        <RadioButton
+            android:id="@+id/radio_button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:freezesText="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="No"
+            android:textSize="15sp" />
+
+        <RadioButton
+            android:id="@+id/radio_button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:freezesText="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="Both"
+            android:textSize="15sp" />
+        <RadioButton
+            android:id="@+id/radio_button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:freezesText="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="Both"
+            android:textSize="15sp" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
+    </LinearLayout>
+
+
+    android:id="@+id/button_confirm_next"
+    android:layout_width="196dp"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/radio_group"
+    android:layout_gravity="center"
+    android:layout_marginTop="16dp"
+    android:background="@color/colorAccent"
+    android:freezesText="true"
+    android:text="Confirm"
+    android:textSize="20sp" />-->
+
+    <!--<Button
+        android:id="@+id/next_ques"
+        android:layout_width="425dp"
+        android:layout_height="221dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="30dp"
+        android:background="#0000FF"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />-->
+
+
+</LinearLayout>
