@@ -167,5 +167,6 @@
     <orderEntry type="library" name="Gradle: org.mongodb:stitch-android-services-fcm:4.7.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:stitch-android-services-http:4.7.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:stitch-android-services-twilio:4.7.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.volley:volley:1.1.0@aar" level="project" />
   </component>
 </module>

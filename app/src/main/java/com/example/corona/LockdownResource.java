@@ -42,9 +42,9 @@ public class LockdownResource extends AppCompatActivity {
 
     public ArrayList<String> mydata = new ArrayList<String>();
     public ArrayList<String> blogid = new ArrayList<String>();
-    public ArrayList<String> task_Id = new ArrayList<String>();
+    /*public ArrayList<String> task_Id = new ArrayList<String>();
     public ArrayList<String> task_Title = new ArrayList<String>();
-    public ArrayList<String> task_Body = new ArrayList<String>();
+    public ArrayList<String> task_Body = new ArrayList<String>();*/
     public String CurStress="0";
     String mmessage;
     String AllInfo;
@@ -80,80 +80,22 @@ public class LockdownResource extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(LockdownResource.this, LockdownBlog.class);
                 String temp = "https://bad-blogger.herokuapp.com/users/single-material/" + blogid.get(position) + "?device=android";
-                Log.e("now", temp);
-                intent.putExtra("url", temp);
+                pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                editor = Objects.requireNonNull(pref).edit();
+                editor.putString("score_id",blogid.get(position));
+                editor.apply();
+                 intent.putExtra("url", temp);
                 startActivity(intent);
-                Toast.makeText(LockdownResource.this, Integer.toString(position), Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity, menu);
-        return true;
-    }
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if(id == R.id.act_item1)
-        {
-            final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle("Select your current stress level ");
-            alert.setMessage("");
-            LinearLayout linear=new LinearLayout(this);
-
-            linear.setOrientation(LinearLayout.VERTICAL);
-            TextView text=new TextView(this);
-            //text.setText("Hello Android");
-            text.setPadding(450, 10, 10, 10);
-
-            SeekBar seek=new SeekBar(this);
-
-            seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
-                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-                {
-                    String stress = Integer.toString(progress);
-                    text.setText(Html.fromHtml("<h3><font color='#008000'><b>"+stress+"/"+seek.getMax()+"</b></font></h3>"));
-                    CurStress = stress;
-
-                }
-                public void onStartTrackingTouch(SeekBar seekBar) {}
-                public void onStopTrackingTouch(SeekBar seekBar) {}
-            });
-
-            linear.addView(seek);
-            linear.addView(text);
-            alert.setView(linear);
-
-            alert.setPositiveButton("Ok",new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog,int id)
-                {
-                    pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-                    editor = Objects.requireNonNull(pref).edit();
-                    int cur = (Integer.parseInt(CurStress)*100)/120;
-                    editor.putString("PreStress",Integer.toString(cur));
-                    editor.putString("score_id",blogid.get(0));
-                    editor.apply();
-
-                    finish();
-                    Toast.makeText(LockdownResource.this, "ok", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LockdownResource.this, Task.class);
-                    intent.putExtra("all",AllInfo);
-                    startActivity(intent);
-                }
-            });
-
-            alert.show();
-
-            return true;
-        }
-        else {
-            finish();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     public class HttpGetRequest extends AsyncTask<Void, Void, String> {
 
@@ -199,11 +141,9 @@ public class LockdownResource extends AppCompatActivity {
                     mydata.add((String) obj.get("title"));
                     blogid.add((String) obj.get("_id"));
                         Jtask = obj.getJSONArray("activities");
+
                         for(int j=0;j<Jtask.length();++j){
                             JSONObject objj = (JSONObject) Jtask.get(j);
-                            task_Id.add((String) objj.get("_id"));
-                            task_Title.add((String) objj.get("title"));
-                            task_Body.add((String) objj.get("body"));
 
                             sid+=(String) objj.get("_id")+'#';
                             stitle+= (String) objj.get("title")+'#';

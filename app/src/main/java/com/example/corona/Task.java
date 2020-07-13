@@ -63,7 +63,7 @@ public class Task extends AppCompatActivity {
         String[] root =check.split("\\$");
 
 
-
+        String[] ID = root[0].split("#");
         String[] Title = root[1].split("#");
         String[] Body = root[2].split("#");
 
@@ -83,9 +83,9 @@ public class Task extends AppCompatActivity {
                 view.startAnimation(animation1);
                 // Toast.makeText(resource.this,mydata.get(position),Toast.LENGTH_SHORT).show();
                 String temp = mydata.get(position);
-                Toast.makeText(Task.this, temp, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Task.this, showTask.class);
-                intent.putExtra("curbody",Body[position]);
+                //intent.putExtra("curbody",Body[position]);
+                intent.putExtra("curbody",ID[position]);
                 startActivity(intent);
             }
         });
