@@ -20,14 +20,14 @@
              android:background="#B11974"
              android:gravity="center"
              android:textColor="#000000"
-             android:textSize="20sp"
+             android:textSize="7sp"
              android:textStyle="bold" />
 
          <com.github.mikephil.charting.charts.LineChart
              android:id="@+id/chart"
              android:layout_width="match_parent"
-             android:layout_height="300dp"
-             android:layout_marginTop="20dp" />
+             android:layout_height="50dp"
+             android:layout_marginTop="5dp" />
 
          <TextView
              android:id="@+id/after"
@@ -36,16 +36,16 @@
              android:text="Task "
              android:background="#C63C9F"
              android:gravity="center"
-             android:layout_marginTop="30dp"
+             android:layout_marginTop="5dp"
              android:textColor="#000000"
-             android:textSize="20sp"
+             android:textSize="7sp"
              android:textStyle="bold" />
 
          <com.github.mikephil.charting.charts.LineChart
              android:id="@+id/chart1"
              android:layout_width="match_parent"
-             android:layout_height="350dp"
-             android:layout_marginTop="20dp" />
+             android:layout_height="30dp"
+             android:layout_marginTop="5dp" />
      </LinearLayout>
 
 </ScrollView>

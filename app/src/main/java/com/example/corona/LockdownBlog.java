@@ -61,7 +61,7 @@ public class LockdownBlog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lockdown_blog);
         String message = getIntent().getStringExtra("url");
-        setTitle("Blog");
+        setTitle("");
         /*back button*/
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -87,11 +87,6 @@ public class LockdownBlog extends AppCompatActivity {
         Log.e("this", "a");
     }
 
-  /*  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        item.getItemId();
-        finish();
-        return super.onOptionsItemSelected(item);
-    }*/
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
       // Inflate the menu; this adds items to the action bar if it is present.
@@ -101,7 +96,7 @@ public class LockdownBlog extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.act_item1)
+        if(id == R.id.act_item1 || id==R.id.act_item2)
         {
             final AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle("Select your current stress level ");

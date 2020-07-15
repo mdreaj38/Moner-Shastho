@@ -71,7 +71,7 @@ public class chart_mental_stress extends AppCompatActivity {
         }
 
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+      Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mChart = findViewById(R.id.chart);
         mChart.setTouchEnabled(true);
@@ -79,14 +79,16 @@ public class chart_mental_stress extends AppCompatActivity {
         MyMarkerView mv = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
         mv.setChartView(mChart);
         mChart.setMarker(mv);
+
         mChart1 = findViewById(R.id.chart1);
         mChart1.setTouchEnabled(true);
         mChart1.setPinchZoom(true);
-
         MyMarkerView mv1 = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
-        mv1.setChartView(mChart1);
+        mv.setChartView(mChart1);
         mChart1.setMarker(mv1);
-        renderData();
+
+
+       renderData();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -96,11 +98,10 @@ public class chart_mental_stress extends AppCompatActivity {
     }
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.Diary)
+        if(id == R.id.Diary   || id == R.id.Diary_name)
         {
             Toast.makeText(chart_mental_stress.this, "HERE", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(chart_mental_stress.this, Diary.class);
-
             startActivity(intent);
             return true;
         }
@@ -111,59 +112,45 @@ public class chart_mental_stress extends AppCompatActivity {
     }
 
     public void renderData() {
+        // for graph 1
         LimitLine llXAxis = new LimitLine(10f, "Index 10");
         llXAxis.setLineWidth(4f);
         llXAxis.enableDashedLine(10f, 10f, 0f);
         llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
         llXAxis.setTextSize(10f);
-
         XAxis xAxis = mChart.getXAxis();
         xAxis.enableGridDashedLine(10f, 5f, 0f);
-       /* xAxis.setAxisMaximum(10f);
-        xAxis.setAxisMinimum(0f);*/
         xAxis.setDrawLimitLinesBehindData(true);
-
-        XAxis xAxis1 = mChart1.getXAxis();
-        xAxis1.enableGridDashedLine(10f, 5f, 0f);
-        /*xAxis1.setAxisMaximum(10f);
-        xAxis1.setAxisMinimum(0f);*/
-        xAxis1.setDrawLimitLinesBehindData(true);
-
-        LimitLine ll1 = new LimitLine(80f, "Maximum Limit");
-        ll1.setLineWidth(4f);
-        ll1.enableDashedLine(10f, 10f, 0f);
-        ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
-        ll1.setTextSize(10f);
-
-        LimitLine ll2 = new LimitLine(20f, "Minimum Limit");
-        ll2.setLineWidth(4f);
-        ll2.enableDashedLine(10f, 10f, 0f);
-        ll2.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
-        ll2.setTextSize(10f);
-
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.removeAllLimitLines();
-
         leftAxis.setAxisMaximum(100f);
         leftAxis.setAxisMinimum(0f);
         leftAxis.enableGridDashedLine(10f, 5f, 0f);
         leftAxis.setDrawZeroLine(false);
-         leftAxis.setDrawLimitLinesBehindData(false);
+        leftAxis.setDrawLimitLinesBehindData(false);
+        mChart.getAxisRight().setEnabled(false);
+        setData();
 
+
+        // for graph 2
+        LimitLine llXAxis1 = new LimitLine(10f, "Index 10");
+        llXAxis1.setLineWidth(4f);
+        llXAxis1.enableDashedLine(10f, 10f, 0f);
+        llXAxis1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
+        llXAxis1.setTextSize(10f);
+        XAxis xAxis1 = mChart1.getXAxis();
+        xAxis1.enableGridDashedLine(10f, 5f, 0f);
+        xAxis1.setDrawLimitLinesBehindData(true);
         YAxis leftAxis1 = mChart1.getAxisLeft();
         leftAxis1.removeAllLimitLines();
-
         leftAxis1.setAxisMaximum(100f);
-        leftAxis1.setAxisMinimum(-100f);
+        leftAxis1.setAxisMinimum(-99f);
         leftAxis1.enableGridDashedLine(10f, 5f, 0f);
         leftAxis1.setDrawZeroLine(false);
         leftAxis1.setDrawLimitLinesBehindData(false);
-
-        mChart.getAxisRight().setEnabled(false);
         mChart1.getAxisRight().setEnabled(false);
-        setData();
         setData1();
-    }
+      }
 
 
     private void setData() {
@@ -173,21 +160,15 @@ public class chart_mental_stress extends AppCompatActivity {
             String cur = test_score.get(i);
             values.add(new Entry(i+1, (float) Double.parseDouble(cur)));
         }
-        for(int i = test_score.size();i<7;++i){
+        for(int i = task_score.size();i<7;++i){
             values.add(new Entry(i+1,0));
         }
 
-       /* values.add(new Entry(1, 50));
-        values.add(new Entry(2, 60));
-        values.add(new Entry(3, -70));
-        values.add(new Entry(4, 0));
-        values.add(new Entry(5, 0));
-        values.add(new Entry(7, 0));*/
+       /* values.add(new Entry(1, 50));*/
 
 
         LineDataSet set1;
-        if (mChart.getData() != null &&
-                mChart.getData().getDataSetCount() > 0) {
+        if (mChart.getData() != null && mChart.getData().getDataSetCount() > 0) {
             set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
             set1.setValues(values);
             mChart.getData().notifyDataChanged();
@@ -198,7 +179,7 @@ public class chart_mental_stress extends AppCompatActivity {
             set1.enableDashedLine(10f, 5f, 0f);
             set1.enableDashedHighlightLine(10f, 5f, 0f);
             set1.setColor(Color.DKGRAY);
-            set1.setCircleColor(Color.RED);
+            set1.setCircleColor(Color.DKGRAY);
             set1.setLineWidth(1f);
             set1.setCircleRadius(3f);
             set1.setDrawCircleHole(false);
@@ -221,32 +202,41 @@ public class chart_mental_stress extends AppCompatActivity {
         }
     }
 
+
+    //for graph 2
     private void setData1() {
 
-        ArrayList<Entry> values1 = new ArrayList<>();
-        values1.add(new Entry(1, 50));
+        ArrayList<Entry> values = new ArrayList<>();
         for(int i=0;i<task_score.size();++i){
-            String cur = test_score.get(i);
-            values1.add(new Entry(i+1, (float) Double.parseDouble(cur)));
+            String cur = task_score.get(i);
+            values.add(new Entry(i+1, (float) Double.parseDouble(cur)));
         }
         for(int i = task_score.size();i<7;++i){
-            values1.add(new Entry(i+1,0));
+            values.add(new Entry(i+1,0));
         }
+
+       /* values.add(new Entry(1, 50));
+        values.add(new Entry(2, 60));
+        values.add(new Entry(3, -70));
+        values.add(new Entry(4, 0));
+        values.add(new Entry(5, 0));
+        values.add(new Entry(7, 0));*/
 
 
         LineDataSet set1;
-        if (mChart1.getData() != null && mChart1.getData().getDataSetCount() > 0) {
-            set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
-            set1.setValues(values1);
+        if (mChart1.getData() != null &&
+                mChart1.getData().getDataSetCount() > 0) {
+            set1 = (LineDataSet) mChart1.getData().getDataSetByIndex(0);
+            set1.setValues(values);
             mChart1.getData().notifyDataChanged();
             mChart1.notifyDataSetChanged();
         } else {
-            set1 = new LineDataSet(values1, "Sample Data");
+            set1 = new LineDataSet(values, "Sample Data");
             set1.setDrawIcons(false);
             set1.enableDashedLine(10f, 5f, 0f);
             set1.enableDashedHighlightLine(10f, 5f, 0f);
             set1.setColor(Color.DKGRAY);
-             set1.setCircleColor(Color.RED);
+            set1.setCircleColor(Color.DKGRAY);
             set1.setLineWidth(1f);
             set1.setCircleRadius(3f);
             set1.setDrawCircleHole(false);
@@ -269,12 +259,13 @@ public class chart_mental_stress extends AppCompatActivity {
         }
     }
 
+
+
+
     //graph 1
     public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
-        public static final String REQUEST_METHOD = "GET";
-        public static final int READ_TIMEOUT = 15000;
-        public static final int CONNECTION_TIMEOUT = 15000;
+
         String data = "";
         String singleParsed = "";
         String dataParsed = "";
@@ -288,6 +279,7 @@ public class chart_mental_stress extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
+
                 URL url = new URL("https://bad-blogger.herokuapp.com/app-admin/tests/getScores/"+strings[0]);
                 Log.e("Check", url.toString());
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -330,9 +322,6 @@ public class chart_mental_stress extends AppCompatActivity {
     //graph 2
     public class HttpGetRequest2 extends AsyncTask<String, Void, String> {
 
-        public static final String REQUEST_METHOD = "GET";
-        public static final int READ_TIMEOUT = 15000;
-        public static final int CONNECTION_TIMEOUT = 15000;
         String data = "";
         String singleParsed = "";
         String dataParsed = "";

@@ -5,6 +5,7 @@
     <item
         android:title="My Diary"
         android:visible="true"
+        android:id="@+id/Diary_name"
         app:showAsAction="always">
     </item>
     <item
