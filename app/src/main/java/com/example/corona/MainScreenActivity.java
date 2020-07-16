@@ -1,6 +1,8 @@
 package com.example.corona;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +34,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class MainScreenActivity extends AppCompatActivity {
         email = getIntent().getStringExtra("email");
         //finding listview
         gridView = findViewById(R.id.gridview);
-
+        button = findViewById(R.id.about_us);
         //set username in mainactivity
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         String temp = pref.getString("name", null);
@@ -87,6 +91,28 @@ public class MainScreenActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
+
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainScreenActivity.this);
+                    builder1.setMessage("About This App");
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Got It",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
             }
         });
 

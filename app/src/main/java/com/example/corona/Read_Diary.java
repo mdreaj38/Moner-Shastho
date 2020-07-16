@@ -69,7 +69,6 @@ public class Read_Diary extends AppCompatActivity {
 
 
 
-        Toast.makeText(Read_Diary.this, "Calendar clicked", Toast.LENGTH_SHORT).show();
 
         ListView listView = findViewById(R.id.diary_list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Read_Diary.this, R.layout.sample_view, R.id.textView, mydata);
@@ -153,12 +152,6 @@ public class Read_Diary extends AppCompatActivity {
                     mydata.add((String) cur.get("displayDate"));
                 }
 
-                //JSONArray JA = jo.getJSONArray("data");
-
-                /*Log.e("this2", (String) real_data.toString());
-                Log.e("this2", (String) real_data.get("title"));
-                Log.e("this2body", (String) real_data.get("body"));
-                Log.e("this2", data);*/
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }

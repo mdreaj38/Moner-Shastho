@@ -8,11 +8,51 @@
     android:orientation="vertical"
     android:background="@color/design_default_color_background"
     tools:context=".Diary">
+    <LinearLayout
+        android:layout_width="166dp"
+        android:layout_height="65dp"
+        android:background="@drawable/button_yellow"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/b2"
+            android:layout_width="88dp"
+            android:layout_height="50dp"
+            android:background="#00E4C644"
+            android:text="Read ...."
+            android:textAllCaps="false"
+            android:textSize="16sp"
+
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="166dp"
+        android:layout_height="65dp"
+        android:background="@drawable/button_yellow"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/b1"
+            android:layout_width="88dp"
+            android:layout_height="50dp"
+            android:background="#00E4C644"
+            android:text="Write ..."
+            android:textAllCaps="false"
+            android:textSize="16sp"
+
+            />
+
+    </LinearLayout>
+
 
 
     <LinearLayout
         android:layout_width="166dp"
         android:layout_height="65dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/button_yellow"
         android:gravity="center"
         >
@@ -28,25 +68,7 @@
 
             />
 
-        <View
-            android:layout_width="3dp"
-            android:layout_height="0dp" />
-
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/read_diary"
-
-            />
-
-
     </LinearLayout>
-
-    <View
-        android:layout_width="3dp"
-        android:layout_height="15dp" />
-
-
 
     <LinearLayout
         android:layout_width="166dp"
@@ -63,17 +85,7 @@
             android:text="Write Diary"
             android:textAllCaps="false"
             android:textSize="16sp"
-
             />
-
-
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/write_diary"
-
-            />
-
 
     </LinearLayout>
 

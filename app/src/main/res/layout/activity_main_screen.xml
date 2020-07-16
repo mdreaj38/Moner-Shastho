@@ -4,16 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:orientation="vertical"
     tools:context=".MainScreenActivity">
 
-    <GridView
-        android:id="@+id/gridview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:horizontalSpacing="2dp"
-        android:numColumns="2"
-        android:verticalSpacing="2dp" />
+        android:layout_height="wrap_content">
+        <GridView
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="2"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/about_us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/aboutus"
+            android:text="About Us"
+            android:textStyle="italic"
+            />
+    </LinearLayout>
 
 </LinearLayout>

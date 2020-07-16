@@ -143,7 +143,6 @@ public class showTask extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                // Toast.makeText(getApplicationContext(),"Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
                 Log.e("ch--eck--",response.toString());
                 parse_json_data(response.toString());
                 progressDialog.cancel();

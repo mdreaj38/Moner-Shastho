@@ -18,6 +18,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
@@ -63,15 +69,7 @@ public class chart_mental_stress extends AppCompatActivity {
         mypref = getApplicationContext().getSharedPreferences("MyPref",0);
         UserId = mypref.getString("id",null);
 
-        try {
-            new HttpGetRequest().execute(User_id).get(); // graph 1
-            new HttpGetRequest2().execute(User_id).get();// graph 2
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-      Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mChart = findViewById(R.id.chart);
         mChart.setTouchEnabled(true);
@@ -79,6 +77,8 @@ public class chart_mental_stress extends AppCompatActivity {
         MyMarkerView mv = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
         mv.setChartView(mChart);
         mChart.setMarker(mv);
+        get_test_data(User_id);
+
 
         mChart1 = findViewById(R.id.chart1);
         mChart1.setTouchEnabled(true);
@@ -86,9 +86,10 @@ public class chart_mental_stress extends AppCompatActivity {
         MyMarkerView mv1 = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
         mv.setChartView(mChart1);
         mChart1.setMarker(mv1);
+        ProgressDialog progressDialog = ProgressDialog.show(chart_mental_stress.this, "Loading...", "");
+        get_task_data(User_id);
+        progressDialog.cancel();
 
-
-       renderData();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,7 +101,6 @@ public class chart_mental_stress extends AppCompatActivity {
         int id = item.getItemId();
         if(id == R.id.Diary   || id == R.id.Diary_name)
         {
-            Toast.makeText(chart_mental_stress.this, "HERE", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(chart_mental_stress.this, Diary.class);
             startActivity(intent);
             return true;
@@ -110,7 +110,6 @@ public class chart_mental_stress extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     public void renderData() {
         // for graph 1
         LimitLine llXAxis = new LimitLine(10f, "Index 10");
@@ -129,8 +128,6 @@ public class chart_mental_stress extends AppCompatActivity {
         leftAxis.setDrawZeroLine(false);
         leftAxis.setDrawLimitLinesBehindData(false);
         mChart.getAxisRight().setEnabled(false);
-        setData();
-
 
         // for graph 2
         LimitLine llXAxis1 = new LimitLine(10f, "Index 10");
@@ -149,14 +146,15 @@ public class chart_mental_stress extends AppCompatActivity {
         leftAxis1.setDrawZeroLine(false);
         leftAxis1.setDrawLimitLinesBehindData(false);
         mChart1.getAxisRight().setEnabled(false);
+
         setData1();
-      }
+        setData2();
 
-
-    private void setData() {
+    }
+    private void setData1() {
 
         ArrayList<Entry> values = new ArrayList<>();
-        for(int i=0;i<test_score.size();++i){
+         for(int i=0;i<test_score.size();++i){
             String cur = test_score.get(i);
             values.add(new Entry(i+1, (float) Double.parseDouble(cur)));
         }
@@ -201,10 +199,8 @@ public class chart_mental_stress extends AppCompatActivity {
             mChart.setData(data);
         }
     }
-
-
     //for graph 2
-    private void setData1() {
+    private void setData2() {
 
         ArrayList<Entry> values = new ArrayList<>();
         for(int i=0;i<task_score.size();++i){
@@ -214,13 +210,6 @@ public class chart_mental_stress extends AppCompatActivity {
         for(int i = task_score.size();i<7;++i){
             values.add(new Entry(i+1,0));
         }
-
-       /* values.add(new Entry(1, 50));
-        values.add(new Entry(2, 60));
-        values.add(new Entry(3, -70));
-        values.add(new Entry(4, 0));
-        values.add(new Entry(5, 0));
-        values.add(new Entry(7, 0));*/
 
 
         LineDataSet set1;
@@ -263,117 +252,87 @@ public class chart_mental_stress extends AppCompatActivity {
 
 
     //graph 1
-    public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
+    private void get_test_data(String U_ID) {
 
-        String data = "";
-        String singleParsed = "";
-        String dataParsed = "";
-        JSONObject real_data;
-        ProgressDialog progressDialog;
+        ProgressDialog progressDialog = ProgressDialog.show(chart_mental_stress.this, "Loading...", "");
 
-        protected void onPreExecute() {
-             progressDialog = ProgressDialog.show(chart_mental_stress.this, "", "Loading...");
-        }
+        //RequestQueue initialized
 
-        @Override
-        protected String doInBackground(String... strings) {
-            try {
+         RequestQueue mRequestQueue = Volley.newRequestQueue(this);
 
-                URL url = new URL("https://bad-blogger.herokuapp.com/app-admin/tests/getScores/"+strings[0]);
-                Log.e("Check", url.toString());
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                //Set method
-                httpURLConnection.setRequestMethod("GET");
-                httpURLConnection.connect();
+        //String Request initialized
+        String url = "https://bad-blogger.herokuapp.com/app-admin/tests/getScores/"+U_ID;
+         StringRequest mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
 
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String line = "";
+                Log.e("ch--eck----",response.toString());
 
-                Log.e("Check", url.toString());
-
-                while (line != null) {
-                    line = bufferedReader.readLine();
-                    data = data + line;
+                try {
+                    parse_test_score(response.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                JSONObject jo = new JSONObject(data);
-                JSONArray JA = jo.getJSONArray("scores");
-                for(int i=0;i<JA.length();++i){
-                    //test_score.add((String) JA.get(i));
-                    String cur = String.valueOf(JA.get(i));
-                    test_score.add(cur);
-                }
-                Log.e("dataaa1", String.valueOf(test_score.size()));
+                progressDialog.cancel();
 
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
             }
-            return data;
-        }
-
-        @Override
-        protected void onPostExecute(String aVoid) {
-             progressDialog.cancel();
-            super.onPostExecute(aVoid);
-        }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("MY_error","++++");
+            }
+        });
+        mRequestQueue.add(mStringRequest);
     }
+    public void parse_test_score(String data) throws JSONException {
+         JSONObject jo = new JSONObject(data);
+        JSONArray JA = jo.getJSONArray("scores");
+         for(int i=0;i<JA.length();++i){
+             String cur = String.valueOf(JA.get(i));
+            test_score.add(cur);
+        }
+     }
 
     //graph 2
-    public class HttpGetRequest2 extends AsyncTask<String, Void, String> {
+    private void get_task_data(String U_ID) {
 
-        String data = "";
-        String singleParsed = "";
-        String dataParsed = "";
-        JSONObject real_data;
-        ProgressDialog progressDialog;
+        //RequestQueue initialized
 
-        protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(chart_mental_stress.this, "", "Loading...");
-        }
+        RequestQueue mRequestQueue = Volley.newRequestQueue(this);
 
-        @Override
-        protected String doInBackground(String... strings) {
-            try {
-                URL url = new URL("https://bad-blogger.herokuapp.com/users/materials/getScores/"+strings[0]);
-                Log.e("Check", url.toString());
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                //Set method
-                httpURLConnection.setRequestMethod("GET");
-                httpURLConnection.connect();
+        //String Request initialized
+        String url = "https://bad-blogger.herokuapp.com/users/materials/getScores/"+U_ID;
+        StringRequest mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
 
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String line = "";
 
-                Log.e("Check", url.toString());
-
-                while (line != null) {
-                    line = bufferedReader.readLine();
-                    data = data + line;
+                try {
+                    parse_task_score(response.toString());
+                    renderData();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                JSONObject jo = new JSONObject(data);
-                JSONArray JA = jo.getJSONArray("scores");
-                for(int i=0;i<JA.length();++i){
-                    //test_score.add((String) JA.get(i));
-                    String cur = String.valueOf(JA.get(i));
-                    task_score.add(cur);
-                }
-                Log.e("dataaa111", String.valueOf(test_score.size()));
 
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
             }
-            return data;
-        }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("MY_error","++++");
+            }
+        });
 
-        @Override
-        protected void onPostExecute(String aVoid) {
-            progressDialog.cancel();
-            super.onPostExecute(aVoid);
+        mRequestQueue.add(mStringRequest);
+    }
+    public void parse_task_score(String data) throws JSONException {
+
+        JSONObject jo = new JSONObject(data);
+        JSONArray JA = jo.getJSONArray("scores");
+         for(int i=0;i<JA.length();++i){
+            String cur = String.valueOf(JA.get(i));
+            task_score.add(cur);
         }
     }
-
-
 
 }

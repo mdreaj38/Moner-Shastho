@@ -11,7 +11,7 @@ import android.widget.Toast;
 public class Diary extends AppCompatActivity {
 
 
-    private Button read_button, write_button;
+    private Button read_button, write_button,extra1,extra2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +19,28 @@ public class Diary extends AppCompatActivity {
         setContentView(R.layout.activity_diary);
 
         read_button = (Button) findViewById(R.id.read_diary);
-        write_button = (Button) findViewById(R.id.write_diary);
+        write_button = findViewById(R.id.write_diary);
+        extra1 = findViewById(R.id.b1);
+        extra2 = findViewById(R.id.b2);
+
+        extra2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        extra1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Diary.this,write_stressor.class);
+                startActivity(intent);
+            }
+        });
 
         read_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(Diary.this, "Read button clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Diary.this,Read_Diary.class);
+                 Intent intent = new Intent(Diary.this,Read_Diary.class);
                 startActivity(intent);
             }
         });
@@ -33,8 +48,7 @@ public class Diary extends AppCompatActivity {
         write_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(Diary.this, "write clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Diary.this,Write_diary.class);
+                 Intent intent = new Intent(Diary.this,Write_diary.class);
                 startActivity(intent);
 
             }
