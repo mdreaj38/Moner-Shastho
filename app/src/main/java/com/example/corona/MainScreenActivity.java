@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +36,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-    Button button;
+    Button button,connect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class MainScreenActivity extends AppCompatActivity {
         //finding listview
         gridView = findViewById(R.id.gridview);
         button = findViewById(R.id.about_us);
+        connect = findViewById(R.id.connect_expert);
         //set username in mainactivity
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         String temp = pref.getString("name", null);
@@ -113,6 +116,13 @@ public class MainScreenActivity extends AppCompatActivity {
 
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
+            }
+        });
+
+        connect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));startActivity(browserIntent);
             }
         });
 

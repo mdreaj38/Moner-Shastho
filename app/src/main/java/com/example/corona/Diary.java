@@ -27,6 +27,8 @@ public class Diary extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(Diary.this,stress_list.class);
+                startActivity(intent);
             }
         });
         extra1.setOnClickListener(new View.OnClickListener() {

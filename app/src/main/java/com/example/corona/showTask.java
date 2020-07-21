@@ -4,18 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.net.http.SslError;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -42,6 +46,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
+import static android.text.TextUtils.replace;
 import static java.lang.Integer.parseInt;
 
 public class showTask extends AppCompatActivity {
@@ -55,21 +60,32 @@ public class showTask extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
     public String screen_title ="";
+    @SuppressLint("SetJavaScriptEnabled")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_task);
         textView = (WebView )findViewById(R.id.taskbodyy);
         setTitle("Follow This Step");
-
+/*
         textView.getSettings().setJavaScriptEnabled(true);
         textView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+        textView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        textView.getSettings().setDomStorageEnabled(true);
+        textView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);*/
 
-         _Id = getIntent().getStringExtra("curbody");
-        Log.e("ch--eck",_Id);
+        textView.getSettings().setJavaScriptEnabled(true);
+        textView.getSettings().setDomStorageEnabled(true);
+        textView.getSettings().setAppCacheEnabled(true);
+        textView.getSettings().setLoadsImagesAutomatically(true);
+         textView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+
+
+
+
+
+        _Id = getIntent().getStringExtra("curbody");
 
         sendAndRequestResponse("https://bad-blogger.herokuapp.com/users/materials/task/"+_Id);
-
-
 
     }
 
@@ -163,18 +179,19 @@ public class showTask extends AppCompatActivity {
         try {
             JSONObject jo = new JSONObject(data);
             JSONArray JA = jo.getJSONArray("data");
-            //Log.e("ch--eck--JA", JA.toString());
+
             jo = (JSONObject) JA.get(0);
             body = (String) jo.get("body");
             screen_title = (String) jo.get("title");
             setTitle(screen_title);
+            textView.loadDataWithBaseURL(null,"<style>img{display: inline;height: auto;max-width: 100%;}</style>"+body,"text/html","utf-8",null);
 
-            textView.loadDataWithBaseURL(null,body,"text/html","utf-8",null);
-           // Log.e("ch--eck--body", body);
+          //  textView.loadUrl(body);
+
+            Log.e("ch--eck--JA",body);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
 }

@@ -28,6 +28,15 @@
             android:text="About Us"
             android:textStyle="italic"
             />
+        <Button
+            android:id="@+id/connect_expert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:background="@drawable/aboutus"
+            android:text="Connect With Expert"
+            android:textStyle="italic"
+            />
     </LinearLayout>
 
 </LinearLayout>

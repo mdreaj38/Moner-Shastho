@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".write_stressor"></activity>
+        <activity android:name=".show_stress"></activity>
+        <activity android:name=".stress_list" />
+        <activity android:name=".write_stressor" />
         <activity android:name=".TestList" />
         <activity android:name=".Write_diary" />
         <activity android:name=".Show_Diary" />
