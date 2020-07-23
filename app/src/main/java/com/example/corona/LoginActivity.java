@@ -57,7 +57,6 @@ public class LoginActivity extends AppCompatActivity {
         // pgsBar = (ProgressBar) findViewById(R.id.pBar);
         /*SharedPreferences settings = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         settings.edit().clear().apply();*/
-        Log.e("ok","clear");
 
         Button signup = findViewById(R.id.signup);
         Handler handler = new Handler();
@@ -69,18 +68,10 @@ public class LoginActivity extends AppCompatActivity {
         forgetPass = findViewById(R.id.forget_password);
         forgetPass.setOnClickListener(handler);
 
-        //back button
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 
     class Handler implements View.OnClickListener {
         EditText emailLogin = findViewById(R.id.email_login);
@@ -147,13 +138,8 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-              /*  Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
-                intent.putExtra("email",email1);
-                startActivity(intent);*/
-
                 pgsdialog.dismiss();
             }
-
 
             if (v.getId() == R.id.forget_password) {
                 Intent intent = new Intent(LoginActivity.this, forget_password.class);

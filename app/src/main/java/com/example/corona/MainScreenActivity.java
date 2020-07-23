@@ -122,7 +122,7 @@ public class MainScreenActivity extends AppCompatActivity {
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));startActivity(browserIntent);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://trin-innovation.com/services/emergencyAppointment/"));startActivity(browserIntent);
             }
         });
 

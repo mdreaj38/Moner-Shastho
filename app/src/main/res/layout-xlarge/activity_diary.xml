@@ -17,12 +17,12 @@
 
         <Button
             android:id="@+id/b2"
-            android:layout_width="88dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
             android:background="#00E4C644"
-            android:text="Read ...."
+            android:text="Check Stress details"
             android:textAllCaps="false"
-            android:textSize="36sp"
+            android:textSize="29sp"
 
             />
 
@@ -36,12 +36,12 @@
 
         <Button
             android:id="@+id/b1"
-            android:layout_width="88dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:background="#00E4C644"
-            android:text="Write ..."
+            android:text="Save Stress details"
             android:textAllCaps="false"
-            android:textSize="36sp"
+            android:textSize="29sp"
 
             />
 

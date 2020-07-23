@@ -20,9 +20,9 @@
             android:layout_width="88dp"
             android:layout_height="50dp"
             android:background="#00E4C644"
-            android:text="Read ...."
+            android:text="Check Stress details"
             android:textAllCaps="false"
-            android:textSize="16sp"
+            android:textSize="14sp"
 
             />
 
@@ -39,7 +39,7 @@
             android:layout_width="88dp"
             android:layout_height="50dp"
             android:background="#00E4C644"
-            android:text="Write ..."
+            android:text="Write Stress details"
             android:textAllCaps="false"
             android:textSize="16sp"
 

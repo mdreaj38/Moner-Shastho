@@ -79,10 +79,6 @@ public class showTask extends AppCompatActivity {
         textView.getSettings().setLoadsImagesAutomatically(true);
          textView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
-
-
-
-
         _Id = getIntent().getStringExtra("curbody");
 
         sendAndRequestResponse("https://bad-blogger.herokuapp.com/users/materials/task/"+_Id);
