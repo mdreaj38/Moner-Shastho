@@ -29,8 +29,8 @@ public class MainScreenActivity extends AppCompatActivity {
 
     public String email;
     GridView gridView;
-    String[] Options = {"Lock Down", "Remain Healthy", "Track Record", "Resources", "Log Out", "Profile"};
-    int[] OptionImage = {R.drawable.lockdown, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.logout, R.drawable.profile};
+    String[] Options = {"Practice", "Assessment", "Track Record", "Resources", "Connect With Expert", "Profile"};
+    int[] OptionImage = {R.drawable.practice, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.connetexpert, R.drawable.profile};
     int cnt = 0;
     private ImageView imageView;
 
@@ -72,15 +72,9 @@ public class MainScreenActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainScreenActivity.this, resource.class);
                     startActivity(intent);
                 } else if (i == 4) {
-                    SharedPreferences settings = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-                    settings.edit().clear().apply();
-                    Intent next = new Intent(getApplicationContext(), LoginActivity.class);
 
-                    //kill all the previous activity
-                    next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://trin-innovation.com/services/emergencyAppointment/"));startActivity(browserIntent);
 
-                    startActivity(next);
-                    finish();
                 } else if (i == 5) {
                     String cur = "expert";
                     if(cur.equals(UserType)) {
@@ -122,7 +116,15 @@ public class MainScreenActivity extends AppCompatActivity {
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://trin-innovation.com/services/emergencyAppointment/"));startActivity(browserIntent);
+                SharedPreferences settings = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                settings.edit().clear().apply();
+                Intent next = new Intent(getApplicationContext(), LoginActivity.class);
+
+                //kill all the previous activity
+                next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                startActivity(next);
+                finish();
             }
         });
 

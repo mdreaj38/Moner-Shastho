@@ -25,12 +25,12 @@
             android:textSize="20dp"
             android:textStyle="normal|italic" />
 
-        <ImageView
+ko        <ImageView
             android:id="@+id/images"
             android:layout_width="90dp"
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            app:srcCompat="@drawable/apple" />
+            app:srcCompat="@drawable/connect" />
     </RelativeLayout>
 </RelativeLayout>

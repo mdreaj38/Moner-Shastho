@@ -23,49 +23,37 @@ public class LockDown extends AppCompatActivity {
 
     GridView gridView;
 
-    String[] Options = {"Manage Stress", "Keep Connected", "Relaxation", "Mindfulness"};
-    int[] OptionImage = {R.drawable.stress_mng, R.drawable.connect, R.drawable.relax, R.drawable.mind};
+    String[] Options = {"Manage Stress", "Relaxation", "Mindfulness","Self Care","Sleep","Problem Solving","Keep Connected","Activity Schedule"};
+    int[] OptionImage = {R.drawable.stress_mng,  R.drawable.relax, R.drawable.mind, R.drawable.self_care, R.drawable.sleep, R.drawable.problem_solving,R.drawable.connect, R.drawable.activity_schedule};
     int cnt = 0;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_down);
-        gridView = findViewById(R.id.gridview);
-        ImageView imageView = findViewById(R.id.sleep);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("Practice");
+
+        gridView = findViewById(R.id.lgridview);
+        //ImageView imageView = findViewById(R.id.sleep);
         pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         editor = Objects.requireNonNull(pref).edit();
        // editor.putString("name", user_name);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LockDown.this, LockdownResource.class);
-                editor.putString("Tag", "Sleep");
-                editor.apply();
-                intent.putExtra("CAT", "Sleep");
-                startActivity(intent);
-
-
-            }
-        });
 
         CustomAdapter customAdapter = new CustomAdapter();
         gridView.setAdapter((ListAdapter) customAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 Intent next = new Intent(LockDown.this, LockdownResource.class);
                 editor.putString("Tag",Options[i]);
                 editor.apply();
-
                 next.putExtra("CAT", Options[i]);
                 startActivity(next);
             }
         });
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
 

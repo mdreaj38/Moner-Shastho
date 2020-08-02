@@ -31,6 +31,6 @@
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            app:srcCompat="@drawable/apple" />
+            app:srcCompat="@drawable/connect" />
     </RelativeLayout>
 </RelativeLayout>

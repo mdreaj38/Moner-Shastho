@@ -14,7 +14,6 @@
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
          android:numColumns="2"/>
     </LinearLayout>
     <LinearLayout
@@ -36,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
             android:background="@drawable/aboutus"
-            android:text="Connect With Expert"
+            android:text="Log Out"
             android:textStyle="italic"
              />
     </LinearLayout>

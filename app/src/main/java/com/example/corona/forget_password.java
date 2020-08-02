@@ -46,11 +46,11 @@ public class forget_password extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
 
-        /* setTitle("Forget Password");
-         *//*back button*//*
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-*/
+        setTitle("Forget Password");
+
 
         pgsdialog = new ProgressDialog(forget_password.this);
         pgsdialog.setTitle("Please Wait");
@@ -80,7 +80,7 @@ public class forget_password extends AppCompatActivity {
                     RadioButton rb = findViewById(id);
                     String text = rb.getText().toString();
                     text = text.toLowerCase();
-                    Toast.makeText((forget_password.this), text, Toast.LENGTH_SHORT).show();
+
                     JSONObject res = new JSONObject();
                     try {
                         res.put("email", forgetEmail.getText().toString());
@@ -96,8 +96,6 @@ public class forget_password extends AppCompatActivity {
             }
         });
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
 
@@ -125,12 +123,6 @@ public class forget_password extends AppCompatActivity {
             String result = null;
             try {
 
-                /*JSONObject res = new JSONObject();
-                res.put("name","Reaj");
-                res.put("username","Reaj");
-                res.put("email","reaj123@gmail.com");
-                res.put("password","Reaj123");
-                data = res.toString();*/
 
 
                 //Connect
@@ -159,18 +151,9 @@ public class forget_password extends AppCompatActivity {
                 }
 
                 bufferedReader.close();
-
-                Log.e("Res2", data);
-                Log.e("Response2", sb.toString());
-
-
-                //////////////////////test
-
                 JSONObject reader = new JSONObject(sb.toString());
                 verdict = reader.getString("status");
                 message = reader.getString("msg");
-                Log.e("Response2(msg)", message);
-                //////////////test
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }

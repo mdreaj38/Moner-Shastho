@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
             android:background="@drawable/aboutus"
-            android:text="Connect With Expert"
+            android:text="Log Out"
             android:textStyle="italic"
             />
     </LinearLayout>
