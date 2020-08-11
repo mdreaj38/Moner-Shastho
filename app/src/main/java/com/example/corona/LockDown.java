@@ -23,7 +23,7 @@ public class LockDown extends AppCompatActivity {
 
     GridView gridView;
 
-    String[] Options = {"Manage Stress", "Relaxation", "Mindfulness","Self Care","Sleep","Problem Solving","Keep Connected","Activity Schedule"};
+    String[] Options = {"Manage Stress", "Relaxation", "Mindfulness","Self Care","Sleep","Specific Problem","Connected","Activity Schedule"};
     int[] OptionImage = {R.drawable.stress_mng,  R.drawable.relax, R.drawable.mind, R.drawable.self_care, R.drawable.sleep, R.drawable.problem_solving,R.drawable.connect, R.drawable.activity_schedule};
     int cnt = 0;
     SharedPreferences pref;
