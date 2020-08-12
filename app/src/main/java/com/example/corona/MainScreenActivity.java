@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,6 @@ public class MainScreenActivity extends AppCompatActivity {
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-    Button button,connect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +45,11 @@ public class MainScreenActivity extends AppCompatActivity {
         email = getIntent().getStringExtra("email");
         //finding listview
         gridView = findViewById(R.id.gridview);
-        button = findViewById(R.id.about_us);
-        connect = findViewById(R.id.connect_expert);
         //set username in mainactivity
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         String temp = pref.getString("name", null);
         String UserType = pref.getString("usertype",null);
         Options[5] = temp;
-      //  Log.e("type2",temp);
 
         CustomAdapter customAdapter = new CustomAdapter();
         gridView.setAdapter(customAdapter);
@@ -92,41 +89,7 @@ public class MainScreenActivity extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainScreenActivity.this);
-                    builder1.setMessage("About This App");
-                    builder1.setCancelable(true);
-
-                    builder1.setPositiveButton(
-                            "Got It",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-
-                    AlertDialog alert11 = builder1.create();
-                    alert11.show();
-            }
-        });
-
-        connect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences settings = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-                settings.edit().clear().apply();
-                Intent next = new Intent(getApplicationContext(), LoginActivity.class);
-
-                //kill all the previous activity
-                next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                startActivity(next);
-                finish();
-            }
-        });
 
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -138,7 +101,38 @@ public class MainScreenActivity extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             this.finish();
         }
+        else if(item.getItemId()==R.id.action_aboutus){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainScreenActivity.this);
+            builder1.setMessage("About This App");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Got It",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }else {
+            SharedPreferences settings = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+            settings.edit().clear().apply();
+            Intent next = new Intent(getApplicationContext(), LoginActivity.class);
+
+            //kill all the previous activity
+            next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            startActivity(next);
+            finish();
+        }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu2, menu);
+        return true;
     }
 
     static class ViewHolder {
