@@ -13,6 +13,8 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -45,17 +47,14 @@ import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class LockdownBlog extends AppCompatActivity {
-    Bitmap bitmap;
-    ImageView imageView;
 
-    TextView textView, btitle, author, date;
     public String CurStress="0";
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     public String sid = "",stitle = "",sbody = "";
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
-
+    WebView webView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,26 +64,14 @@ public class LockdownBlog extends AppCompatActivity {
         /*back button*/
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        btitle = findViewById(R.id.ltitle);
-        textView = findViewById(R.id.lblogbody);
-        author = findViewById(R.id.lauthor);
-        date = findViewById(R.id.ldate);
-        imageView = findViewById(R.id.lblogImg);
-
-        //editText.setText(Html.fromHtml("<b>"+message+"</b>"));
-        Log.e("this", "a");
-
+        webView = findViewById(R.id.res_body);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setAppCacheEnabled(true);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
         sendAndRequestResponse(message);
-
-        /*try {
-            new HttpGetRequest().execute(message).get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
-        Log.e("this", "a");
     }
 
   @Override
@@ -155,70 +142,6 @@ public class LockdownBlog extends AppCompatActivity {
         }
     }
 
-    public class HttpGetRequest extends AsyncTask<String, Void, String> {
-
-        String data="";
-        String singleParsed = "";
-        String dataParsed = "";
-        ProgressDialog progressDialog;
-
-        protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(LockdownBlog.this, "", "Loading...");
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            Log.e("Check", "ok");
-            try {
-                String st = strings[0];
-                URL url = new URL(st);
-                Log.e("cchheecckk", url.toString());
-
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                //Set method
-                httpURLConnection.setRequestMethod("GET");
-                httpURLConnection.connect();
-
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String line = "";
-
-                while (line != null) {
-                    line = bufferedReader.readLine();
-                    data = data + line;
-                 }
-
-                bufferedReader.close();
-
-                ParseJsonData(data);
-
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-            return data.toString();
-        }
-
-        @Override
-        protected void onPostExecute(String aVoid) {
-            try {
-                JSONObject jo = new JSONObject(data);
-                JSONObject real_data = jo.getJSONObject("data");
-                new loadImage().execute((String) real_data.get("thumbnail")).get();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            progressDialog.dismiss();
-            super.onPostExecute(aVoid);
-        }
-    }
 
     private void sendAndRequestResponse(String url) {
 
@@ -255,10 +178,11 @@ public class LockdownBlog extends AppCompatActivity {
 
     public void ParseJsonData(String data) throws JSONException, ExecutionException, InterruptedException {
 
-        JSONObject jo = new JSONObject(data);
-        JSONObject real_data = jo.getJSONObject("data");
-        new loadImage().execute((String) real_data.get("thumbnail"));
-
+        JSONObject real_data = new JSONObject(data);
+        String Body = (String) real_data.get("bodyHTML");
+        Body="<style>img{display: inline;height: auto;max-width: 100%;}</style>"+Body+"<b>You can complete some tasks pressing task on top right corner</b>";
+        webView.loadDataWithBaseURL(null,Body,"text/html","utf-8",null);
+        Log.e("poo",Body);
         JSONArray Jtask = real_data.getJSONArray("activities");
         for(int j=0;j<Jtask.length();++j){
             JSONObject objj = (JSONObject) Jtask.get(j);
@@ -267,38 +191,6 @@ public class LockdownBlog extends AppCompatActivity {
             stitle+= (String) objj.get("title")+'#';
             sbody+= (String) objj.get("body")+'#';
         }
-        Log.e("cchheecckk", sbody);
 
-        btitle.setText((String) real_data.get("title"));
-
-        textView.setText(Html.fromHtml((String) real_data.get("body")));
-
-        author.setText(Html.fromHtml("<i>Written by</i>  " + (String) real_data.get("author")));
-        date.setText((String) real_data.get("date"));
-    }
-    public class loadImage extends AsyncTask<String, String, String> {
-
-        @Override
-        protected String doInBackground(String... param) {
-
-            URL url = null;
-            InputStream strm = null;
-            try {
-
-                url = new URL(param[0]);
-                strm = new BufferedInputStream(url.openStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            bitmap = BitmapFactory.decodeStream(strm);
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-
-            imageView.setImageBitmap(bitmap);
-        }
     }
 }

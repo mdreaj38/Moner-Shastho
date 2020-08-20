@@ -31,7 +31,7 @@ public class MainScreenActivity extends AppCompatActivity {
     public String email;
     GridView gridView;
     String[] Options = {"Practice", "Assessment", "Track Record", "Resources", "Connect With Expert", "Profile"};
-    int[] OptionImage = {R.drawable.practice, R.drawable.active, R.drawable.wellbeing, R.drawable.books, R.drawable.connetexpert, R.drawable.profile};
+    int[] OptionImage = {R.drawable.practice, R.drawable.assessment, R.drawable.activity, R.drawable.resources, R.drawable.connetexpert, R.drawable.profile};
     int cnt = 0;
     private ImageView imageView;
 

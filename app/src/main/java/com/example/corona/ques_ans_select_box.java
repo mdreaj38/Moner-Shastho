@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -55,6 +56,9 @@ public class ques_ans_select_box extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ques_ans_select_box);
+
+        /*back button*/
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         TextView question = findViewById(R.id.textQuestion);
         RadioGroup radioGroup = findViewById(R.id.radio_group);
@@ -133,6 +137,12 @@ public class ques_ans_select_box extends AppCompatActivity {
         });
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
     //get data from here
     public void onRadioButtonClicked(View view) {
         flag = 0;

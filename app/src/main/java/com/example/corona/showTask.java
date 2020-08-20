@@ -66,12 +66,6 @@ public class showTask extends AppCompatActivity {
         setContentView(R.layout.activity_show_task);
         textView = (WebView )findViewById(R.id.taskbodyy);
         setTitle("Follow This Step");
-/*
-        textView.getSettings().setJavaScriptEnabled(true);
-        textView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
-        textView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        textView.getSettings().setDomStorageEnabled(true);
-        textView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);*/
 
         textView.getSettings().setJavaScriptEnabled(true);
         textView.getSettings().setDomStorageEnabled(true);
@@ -171,7 +165,6 @@ public class showTask extends AppCompatActivity {
     }
 
      public void parse_json_data(String data){
-        //Log.e("ch--eck--data", data);
         try {
             JSONObject jo = new JSONObject(data);
             JSONArray JA = jo.getJSONArray("data");
@@ -181,10 +174,6 @@ public class showTask extends AppCompatActivity {
             screen_title = (String) jo.get("title");
             setTitle(screen_title);
             textView.loadDataWithBaseURL(null,"<style>img{display: inline;height: auto;max-width: 100%;}</style>"+body,"text/html","utf-8",null);
-
-          //  textView.loadUrl(body);
-
-            Log.e("ch--eck--JA",body);
 
         } catch (JSONException e) {
             e.printStackTrace();

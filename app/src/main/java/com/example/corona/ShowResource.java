@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,7 +33,7 @@ public class ShowResource extends AppCompatActivity {
     ImageView imageView;
 
     TextView textView, btitle, author, date;
-
+    //WebView webView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_resource);
@@ -51,14 +52,12 @@ public class ShowResource extends AppCompatActivity {
         imageView = findViewById(R.id.blogImg);
 
         //editText.setText(Html.fromHtml("<b>"+message+"</b>"));
-        Log.e("this", "a");
         try {
             new HttpGetRequest().execute(message).get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
-        Log.e("this", "a");
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -86,7 +85,6 @@ public class ShowResource extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            Log.e("Check", "ok");
             try {
                 String st = strings[0];
                 URL url = new URL(st);
@@ -94,7 +92,6 @@ public class ShowResource extends AppCompatActivity {
                 //Set method
                 httpURLConnection.setRequestMethod("GET");
                 httpURLConnection.connect();
-                ;
 
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -106,10 +103,7 @@ public class ShowResource extends AppCompatActivity {
 
                 JSONObject jo = new JSONObject(data);
                 real_data = jo.getJSONObject("data");
-                Log.e("this2", (String) real_data.toString());
-                Log.e("this2", (String) real_data.get("title"));
-                Log.e("this2body", (String) real_data.get("body"));
-                Log.e("this2", data);
+
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
@@ -122,11 +116,13 @@ public class ShowResource extends AppCompatActivity {
 
                 new loadImage().execute((String) real_data.get("thumbnail")).get();
                 btitle.setText((String) real_data.get("title"));
-
-                textView.setText(Html.fromHtml((String) real_data.get("body")));
+                String Body  =(String) real_data.get("body");
+                textView.setText(Html.fromHtml(Body));
 
                 author.setText(Html.fromHtml("<i>Written by</i>  " + (String) real_data.get("author")));
                 date.setText((String) real_data.get("date"));
+              //  webView.loadDataWithBaseURL(null,Body,"text/html","utf-8",null);
+
 
                 progressDialog.dismiss();
             } catch (JSONException | InterruptedException | ExecutionException e) {
