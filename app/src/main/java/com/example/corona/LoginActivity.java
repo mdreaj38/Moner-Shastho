@@ -166,7 +166,6 @@ public class LoginActivity extends AppCompatActivity {
             HttpURLConnection urlConnection;
             String url = strings[0];
             String data = strings[1];
-            Log.e("login",data);
             String result = null;
             try {
 
@@ -187,7 +186,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Read
                 statusCode = urlConnection.getResponseCode();
-                Log.e("code", Integer.toString(statusCode));
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
 
                 String line = null;
@@ -200,13 +198,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("Response2", data);
                 Log.e("Response2", sb.toString());
 
-                //////////////////////test
-
-                /*JSONObject reader = new JSONObject(sb.toString());
-                verdict = reader.getString("status");
-                message = reader.getString("msg");
-                Log.e("Response2(msg)", message);*/
-                //////////////test
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -104,7 +104,7 @@ public class update_profile_page_4 extends AppCompatActivity {
                             res.put("name",u_name);
                             res.put("email",email);
                             res.put("age",age);
-                            res.put("id",id);
+                            res.put("user_id",id);
                             res.put("maritalStatus",maritalStatus);
                             res.put("Gender",gender);
                             res.put("livingArea",area);
@@ -128,9 +128,7 @@ public class update_profile_page_4 extends AppCompatActivity {
                         String url = "https://bad-blogger.herokuapp.com/users/update-profile/android";
                         try {
                             new HttpPostRequest().execute(url,res.toString()).get();
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
+                        } catch (ExecutionException | InterruptedException e) {
                             e.printStackTrace();
                         }
 
@@ -217,7 +215,6 @@ public class update_profile_page_4 extends AppCompatActivity {
             HttpURLConnection urlConnection;
             String url = strings[0];
             String data = strings[1];
-            Log.e("Response23", data);
             String result = null;
             try {
 
@@ -238,7 +235,6 @@ public class update_profile_page_4 extends AppCompatActivity {
 
                 //Read
                 statusCode = urlConnection.getResponseCode();
-                Log.e("code", Integer.toString(statusCode));
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
 
                 String line = null;
@@ -247,9 +243,9 @@ public class update_profile_page_4 extends AppCompatActivity {
                 }
 
                 bufferedReader.close();
-                Log.e("Response23", Integer.toString(statusCode));
-                Log.e("Response23", data);
-                Log.e("Response23", sb.toString());
+                Log.e("Response223", Integer.toString(statusCode));
+                Log.e("Response223", data);
+                Log.e("Response223", sb.toString());
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -260,7 +256,6 @@ public class update_profile_page_4 extends AppCompatActivity {
 
         protected void onPostExecute(Void code) {
             progressDialog.dismiss();
-            Log.e("Response23--",sb.toString());
 
             SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = Objects.requireNonNull(pref).edit();

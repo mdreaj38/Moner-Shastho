@@ -73,7 +73,6 @@ public class GeneralReg extends AppCompatActivity {
                     Toast.makeText(GeneralReg.this, "Select gender", Toast.LENGTH_SHORT).show();
                 } else {
                     GenderString = (String) radioButton.getText();
-                    Toast.makeText(GeneralReg.this, GenderString, Toast.LENGTH_SHORT).show();
                 }
 
                 NameString = Name.getText().toString();
