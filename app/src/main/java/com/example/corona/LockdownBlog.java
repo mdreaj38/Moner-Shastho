@@ -180,7 +180,7 @@ public class LockdownBlog extends AppCompatActivity {
 
         JSONObject real_data = new JSONObject(data);
         String Body = (String) real_data.get("bodyHTML");
-        Body="<style>img{display: inline;height: auto;max-width: 100%;}</style>"+Body+"<b>You can complete some tasks pressing task on top right corner</b>";
+        Body="<style>img{display: inline;height: auto;max-width: 100%;}</style>"+Body+"<p style=\"color:black;font-size:24px;\">You can practice some tasks pressing <b><i>TASK</i></b> on top right corner,which are very much helpful to reduce stress.</p>";
         webView.loadDataWithBaseURL(null,Body,"text/html","utf-8",null);
         Log.e("poo",Body);
         JSONArray Jtask = real_data.getJSONArray("activities");
