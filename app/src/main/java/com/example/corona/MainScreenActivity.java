@@ -69,7 +69,6 @@ public class MainScreenActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainScreenActivity.this, resource.class);
                     startActivity(intent);
                 } else if (i == 4) {
-
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://trin-innovation.com/services/emergencyAppointment/"));startActivity(browserIntent);
 
                 } else if (i == 5) {
@@ -102,20 +101,8 @@ public class MainScreenActivity extends AppCompatActivity {
             this.finish();
         }
         else if(item.getItemId()==R.id.action_aboutus){
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainScreenActivity.this);
-            builder1.setMessage("About This App");
-            builder1.setCancelable(true);
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bad-blogger.herokuapp.com/about"));startActivity(browserIntent);
 
-            builder1.setPositiveButton(
-                    "Got It",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
         }else {
             SharedPreferences settings = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
             settings.edit().clear().apply();

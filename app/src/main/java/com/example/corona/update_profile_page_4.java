@@ -105,21 +105,51 @@ public class update_profile_page_4 extends AppCompatActivity {
                             res.put("email",email);
                             res.put("age",age);
                             res.put("user_id",id);
+                            String NA = "Not Specified";
+                            if(maritalStatus.length()==0) maritalStatus=NA;
                             res.put("maritalStatus",maritalStatus);
+
+                            if(gender.length()==0) gender=NA;
                             res.put("Gender",gender);
+
+                            area = area.length()==0?NA:area;
                             res.put("livingArea",area);
-                            res.put("residenceType","NA");
+
+                            res.put("residenceType",NA);
+
+                            family = family.length()==0?NA:family;
                             res.put("familyType",family);
+
+                            education = education.length()==0?NA:education;
                             res.put("education",education);
+
+                            occ = occ.length()==0?NA:occ;
                             res.put("occupation",occ);
+
+                            income = income.length()==0?NA:income;
                             res.put("monthlyIncome",income);
-                            res.put("familyIllness","NA");
+
+                            res.put("familyIllness",NA);
+
+                            complaints = complaints.length()==0?NA:complaints;
                             res.put("complaint",complaints);
+
+                            stringChildAbuse = stringChildAbuse.length()==0?NA:stringChildAbuse;
                             res.put("childhoodDeprivation",stringChildAbuse);
+
+                            stringRelationshipPrb = stringRelationshipPrb.length()==0?NA:stringRelationshipPrb;
                             res.put("relationProblem",stringRelationshipPrb);
+
+                            stress = stress.length()==0?NA:stress;
                             res.put("stressfullEvent",stress);
+
+                            abuse = abuse.length()==0?NA:abuse;
                             res.put("subtanceAbuse",abuse);
+
+                            disorder = disorder.length()==0?NA:disorder;
                             res.put("diagnosedDisorder",disorder);
+
+                            stringTreatmentDetails = stringTreatmentDetails.length()==0?NA:stringTreatmentDetails;
                             res.put("treatmentHistory",stringTreatmentDetails);
 
                         } catch (JSONException e) {

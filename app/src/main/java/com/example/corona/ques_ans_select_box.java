@@ -44,6 +44,10 @@ public class ques_ans_select_box extends AppCompatActivity {
     public ArrayList<String> option2  = new ArrayList<String>();
     public ArrayList<String> option3  = new ArrayList<String>();
     public ArrayList<String> option4  = new ArrayList<String>();
+    public ArrayList<String> option5  = new ArrayList<String>();
+    public ArrayList<String> option6  = new ArrayList<String>();
+    public ArrayList<String> option7  = new ArrayList<String>();
+
     public ArrayList<Integer> scale  = new ArrayList<Integer>();
 
     int[][] score = new int[150][150];
@@ -66,6 +70,9 @@ public class ques_ans_select_box extends AppCompatActivity {
         RadioButton button2 = findViewById(R.id.radio_button2);
         RadioButton button3 = findViewById(R.id.radio_button3);
         RadioButton button4 = findViewById(R.id.radio_button4);
+        RadioButton button5 = findViewById(R.id.radio_button5);
+        RadioButton button6 = findViewById(R.id.radio_button6);
+        RadioButton button7 = findViewById(R.id.radio_button7);
 
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
 
@@ -73,18 +80,16 @@ public class ques_ans_select_box extends AppCompatActivity {
         String ID = getIntent().getStringExtra("ID");
         try {
             new HttpGetRequest().execute(ID).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
 
-
         //set question
         String[] s = new String[500];
-        for(int i=0;i<Radio_Question.size();++i){
-            s[i] = Radio_Question.get(i);
+        int Limit = Radio_Question.size();
+        for(int i=0;i<Limit;++i){
+            s[i] = "("+String.valueOf(i+1)+"/"+String.valueOf(Limit)+") "+Radio_Question.get(i);
         }
         List<String> stringArrayList = new ArrayList<>(Arrays.asList(s));
 
@@ -93,6 +98,10 @@ public class ques_ans_select_box extends AppCompatActivity {
         button2.setText(option2.get(0));
         button3.setText(option3.get(0));
         button4.setText(option4.get(0));
+        button5.setText(option5.get(0));
+        button6.setText(option6.get(0));
+        button7.setText(option7.get(0));
+
         question.setText(s[0]);
         i = 0;
        int len = Radio_Question.size();
@@ -102,7 +111,7 @@ public class ques_ans_select_box extends AppCompatActivity {
                 if (flag == 0) {
                     Toast toast = Toast.makeText(ques_ans_select_box.this, "Choose an answer!", Toast.LENGTH_SHORT);
                     View view1 = toast.getView();
-                    view1.setBackgroundResource(R.color.colorAccent);
+                    view1.setBackgroundResource(R.color.red);
                     toast.show();
                 }
                 else if(i<len-1){
@@ -117,6 +126,10 @@ public class ques_ans_select_box extends AppCompatActivity {
                     button2.setText(option2.get(i));
                     button3.setText(option3.get(i));
                     button4.setText(option4.get(i));
+                    button5.setText(option5.get(i));
+                    button6.setText(option6.get(i));
+                    button7.setText(option7.get(i));
+
                 }
                 else if(i==len-1){
                     cur_score+= (scale.get(i) *score[i][select]);
@@ -127,12 +140,8 @@ public class ques_ans_select_box extends AppCompatActivity {
 
                     Intent intent = new Intent(ques_ans_select_box.this, qus_ans_slider.class);
                     intent.putExtra("t_id",ID);
-                    Log.e("code1",ID);
-
                     startActivity(intent);
-                    //startActivity(intent);
                 }
-
             }
         });
     }
@@ -174,6 +183,24 @@ public class ques_ans_select_box extends AppCompatActivity {
                 flag = 1;
                 select = 3;
             }
+        }else if (id == R.id.radio_button5) {
+            if (checked) {
+                str = "5";
+                flag = 1;
+                select = 4;
+            }
+        }else if (id == R.id.radio_button6) {
+            if (checked) {
+                str = "6";
+                flag = 1;
+                select = 5;
+            }
+        }else if (id == R.id.radio_button7) {
+            if (checked) {
+                str = "7";
+                flag = 1;
+                select = 6;
+            }
         }
     }
 
@@ -189,14 +216,12 @@ public class ques_ans_select_box extends AppCompatActivity {
         ProgressDialog progressDialog;
 
         protected void onPreExecute() {
-           // progressDialog = ProgressDialog.show(Read_Diary.this, "", "Loading...");
         }
 
         @Override
         protected String doInBackground(String... strings) {
             try {
                 URL url = new URL("https://bad-blogger.herokuapp.com/app-admin/single-test/"+strings[0]+"?device=android");
-                Log.e("Check", url.toString());
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set method
                 httpURLConnection.setRequestMethod("GET");
@@ -206,27 +231,22 @@ public class ques_ans_select_box extends AppCompatActivity {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line = "";
 
-                Log.e("Check", url.toString());
 
                 while (line != null) {
                     line = bufferedReader.readLine();
                     data = data + line;
                 }
-                Log.e("dataaa1", data.toString());
 
                 JSONObject jo = new JSONObject(data);
                 jo = jo.getJSONObject("data");
                 JSONArray JA = jo.getJSONArray("questionSet");
                 int ll = JA.length();
-                Log.e("dataaa2->", String.valueOf(ll));
-                Log.e("dataaa2", String.valueOf(JA.length()));
                 int c = 0;
                 for(int i=0;i<JA.length();++i){
                     JSONObject obj = (JSONObject) JA.get(i);
                     String type = (String) obj.get("inputType");
                     if(type.equals("radio")){
                         c++;
-                        Log.e("dataaa2", "Radio");
 
                         Radio_Question.add((String) obj.get("question"));
                         scale.add(Integer.parseInt((String) obj.get("scale")));
@@ -251,13 +271,20 @@ public class ques_ans_select_box extends AppCompatActivity {
                         option4.add((String) cur.get("option"));
                         score[i][3] = Integer.parseInt((String) cur.get("scale"));
 
-                    }
-                    else {
-                        Log.e("dataaa2", "Ranger");
+                        cur = (JSONObject) op.get(4);
+                        option5.add((String) cur.get("option"));
+                        score[i][4] = Integer.parseInt((String) cur.get("scale"));
+
+                        cur = (JSONObject) op.get(5);
+                        option6.add((String) cur.get("option"));
+                        score[i][5] = Integer.parseInt((String) cur.get("scale"));
+
+                        cur = (JSONObject) op.get(6);
+                        option7.add((String) cur.get("option"));
+                        score[i][6] = Integer.parseInt((String) cur.get("scale"));
 
                     }
                 }
-                Log.e("dataaa2->", String.valueOf(c));
 
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
@@ -267,7 +294,6 @@ public class ques_ans_select_box extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String aVoid) {
-          //  progressDialog.cancel();
             super.onPostExecute(aVoid);
         }
     }

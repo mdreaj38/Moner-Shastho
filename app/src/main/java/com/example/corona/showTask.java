@@ -9,14 +9,18 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.http.SslError;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -71,7 +75,11 @@ public class showTask extends AppCompatActivity {
         textView.getSettings().setDomStorageEnabled(true);
         textView.getSettings().setAppCacheEnabled(true);
         textView.getSettings().setLoadsImagesAutomatically(true);
-         textView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        textView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+
+
+        textView.setBackgroundColor(Color.argb(1, 0, 0, 0));
+
 
         _Id = getIntent().getStringExtra("curbody");
 
@@ -130,7 +138,6 @@ public class showTask extends AppCompatActivity {
                 editor.putString("count",cnt);
                 editor.putString("CurStress", Integer.toString(now_stress));
                 editor.apply();
-               // Toast.makeText(getApplicationContext(),Integer.toString(avg),Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -149,7 +156,6 @@ public class showTask extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                Log.e("ch--eck--",response.toString());
                 parse_json_data(response.toString());
                 progressDialog.cancel();
 

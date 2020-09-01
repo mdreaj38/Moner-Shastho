@@ -62,20 +62,13 @@ public class TestList extends AppCompatActivity {
                 Animation animation1 = new AlphaAnimation(0.7f, 1.0f);
                 animation1.setDuration(2000);
                 view.startAnimation(animation1);
-                 Toast.makeText(TestList.this,mydata.get(position),Toast.LENGTH_SHORT).show();
+                Toast.makeText(TestList.this,mydata.get(position),Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(TestList.this, ques_ans_select_box.class);
                 String temp = testid.get(position);
                 intent.putExtra("ID", temp );
                 startActivity(intent);
 
-            }
-        });
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(TestList.this, "long", Toast.LENGTH_SHORT).show();
-                return false;
             }
         });
     }

@@ -53,8 +53,10 @@ public class chart_mental_stress extends AppCompatActivity {
     SharedPreferences mypref;
     SharedPreferences.Editor editor;
     String UserId;
+    MyMarkerView mv;
     public ArrayList<String> test_score = new ArrayList<String>(); // graph - 1
     public ArrayList<String> task_score = new ArrayList<String>(); // graph - 1
+
 
     String User_id;
     @Override
@@ -74,21 +76,10 @@ public class chart_mental_stress extends AppCompatActivity {
         mChart = findViewById(R.id.chart);
         mChart.setTouchEnabled(true);
         mChart.setPinchZoom(true);
-        MyMarkerView mv = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
+         mv = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
         mv.setChartView(mChart);
         mChart.setMarker(mv);
         get_test_data(User_id);
-
-
-        mChart1 = findViewById(R.id.chart1);
-        mChart1.setTouchEnabled(true);
-        mChart1.setPinchZoom(true);
-        MyMarkerView mv1 = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
-        mv.setChartView(mChart1);
-        mChart1.setMarker(mv1);
-        ProgressDialog progressDialog = ProgressDialog.show(chart_mental_stress.this, "Loading...", "");
-        get_task_data(User_id);
-        progressDialog.cancel();
 
     }
 
@@ -153,17 +144,16 @@ public class chart_mental_stress extends AppCompatActivity {
     }
     private void setData1() {
 
+        Log.e("ScoreTa", String.valueOf(task_score.size()));
+        Log.e("ScoreTe", String.valueOf(test_score.size()));
         ArrayList<Entry> values = new ArrayList<>();
          for(int i=0;i<test_score.size();++i){
             String cur = test_score.get(i);
             values.add(new Entry(i+1, (float) Double.parseDouble(cur)));
         }
-        for(int i = task_score.size();i<7;++i){
+        for(int i = test_score.size();i<7;++i){
             values.add(new Entry(i+1,0));
         }
-
-       /* values.add(new Entry(1, 50));*/
-
 
         LineDataSet set1;
         if (mChart.getData() != null && mChart.getData().getDataSetCount() > 0) {
@@ -267,15 +257,12 @@ public class chart_mental_stress extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                Log.e("ch--eck----",response.toString());
-
                 try {
                     parse_test_score(response.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 progressDialog.cancel();
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -284,9 +271,17 @@ public class chart_mental_stress extends AppCompatActivity {
             }
         });
         mRequestQueue.add(mStringRequest);
+        mChart1 = findViewById(R.id.chart1);
+        mChart1.setTouchEnabled(true);
+        mChart1.setPinchZoom(true);
+        MyMarkerView mv1 = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
+        mv.setChartView(mChart1);
+        mChart1.setMarker(mv1);
+        get_task_data(User_id);
     }
     public void parse_test_score(String data) throws JSONException {
-         JSONObject jo = new JSONObject(data);
+        Log.e("ScoreTest",data.toString());
+        JSONObject jo = new JSONObject(data);
         JSONArray JA = jo.getJSONArray("scores");
          for(int i=0;i<JA.length();++i){
              String cur = String.valueOf(JA.get(i));
@@ -324,9 +319,10 @@ public class chart_mental_stress extends AppCompatActivity {
         });
 
         mRequestQueue.add(mStringRequest);
+
     }
     public void parse_task_score(String data) throws JSONException {
-
+        Log.e("ScoreTask",data.toString());
         JSONObject jo = new JSONObject(data);
         JSONArray JA = jo.getJSONArray("scores");
          for(int i=0;i<JA.length();++i){

@@ -98,12 +98,18 @@ public class Task extends AppCompatActivity {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        /*Intent intent = new Intent(Task.this, LockDown.class);
-        startActivity(intent);*/
         finish();
         return super.onOptionsItemSelected(item);
     }
-    public class HttpGetRequest extends AsyncTask<Void, Void, String> {
+    public void onBackPressed() {
+        try {
+            new HttpGetRequest().execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        finish();
+    }
+        public class HttpGetRequest extends AsyncTask<Void, Void, String> {
 
         public static final String REQUEST_METHOD = "GET";
         public static final int READ_TIMEOUT = 15000;
@@ -131,7 +137,6 @@ public class Task extends AppCompatActivity {
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set methods and timeouts
                 httpURLConnection.setRequestMethod("GET");
-                Log.e("thissjj",url.toString());
 
                 httpURLConnection.connect();
                 InputStream inputStream = httpURLConnection.getInputStream();
@@ -141,9 +146,6 @@ public class Task extends AppCompatActivity {
                     line = bufferedReader.readLine();
                     data = data + line;
                 }
-                // Log.e("check",data.toString());
-
-                Log.e("thissjj", data.toString());
 
             } catch (IOException e) {
                 e.printStackTrace();
