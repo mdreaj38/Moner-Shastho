@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginStart="10dp"
-            android:text="Phone Number"
+            android:text="3.Phone Number"
             android:textColor="#ba160c"
             android:textSize="20sp" />
 
@@ -86,7 +86,8 @@
             android:autofillHints="textPassword"
             android:ems="10"
             android:inputType="phone"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:gravity="center"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -103,8 +104,9 @@
             android:layout_height="wrap_content"
             android:autofillHints="textPassword"
             android:ems="10"
+            android:gravity="center"
             android:inputType="text"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:textColor="#000000" />
 
 
         <TextView
@@ -122,8 +124,9 @@
             android:layout_height="wrap_content"
             android:autofillHints="textPassword"
             android:ems="10"
+            android:gravity="center"
             android:inputType="text"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -139,8 +142,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autofillHints="textPassword"
+            android:gravity="center"
+            android:textColor="#000000"
             android:ems="10"
             android:inputType="text"
-            android:textColorHint="@color/colorPrimaryDark" />
+            />
     </LinearLayout>
 </LinearLayout>

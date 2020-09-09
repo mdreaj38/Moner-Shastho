@@ -52,8 +52,10 @@ public class update_profile_page_2 extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == R.id.item1) {   //this item has your app icon
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
+        else {   //this item has your app icon
             Intent intent = new Intent(update_profile_page_2.this, update_profile_page_3.class);
 
 
@@ -80,9 +82,7 @@ public class update_profile_page_2 extends AppCompatActivity {
             startActivity(intent);
              return true;
         }
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
+
         return super.onOptionsItemSelected(item);
     }
 

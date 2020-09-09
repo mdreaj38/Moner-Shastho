@@ -84,24 +84,14 @@ public class MainScreenActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
-
             }
         });
-
-
-
-
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
-        else if(item.getItemId()==R.id.action_aboutus){
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bad-blogger.herokuapp.com/about"));startActivity(browserIntent);
+         if(item.getItemId()==R.id.action_aboutus){
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bad-blogger.herokuapp.com/about"));
+            startActivity(browserIntent);
 
         }else {
             SharedPreferences settings = getSharedPreferences("MyPref", Context.MODE_PRIVATE);

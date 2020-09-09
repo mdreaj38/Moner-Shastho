@@ -42,6 +42,7 @@ public class activity_profile_expert_user_2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_expert_user_2);
+        setTitle("Profile");
 
         //back button
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -57,16 +58,27 @@ public class activity_profile_expert_user_2 extends AppCompatActivity {
         organization = pref.getString("organization", null);
         password = pref.getString("password",null);
         string_license = pref.getString("license",null);
-        Log.e("kop","ok1"+password);
+
+        String t_ins = pref.getString("institute",null);
+        String t_hdeg =pref.getString("hDegree",null);
+        String t_field = pref.getString("field",null);
+        String t_city = pref.getString("city",null);
+        String t_country = pref.getString("country",null);
 
         institute = findViewById(R.id.expert_institute);
         license = findViewById(R.id.expert_license);
         hdegree = findViewById(R.id.expert_hDegree);
         field = findViewById(R.id.expert_field);
         country = findViewById(R.id.expert_country);
+
         city = findViewById(R.id.expert_city);
         Epassword = findViewById(R.id.expert_password);
-        Log.e("kop","ok2"+password);
+
+        institute.setText(t_ins);
+        hdegree.setText(t_hdeg);
+        field.setText(t_field);
+        country.setText(t_country);
+        city.setText(t_city);
 
 
         update = findViewById(R.id.expertUpdateProfileButton);

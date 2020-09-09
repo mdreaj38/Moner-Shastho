@@ -37,12 +37,12 @@
             android:layout_marginStart="10dp"
             android:text="1.Email"
             android:textColor="#ba160c"
-            android:textSize="20sp" />
+            android:textSize="40sp" />
 
         <EditText
             android:id="@+id/expert_email"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:autofillHints="textEmail"
             android:background="#B5CCC9"
             android:focusable="true"
@@ -58,7 +58,7 @@
             android:layout_marginStart="10dp"
             android:text="2.Username"
             android:textColor="#ba160c"
-            android:textSize="20sp" />
+            android:textSize="40sp" />
 
         <EditText
             android:id="@+id/expert_username"
@@ -66,27 +66,31 @@
             android:layout_height="wrap_content"
             android:autofillHints="textPassword"
             android:ems="10"
+            android:textSize="40dp"
             android:gravity="center"
             android:inputType="text"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginStart="10dp"
-            android:text="Phone Number"
+            android:text="3.Phone Number"
             android:textColor="#ba160c"
-            android:textSize="20sp" />
+            android:textSize="40sp" />
 
         <EditText
             android:id="@+id/expert_phoneNo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autofillHints="textPassword"
+            android:textSize="40dp"
+
             android:ems="10"
             android:inputType="phone"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:gravity="center"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -95,16 +99,19 @@
             android:layout_marginStart="10dp"
             android:text="4.Designation"
             android:textColor="#ba160c"
-            android:textSize="20sp" />
+            android:textSize="40sp" />
 
         <EditText
             android:id="@+id/expert_designation"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autofillHints="textPassword"
+            android:textSize="40dp"
+
             android:ems="10"
             android:inputType="text"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:gravity="center"
+            android:textColor="#000000" />
 
 
         <TextView
@@ -114,16 +121,18 @@
             android:layout_marginStart="10dp"
             android:text="5.Organization"
             android:textColor="#ba160c"
-            android:textSize="20sp" />
+            android:textSize="40sp" />
 
         <EditText
             android:id="@+id/expert_organization"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:textSize="40dp"
             android:autofillHints="textPassword"
             android:ems="10"
             android:inputType="text"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:gravity="center"
+            android:textColor="#000000"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -132,7 +141,7 @@
             android:layout_marginStart="10dp"
             android:text="6.License"
             android:textColor="#ba160c"
-            android:textSize="20sp" />
+            android:textSize="40sp" />
 
         <EditText
             android:id="@+id/expert_license"
@@ -140,7 +149,10 @@
             android:layout_height="wrap_content"
             android:autofillHints="textPassword"
             android:ems="10"
+            android:textSize="40dp"
             android:inputType="text"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:gravity="center"
+            android:textColor="#000000"
+            />
     </LinearLayout>
 </LinearLayout>

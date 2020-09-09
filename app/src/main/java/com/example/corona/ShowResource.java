@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,24 +34,24 @@ public class ShowResource extends AppCompatActivity {
     ImageView imageView;
 
     TextView textView, btitle, author, date;
-    //WebView webView;
+    WebView webView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_resource);
         String message = getIntent().getStringExtra("ID");
 
 
-        setTitle("Blog");
+        setTitle("");
         /*back button*/
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        btitle = findViewById(R.id.title);
-        textView = findViewById(R.id.blogbody);
-        author = findViewById(R.id.author);
-        date = findViewById(R.id.date);
-        imageView = findViewById(R.id.blogImg);
-
+        webView = findViewById(R.id.resourcebodyy);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setAppCacheEnabled(true);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         //editText.setText(Html.fromHtml("<b>"+message+"</b>"));
         try {
             new HttpGetRequest().execute(message).get();
@@ -61,7 +62,7 @@ public class ShowResource extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) ;
+        if(item.getItemId() == android.R.id.home) ;
         {
             finish();
         }
@@ -73,6 +74,7 @@ public class ShowResource extends AppCompatActivity {
         public static final String REQUEST_METHOD = "GET";
         public static final int READ_TIMEOUT = 15000;
         public static final int CONNECTION_TIMEOUT = 15000;
+        String  res_body;
         String data = "";
         String singleParsed = "";
         String dataParsed = "";
@@ -102,59 +104,20 @@ public class ShowResource extends AppCompatActivity {
                 }
 
                 JSONObject jo = new JSONObject(data);
-                real_data = jo.getJSONObject("data");
+                 res_body= (String) jo.get("bodyHTML");
 
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
-            return data;
+            return res_body;
         }
 
         @Override
-        protected void onPostExecute(String aVoid) {
-            try {
-
-                new loadImage().execute((String) real_data.get("thumbnail")).get();
-                btitle.setText((String) real_data.get("title"));
-                String Body  =(String) real_data.get("body");
-                textView.setText(Html.fromHtml(Body));
-
-                author.setText(Html.fromHtml("<i>Written by</i>  " + (String) real_data.get("author")));
-                date.setText((String) real_data.get("date"));
-              //  webView.loadDataWithBaseURL(null,Body,"text/html","utf-8",null);
-
-
-                progressDialog.dismiss();
-            } catch (JSONException | InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(String body) {
+            webView.loadDataWithBaseURL(null,"<style>img{display: inline;height: auto;max-width: 100%;}</style>"+body,"text/html","utf-8",null);
+            progressDialog.dismiss();
+            super.onPostExecute(body);
         }
     }
 
-    public class loadImage extends AsyncTask<String, String, String> {
-
-        @Override
-        protected String doInBackground(String... param) {
-
-            URL url = null;
-            InputStream strm = null;
-            try {
-
-                url = new URL(param[0]);
-                strm = new BufferedInputStream(url.openStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            bitmap = BitmapFactory.decodeStream(strm);
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-
-            imageView.setImageBitmap(bitmap);
-        }
-    }
 }

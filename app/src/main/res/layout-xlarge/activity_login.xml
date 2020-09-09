@@ -21,34 +21,36 @@
         <ImageView
             android:layout_width="220dp"
             android:layout_height="220dp"
-            app:srcCompat="@mipmap/coverphoto" />
+            app:srcCompat="@drawable/login_page" />
     </LinearLayout>
 
     <EditText
         android:id="@+id/email_login"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
+        android:layout_width="500dp"
+        android:layout_height="75dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/btn"
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:drawablePadding="10dp"
-        android:elevation="8dp"
+        android:elevation="10dp"
         android:hint="Email"
+        android:textSize="30sp"
         android:inputType="textEmailAddress"
         android:paddingLeft="15dp"
         android:textColor="#C3BABA" />
 
     <EditText
         android:id="@+id/password_login"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
+        android:layout_width="500dp"
+        android:layout_height="75dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/btn"
         android:drawableLeft="@drawable/ic_lock_black_24dp"
         android:drawablePadding="10dp"
         android:elevation="8dp"
+        android:textSize="30sp"
         android:hint="Password"
         android:inputType="textPassword"
         android:paddingLeft="15dp"
@@ -63,28 +65,30 @@
         android:paddingStart="210dp"
         android:text="@string/forgetpass"
         android:textColor="#DF0D38"
-        android:textSize="15sp"
+        android:textSize="35sp"
         android:textStyle="italic" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="300dp"
-        android:layout_height="45dp"
+        android:layout_height="65dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:background="@drawable/joinbtn"
         android:text="Log In"
+        android:textSize="30sp"
         android:textAllCaps="false"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/signup"
         android:layout_width="300dp"
-        android:layout_height="45dp"
+        android:layout_height="65dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:background="@drawable/joinbtn"
         android:text="Sign Up"
+        android:textSize="30sp"
         android:textAllCaps="false"
         android:textStyle="bold" />
 

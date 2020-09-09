@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 
@@ -30,6 +31,7 @@ public class profile_expert_user extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("Profile");
 
 
         email = findViewById(R.id.expert_email);
@@ -40,14 +42,24 @@ public class profile_expert_user extends AppCompatActivity {
         license = findViewById(R.id.expert_license);
 
         //shared preference
-        pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        pref = getSharedPreferences("MyPrefExpert", Context.MODE_PRIVATE);
         String eemail = pref.getString("email", null);
         String t_name = pref.getString("name", null);
+        String t_phone = pref.getString("phoneNo",null);
+        String t_designation=  pref.getString("designation",null);
+        String t_org = pref.getString("organization","NA");
+        String t_license = pref.getString("license",null);
+
         string_id = pref.getString("id",null);
         Pass = pref.getString("password",null);
         username.setText(t_name);
         email.setText(eemail);
         email.setEnabled(false);
+        phoneNo.setText(t_phone);
+        phoneNo.setEnabled(false);
+
+        designation.setText(t_designation);
+        license.setText(t_license);
 
 
         pref = getSharedPreferences("MyPrefExpert", Context.MODE_PRIVATE);
@@ -62,7 +74,10 @@ public class profile_expert_user extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.item1) {   //this item has your app icon
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
+        else {   //this item has your app icon
             Intent intent = new Intent(profile_expert_user.this, activity_profile_expert_user_2.class);
 
             string_email = email.getText().toString();
@@ -87,9 +102,7 @@ public class profile_expert_user extends AppCompatActivity {
 
             startActivity(intent);
         }
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
+
         return super.onOptionsItemSelected(item);
     }
 }

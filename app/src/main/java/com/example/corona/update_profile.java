@@ -63,7 +63,10 @@ public class update_profile extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.item1) {//this item has your app icon
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
+        else {
             Intent intent = new Intent(update_profile.this, update_profile_page_2.class);
             Email = email.getText().toString();
             Age = age.getText().toString();
@@ -80,14 +83,7 @@ public class update_profile extends AppCompatActivity {
             editor.apply();
             // intent.putExtra("Age", "22");
             startActivity(intent);
-
-
-
-
             return true;
-        }
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
         }
 
         return super.onOptionsItemSelected(item);
