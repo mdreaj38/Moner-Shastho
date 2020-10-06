@@ -42,9 +42,6 @@ public class LockdownResource extends AppCompatActivity {
 
     public ArrayList<String> mydata = new ArrayList<String>();
     public ArrayList<String> blogid = new ArrayList<String>();
-    /*public ArrayList<String> task_Id = new ArrayList<String>();
-    public ArrayList<String> task_Title = new ArrayList<String>();
-    public ArrayList<String> task_Body = new ArrayList<String>();*/
     public String CurStress="0";
     String mmessage;
     String AllInfo;
@@ -83,6 +80,7 @@ public class LockdownResource extends AppCompatActivity {
                 pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                 editor = Objects.requireNonNull(pref).edit();
                 editor.putString("score_id",blogid.get(position));
+                editor.putString("ResourceName",mydata.get(position));
                 editor.apply();
                  intent.putExtra("url", temp);
                 startActivity(intent);

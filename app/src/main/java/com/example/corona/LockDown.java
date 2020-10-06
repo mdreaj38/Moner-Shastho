@@ -36,10 +36,8 @@ public class LockDown extends AppCompatActivity {
         setTitle("Practice");
 
         gridView = findViewById(R.id.lgridview);
-        //ImageView imageView = findViewById(R.id.sleep);
         pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         editor = Objects.requireNonNull(pref).edit();
-       // editor.putString("name", user_name);
 
 
         CustomAdapter customAdapter = new CustomAdapter();

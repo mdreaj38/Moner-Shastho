@@ -6,12 +6,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,8 +54,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
-public class chart_mental_stress extends AppCompatActivity {
-    private LineChart mChart, mChart1;
+public class chart_mental_stress extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    String[] Options = {"Select One", "Manage Stress", "Relaxation", "Mindfulness","Self Care","Sleep","Specific Problem","Connected","Activity Schedule"};    private LineChart mChart, mChart1;
     SharedPreferences mypref;
     SharedPreferences.Editor editor;
     String UserId;
@@ -63,7 +69,18 @@ public class chart_mental_stress extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
-    //shared preference
+       Spinner spin = (Spinner) findViewById(R.id.spinner);
+        spin.setOnItemSelectedListener(this);
+
+        //Creating the ArrayAdapter instance having the country list
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,Options);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        spin.setAdapter(arrayAdapter);
+
+
+
+        //shared preference
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         User_id = pref.getString("id", null);
         setTitle("Track Record");
@@ -81,6 +98,13 @@ public class chart_mental_stress extends AppCompatActivity {
         mChart.setMarker(mv);
         get_test_data(User_id);
 
+    }
+    //Performing action onItemSelected and onNothing selected
+     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+        Toast.makeText(getApplicationContext(),Options[position] , Toast.LENGTH_LONG).show();
+    }
+     public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,8 +168,6 @@ public class chart_mental_stress extends AppCompatActivity {
     }
     private void setData1() {
 
-        Log.e("ScoreTa", String.valueOf(task_score.size()));
-        Log.e("ScoreTe", String.valueOf(test_score.size()));
         ArrayList<Entry> values = new ArrayList<>();
          for(int i=0;i<test_score.size();++i){
             String cur = test_score.get(i);

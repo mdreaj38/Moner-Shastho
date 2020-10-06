@@ -40,8 +40,6 @@ public class Task extends AppCompatActivity {
 
 
     public ArrayList<String> mydata = new ArrayList<String>();
-
-
     public ArrayList<String> Id = new ArrayList<String>();
     public ArrayList<String> Title = new ArrayList<String>();
     public ArrayList<String> Body = new ArrayList<String>();
@@ -84,30 +82,31 @@ public class Task extends AppCompatActivity {
                 // Toast.makeText(resource.this,mydata.get(position),Toast.LENGTH_SHORT).show();
                 String temp = mydata.get(position);
                 Intent intent = new Intent(Task.this, showTask.class);
-                //intent.putExtra("curbody",Body[position]);
-                intent.putExtra("curbody",ID[position]);
+                intent.putExtra("task_id",ID[position]);
                 startActivity(intent);
             }
         });
 
     }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         try {
             new HttpGetRequest().execute().get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        finish();
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
         return super.onOptionsItemSelected(item);
     }
+
     public void onBackPressed() {
         try {
             new HttpGetRequest().execute().get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        finish();
+        this.finish();
     }
         public class HttpGetRequest extends AsyncTask<Void, Void, String> {
 
@@ -130,10 +129,11 @@ public class Task extends AppCompatActivity {
                 String score = pref.getString("CurStress","0");
                 String t_id  = pref.getString("score_id","0");
                 String u_id  = pref.getString("id","0");
-                String t_name  = pref.getString("Tag","0");
+                String category  = pref.getString("Tag","0");
+                String post_name  = pref.getString("ResourceName","0");
 
-                URL url = new URL("https://bad-blogger.herokuapp.com/users/add/material/?score=" + score + "&id="+t_id+"&name="+t_name
-                +"&user_id="+u_id+"&device=android");
+                URL url = new URL("https://bad-blogger.herokuapp.com/users/add/material/?score=" + score + "&id="+t_id+"&name="+post_name
+                +"&user_id="+u_id+"&category="+category+"&device=android");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set methods and timeouts
                 httpURLConnection.setRequestMethod("GET");

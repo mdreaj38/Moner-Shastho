@@ -69,7 +69,7 @@ public class MainScreenActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainScreenActivity.this, resource.class);
                     startActivity(intent);
                 } else if (i == 4) {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://trin-innovation.com/services/emergencyAppointment/"));startActivity(browserIntent);
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://trin-innovation.com/services/emergencyAppointment/"));startActivity(browserIntent);
 
                 } else if (i == 5) {
                     String cur = "expert";

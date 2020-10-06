@@ -158,11 +158,7 @@ public class LockdownBlog extends AppCompatActivity {
                 try {
                     ParseJsonData(response.toString());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
+                } catch (JSONException | ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }

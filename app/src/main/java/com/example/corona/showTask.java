@@ -81,7 +81,7 @@ public class showTask extends AppCompatActivity {
         textView.setBackgroundColor(Color.argb(1, 0, 0, 0));
 
 
-        _Id = getIntent().getStringExtra("curbody");
+        _Id = getIntent().getStringExtra("task_id");
 
         sendAndRequestResponse("https://bad-blogger.herokuapp.com/users/materials/task/"+_Id);
 
