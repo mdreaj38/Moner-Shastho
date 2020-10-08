@@ -82,7 +82,7 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
         //Setting the ArrayAdapter data on the Spinner
         spin.setAdapter(arrayAdapter);
 
-        //shared preference
+        //shared prefxxxxxerence
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         User_id = pref.getString("id", null);
         setTitle("Track Record");
