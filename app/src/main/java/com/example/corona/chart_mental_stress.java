@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,11 +58,13 @@ import java.util.concurrent.ExecutionException;
 public class chart_mental_stress extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     String[] Options = {"Select One", "Manage Stress", "Relaxation", "Mindfulness","Self Care","Sleep","Specific Problem","Connected","Activity Schedule"};    private LineChart mChart, mChart1;
     SharedPreferences mypref;
+    Button button;
     SharedPreferences.Editor editor;
     String UserId;
     MyMarkerView mv;
     public ArrayList<String> test_score = new ArrayList<String>(); // graph - 1
     public ArrayList<String> task_score = new ArrayList<String>(); // graph - 1
+    String category;
 
 
     String User_id;
@@ -69,7 +72,8 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
-       Spinner spin = (Spinner) findViewById(R.id.spinner);
+        Spinner spin = (Spinner) findViewById(R.id.spinner);
+        button = findViewById(R.id.showGraph);
         spin.setOnItemSelectedListener(this);
 
         //Creating the ArrayAdapter instance having the country list
@@ -77,8 +81,6 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         spin.setAdapter(arrayAdapter);
-
-
 
         //shared preference
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -90,18 +92,29 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
         mChart = findViewById(R.id.chart);
         mChart.setTouchEnabled(true);
         mChart.setPinchZoom(true);
-         mv = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
+        mv = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
         mv.setChartView(mChart);
         mChart.setMarker(mv);
         get_test_data(User_id);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                task_score.clear();
+                get_task_data(User_id);
+            }
+        });
+
     }
     //Performing action onItemSelected and onNothing selected
      public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-        Toast.makeText(getApplicationContext(),Options[position] , Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),Options[position] , Toast.LENGTH_LONG).show();
+        category = Options[position];
     }
      public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
@@ -125,7 +138,7 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
         }
         return super.onOptionsItemSelected(item);
     }
-    public void renderData() {
+    public void renderData1(){
         // for graph 1
         LimitLine llXAxis = new LimitLine(10f, "Index 10");
         llXAxis.setLineWidth(4f);
@@ -143,6 +156,11 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
         leftAxis.setDrawZeroLine(false);
         leftAxis.setDrawLimitLinesBehindData(false);
         mChart.getAxisRight().setEnabled(false);
+        setData1();
+
+    }
+    public void renderData2() {
+
 
         // for graph 2
         LimitLine llXAxis1 = new LimitLine(10f, "Index 10");
@@ -161,21 +179,16 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
         leftAxis1.setDrawZeroLine(false);
         leftAxis1.setDrawLimitLinesBehindData(false);
         mChart1.getAxisRight().setEnabled(false);
-
-        setData1();
         setData2();
 
     }
     private void setData1() {
-
         ArrayList<Entry> values = new ArrayList<>();
          for(int i=0;i<test_score.size();++i){
             String cur = test_score.get(i);
             values.add(new Entry(i+1, (float) Double.parseDouble(cur)));
         }
-        for(int i = test_score.size();i<7;++i){
-            values.add(new Entry(i+1,0));
-        }
+
 
         LineDataSet set1;
         if (mChart.getData() != null && mChart.getData().getDataSetCount() > 0) {
@@ -219,10 +232,6 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
             String cur = task_score.get(i);
             values.add(new Entry(i+1, (float) Double.parseDouble(cur)));
         }
-        for(int i = task_score.size();i<7;++i){
-            values.add(new Entry(i+1,0));
-        }
-
 
         LineDataSet set1;
         if (mChart1.getData() != null &&
@@ -259,12 +268,6 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
             mChart1.setData(data);
         }
     }
-
-
-
-
-    //graph 1
-
     private void get_test_data(String U_ID) {
 
         ProgressDialog progressDialog = ProgressDialog.show(chart_mental_stress.this, "Loading...", "");
@@ -299,7 +302,7 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
         MyMarkerView mv1 = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
         mv.setChartView(mChart1);
         mChart1.setMarker(mv1);
-        get_task_data(User_id);
+        //get_task_data(User_id);
     }
     public void parse_test_score(String data) throws JSONException {
         Log.e("ScoreTest",data.toString());
@@ -309,6 +312,7 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
              String cur = String.valueOf(JA.get(i));
             test_score.add(cur);
         }
+         renderData1();
      }
 
     //graph 2
@@ -319,15 +323,13 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
         RequestQueue mRequestQueue = Volley.newRequestQueue(this);
 
         //String Request initialized
-        String url = "https://bad-blogger.herokuapp.com/users/materials/getScores/"+U_ID;
+        String url = "https://bad-blogger.herokuapp.com/users/materials/getScores/"+U_ID+"/"+category;
         StringRequest mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
-
                 try {
                     parse_task_score(response.toString());
-                    renderData();
+                    renderData2();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -21,7 +21,6 @@
              android:textSize="20sp"
              android:textStyle="bold" />
 
-
          <com.github.mikephil.charting.charts.LineChart
              android:id="@+id/chart"
              android:layout_width="match_parent"
@@ -51,6 +50,7 @@
              <Button
                  android:layout_width="wrap_content"
                  android:layout_height="match_parent"
+                 android:id="@+id/showGraph"
                  android:text="Go"/>
          </LinearLayout>
 
