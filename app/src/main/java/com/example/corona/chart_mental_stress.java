@@ -93,7 +93,6 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
         mChart = findViewById(R.id.chart);
         mChart.setTouchEnabled(true);
         mChart.setPinchZoom(true);
@@ -109,8 +108,8 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
                 get_task_data(User_id);
             }
         });
-
     }
+
     //Performing action onItemSelected and onNothing selected
      public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
         //Toast.makeText(getApplicationContext(),Options[position] , Toast.LENGTH_LONG).show();
@@ -189,7 +188,9 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
             values.add(new Entry(i+1, (float) Double.parseDouble(cur)));
         }
 
-
+         if(values.size()==0){
+             values.add(new Entry(1,0));
+         }
         LineDataSet set1;
         if (mChart.getData() != null && mChart.getData().getDataSetCount() > 0) {
             set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
@@ -232,7 +233,9 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
             String cur = task_score.get(i);
             values.add(new Entry(i+1, (float) Double.parseDouble(cur)));
         }
-
+        if(values.size()==0){
+            values.add(new Entry(1,0));
+        }
         LineDataSet set1;
         if (mChart1.getData() != null &&
                 mChart1.getData().getDataSetCount() > 0) {
