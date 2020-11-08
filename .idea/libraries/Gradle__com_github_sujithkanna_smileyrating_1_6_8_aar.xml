@@ -4,9 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bf3a155a447d372ab1e50dddf50372d2/jetified-smileyrating-1.6.8/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bf3a155a447d372ab1e50dddf50372d2/jetified-smileyrating-1.6.8/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bf3a155a447d372ab1e50dddf50372d2/jetified-smileyrating-1.6.8/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bf3a155a447d372ab1e50dddf50372d2/jetified-smileyrating-1.6.8/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bf3a155a447d372ab1e50dddf50372d2/jetified-smileyrating-1.6.8/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.sujithkanna/smileyrating/1.6.8/3a9b1e31d03d99c18f9dadc6f53ca69c6d0049ea/smileyrating-1.6.8-javadoc.jar!/" />
