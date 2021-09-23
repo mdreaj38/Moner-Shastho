@@ -83,7 +83,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
          if(item.getItemId()==R.id.action_aboutus){
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bad-blogger.herokuapp.com/about"));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://monershastho.herokuapp.com/about"));
             startActivity(browserIntent);
 
         }else {

@@ -55,7 +55,7 @@ public class stress_list extends AppCompatActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         String Id = pref.getString("id", "");
-        String url = "https://bad-blogger.herokuapp.com/users/profile/get-stress/"+Id;
+        String url = "https://monershastho.herokuapp.com/users/profile/get-stress/"+Id;
         ProgressDialog progressDialog = ProgressDialog.show(stress_list.this, "Loading...", "");
 
         //RequestQueue initialized

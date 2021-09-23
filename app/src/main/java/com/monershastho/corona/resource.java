@@ -66,7 +66,7 @@ public class resource extends AppCompatActivity {
 
                 Intent intent = new Intent(resource.this, ShowResource.class);
                 String temp = blogid.get(position);
-                intent.putExtra("ID", "https://bad-blogger.herokuapp.com/users/view/" + temp + "?device=android");
+                intent.putExtra("ID", "https://monershastho.herokuapp.com/users/view/" + temp + "?device=android");
                 startActivity(intent);
             }
         });
@@ -106,7 +106,7 @@ public class resource extends AppCompatActivity {
 
         protected String doInBackground(Void... voids) {
             try {
-                URL url = new URL("https://bad-blogger.herokuapp.com/users/blogs?device=android");
+                URL url = new URL("https://monershastho.herokuapp.com/users/blogs?device=android");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set methods and timeouts
                 httpURLConnection.setRequestMethod("GET");

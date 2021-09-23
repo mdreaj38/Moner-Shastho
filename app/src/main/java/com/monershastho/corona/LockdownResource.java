@@ -67,7 +67,7 @@ public class LockdownResource extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(LockdownResource.this, LockdownBlog.class);
-                String temp = "https://bad-blogger.herokuapp.com/users/single-material/" + blogid.get(position) + "?device=android";
+                String temp = "https://monershastho.herokuapp.com/users/single-material/" + blogid.get(position) + "?device=android";
                 pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                 editor = Objects.requireNonNull(pref).edit();
                 editor.putString("score_id",blogid.get(position));
@@ -103,7 +103,7 @@ public class LockdownResource extends AppCompatActivity {
 
         protected String doInBackground(Void... voids) {
             try {
-                URL url = new URL("https://bad-blogger.herokuapp.com/users/materials?category=" + mmessage + "&device=android");
+                URL url = new URL("https://monershastho.herokuapp.com/users/materials?category=" + mmessage + "&device=android");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set methods and timeouts
                 httpURLConnection.setRequestMethod("GET");

@@ -154,7 +154,7 @@ public class update_profile_page_4 extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        String url = "https://bad-blogger.herokuapp.com/users/update-profile/android";
+                        String url = "https://monershastho.herokuapp.com/users/update-profile/android";
                         try {
                             new HttpPostRequest().execute(url,res.toString()).get();
                         } catch (ExecutionException | InterruptedException e) {

@@ -122,17 +122,13 @@ public class activity_profile_expert_user_2 extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    String url = "https://bad-blogger.herokuapp.com/users/update-expert-profile";
+                    String url = "https://monershastho.herokuapp.com/users/update-expert-profile";
                     try{
                         new HttpPostRequest().execute(url,object.toString()).get();
                     }
-                    catch (ExecutionException e){
+                    catch (ExecutionException | InterruptedException e){
                         e.printStackTrace();
                     }
-                    catch (InterruptedException e){
-                        e.printStackTrace();
-                    }
-
 
 
                 }

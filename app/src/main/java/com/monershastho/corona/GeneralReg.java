@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 public class GeneralReg extends AppCompatActivity {
 
     public String EmailString, PhoneString, PasswordString, NameString, CPasswordString, GenderString;
-    String url = "https://bad-blogger.herokuapp.com/admin/register/general";
+    String url = "https://monershastho.herokuapp.com/admin/register/general";
     RadioButton radioButton;
     RadioGroup radioGroup;
 

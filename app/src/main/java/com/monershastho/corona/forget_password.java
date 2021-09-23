@@ -37,7 +37,7 @@ public class forget_password extends AppCompatActivity {
     ProgressDialog pgsdialog;
     TextView login;
     RadioGroup radioGroup;
-    String url = "https://bad-blogger.herokuapp.com/admin/forgot_password";
+    String url = "https://monershastho.herokuapp.com/admin/forgot_password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

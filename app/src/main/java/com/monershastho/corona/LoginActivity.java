@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog pgsdialog;
     TextView forgetPass;
     String string_email_login, string_email_pass;
-    JSONObject jb,jc;
+    JSONObject jb, jc;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 HttpPostRequest httpPostRequest = new HttpPostRequest();
                 try {
-                    httpPostRequest.execute("https://bad-blogger.herokuapp.com/admin/login/android", res.toString()).get();
+                    httpPostRequest.execute("https://monershastho.herokuapp.com/admin/login/android", res.toString()).get();
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -145,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPreExecute() {
             progressDialog = ProgressDialog.show(LoginActivity.this, "Login...", "Wait");
         }
+
         protected Void doInBackground(String... strings) {
             HttpURLConnection urlConnection;
             String url = strings[0];
@@ -185,7 +186,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Void code) {
             progressDialog.dismiss();
             if (statusCode == 200) {
-                String user_name = "", _gender = "",u_type="",ID="";
+                String user_name = "", _gender = "", u_type = "", ID = "";
                 try {
                     jb = new JSONObject(sb.toString());
 
@@ -203,16 +204,16 @@ public class LoginActivity extends AppCompatActivity {
                 editor = Objects.requireNonNull(pref).edit();
                 editor.putString("name", user_name);
                 editor.putString("email", string_email_login);
-                editor.putString("CurStress","0");
-                editor.putString("password",pass1);
+                editor.putString("CurStress", "0");
+                editor.putString("password", pass1);
                 editor.putString("gender", _gender);
-                editor.putString("id",ID);
-                editor.putString("usertype",u_type);
-                editor.putString("PreStress","0");
-                editor.putString("count","0");
-                editor.putString("AvgStress","0");
+                editor.putString("id", ID);
+                editor.putString("usertype", u_type);
+                editor.putString("PreStress", "0");
+                editor.putString("count", "0");
+                editor.putString("AvgStress", "0");
                 editor.apply();
-                if(u_type.equals("expert")){
+                if (u_type.equals("expert")) {
                     android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(LoginActivity.this);
                     builder1.setCancelable(false);
                     builder1.setMessage(Html.fromHtml("Visit website login to get access as an Expert!<br><br>Do you want to visit?"));
@@ -221,7 +222,7 @@ public class LoginActivity extends AppCompatActivity {
                             new DialogInterface.OnClickListener() {
                                 //
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bad-blogger.herokuapp.com"));
+                                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://monershastho.herokuapp.com"));
                                     startActivity(browserIntent);
                                 }
                             });
@@ -236,8 +237,7 @@ public class LoginActivity extends AppCompatActivity {
                     android.app.AlertDialog alert11 = builder1.create();
                     alert11.show();
 
-                }
-                else {
+                } else {
                     Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
                     startActivity(intent);
                 }

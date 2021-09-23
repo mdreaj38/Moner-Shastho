@@ -63,7 +63,7 @@ public class showTask extends AppCompatActivity {
 
         _Id = getIntent().getStringExtra("task_id");
 
-        sendAndRequestResponse("https://bad-blogger.herokuapp.com/users/materials/task/"+_Id);
+        sendAndRequestResponse("https://monershastho.herokuapp.com/users/materials/task/"+_Id);
 
     }
 

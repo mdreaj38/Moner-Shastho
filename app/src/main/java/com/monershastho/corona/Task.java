@@ -120,7 +120,7 @@ public class Task extends AppCompatActivity {
                 String category  = pref.getString("Tag","0");
                 String post_name  = pref.getString("ResourceName","0");
 
-                URL url = new URL("https://bad-blogger.herokuapp.com/users/add/material/?score=" + score + "&id="+t_id+"&name="+post_name
+                URL url = new URL("https://monershastho.herokuapp.com/users/add/material/?score=" + score + "&id="+t_id+"&name="+post_name
                 +"&user_id="+u_id+"&category="+category+"&device=android");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set methods and timeouts

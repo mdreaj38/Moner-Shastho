@@ -192,7 +192,7 @@ public class qus_ans_slider extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try {
                 String st = strings[0];
-                URL url = new URL("https://bad-blogger.herokuapp.com/app-admin/single-test/"+strings[0]+"?device=android");
+                URL url = new URL("https://monershastho.herokuapp.com/app-admin/single-test/"+strings[0]+"?device=android");
                 Log.e("Check", url.toString());
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set method
@@ -254,7 +254,7 @@ public class qus_ans_slider extends AppCompatActivity {
 
         protected Void doInBackground(String... strings) {
             HttpURLConnection urlConnection;
-            String url =  "https://bad-blogger.herokuapp.com/app-admin/test/new";
+            String url =  "https://monershastho.herokuapp.com/app-admin/test/new";
             String data = strings[0];
             Log.e("code1",data);
             String result = null;

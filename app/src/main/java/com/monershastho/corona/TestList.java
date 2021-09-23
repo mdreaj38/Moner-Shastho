@@ -95,7 +95,7 @@ public class TestList extends AppCompatActivity {
 
         protected String doInBackground(Void... voids) {
             try {
-                URL url = new URL("https://bad-blogger.herokuapp.com/app-admin/all-tests?device=android");
+                URL url = new URL("https://monershastho.herokuapp.com/app-admin/all-tests?device=android");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set methods and timeouts
                 httpURLConnection.setRequestMethod("GET");

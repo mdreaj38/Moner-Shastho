@@ -269,7 +269,7 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
          RequestQueue mRequestQueue = Volley.newRequestQueue(this);
 
         //String Request initialized
-        String url = "https://bad-blogger.herokuapp.com/app-admin/tests/getScores/"+U_ID;
+        String url = "https://monershastho.herokuapp.com/app-admin/tests/getScores/"+U_ID;
          StringRequest mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -315,7 +315,7 @@ public class chart_mental_stress extends AppCompatActivity implements AdapterVie
         RequestQueue mRequestQueue = Volley.newRequestQueue(this);
 
         //String Request initialized
-        String url = "https://bad-blogger.herokuapp.com/users/materials/getScores/"+U_ID+"/"+category;
+        String url = "https://monershastho.herokuapp.com/users/materials/getScores/"+U_ID+"/"+category;
         StringRequest mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

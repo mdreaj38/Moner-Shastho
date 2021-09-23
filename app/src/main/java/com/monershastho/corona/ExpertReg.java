@@ -42,7 +42,7 @@ public class ExpertReg extends AppCompatActivity {
     Button joinUs;
     EditText name, email, mobile, password, cpassword, affiliation, city, designation, licence, hiDegree, institute, field;
     String stringName, stringEmail, stringMobile, stringPass, stringCpassword, stringAffiliation, stringCountry, stringCity, stringDesignation, stringLicence, stringHDegree, stringInstitute, stringfield, GenderString;
-    String url = "https://bad-blogger.herokuapp.com/admin/register/expert";
+    String url = "https://monershastho.herokuapp.com/admin/register/expert";
 
     public static boolean isValidPhoneNumber(String data) {
         return data.length() == 11 && data.charAt(0) == '0';

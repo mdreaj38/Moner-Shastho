@@ -110,7 +110,7 @@ public class Write_diary extends AppCompatActivity {
                     res.put("reactions", reaction);
                     res.put("behaiviour", behaviour);
 
-                    new HttpPostRequest().execute("https://bad-blogger.herokuapp.com/users/profile/add-record/android",res.toString()).get();
+                    new HttpPostRequest().execute("https://monershastho.herokuapp.com/users/profile/add-record/android",res.toString()).get();
 
                     String res1 = res.toString();
                     Log.e("Response", res1.toString());

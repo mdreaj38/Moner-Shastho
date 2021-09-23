@@ -115,7 +115,7 @@ public class Read_Diary extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try {
                 String st = strings[0];
-                URL url = new URL("https://bad-blogger.herokuapp.com/users/profile/get-diary/"+st);
+                URL url = new URL("https://monershastho.herokuapp.com/users/profile/get-diary/"+st);
                 Log.e("Check", url.toString());
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set method

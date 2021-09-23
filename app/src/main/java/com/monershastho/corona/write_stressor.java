@@ -67,7 +67,7 @@ public class write_stressor extends AppCompatActivity {
                     Log.e("Response2", res1.toString());
                     HttpPostRequest httpPostRequest = new HttpPostRequest();
 
-                    new HttpPostRequest().execute("https://bad-blogger.herokuapp.com/users/profile/add-stress/android",params.toString());
+                    new HttpPostRequest().execute("https://monershastho.herokuapp.com/users/profile/add-stress/android",params.toString());
 
                 } catch (JSONException e) {
                     e.printStackTrace();

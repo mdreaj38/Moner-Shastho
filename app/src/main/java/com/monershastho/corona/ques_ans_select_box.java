@@ -218,7 +218,7 @@ public class ques_ans_select_box extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("https://bad-blogger.herokuapp.com/app-admin/single-test/"+strings[0]+"?device=android");
+                URL url = new URL("https://monershastho.herokuapp.com/app-admin/single-test/"+strings[0]+"?device=android");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 //Set method
                 httpURLConnection.setRequestMethod("GET");
